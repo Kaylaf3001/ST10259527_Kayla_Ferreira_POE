@@ -164,7 +164,20 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             Console.WriteLine("Quantities reverted to original values.");
             displayReceipe();
         }
+        //========================================================================================================
+        // Clear data for new recipe
+        public void clearData()
+        {
+            receipeName = "";
+            ingredientNames = new string[] { };
+            stepDescriptions = new string[] { };
+            ingredQuantity = new double[] { };
+            originalQuantities = new double[] { };
+            scaleNumber = 0;
+            unitOfMeasurement = new string[] { };
 
+            userInput();
+        }
         //========================================================================================================
     }
 }
