@@ -55,6 +55,17 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 displayReceipe();
             }
+
+            Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
+            int response2 = Convert.ToInt32(Console.ReadLine());
+
+            if (response2 == 1)
+            {
+                Console.WriteLine("What would you like to scale down to?");
+                string scaleInput = Console.ReadLine();
+                scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
+                scale();
+            }
         }
         //========================================================================================================
         // Input ingredient names, quantities, and units
@@ -110,6 +121,19 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             }
             Console.WriteLine("******************************************************************************");
         }
+        //========================================================================================================
+        // Scale the recipe up or down.
+        public void scale()
+        {
+            for (int i = 0; i < ingredQuantity.Length; i++)
+            {
+                double newQuantity = originalQuantities[i] * scaleNumber;
+                Console.WriteLine("Old: " + ingredQuantity[i] + " New: " + newQuantity);
+                ingredQuantity[i] = newQuantity;
+            }
+            displayReceipe();
+        }
+
         //========================================================================================================
     }
 }
