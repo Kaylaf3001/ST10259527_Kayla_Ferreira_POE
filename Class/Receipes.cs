@@ -19,7 +19,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         private int ingreNo = 0;
         public void userInput()
         {
-
+            try
+            {
             Console.WriteLine("What is the name of the recipe?");
             receipeName = Console.ReadLine();
             Console.WriteLine();
@@ -84,7 +85,19 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Console.WriteLine("Data cleared");
                 clearData();
             }
-        }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input format. Please enter a valid number.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Input is too large to be converted to an integer.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }        
+    }
         //========================================================================================================
         // Input ingredient names, quantities, and units
         public void nameQuanUnit()
