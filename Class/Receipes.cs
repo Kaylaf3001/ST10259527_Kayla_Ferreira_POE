@@ -66,6 +66,14 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
                 scale();
             }
+
+            Console.WriteLine("Would you like to revert back to the orginal quantities? (1 - Yes, 0 - No)");
+            int response3 = Convert.ToInt32(Console.ReadLine());
+
+            if (response3 == 1)
+            {
+                resetQuantities();
+            }
         }
         //========================================================================================================
         // Input ingredient names, quantities, and units
