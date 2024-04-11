@@ -48,6 +48,13 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             Console.WriteLine("******************************************************************************");
             Console.WriteLine();
 
+            Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
+            int response = Convert.ToInt32(Console.ReadLine());
+
+            if (response == 1)
+            {
+                displayReceipe();
+            }
         }
         //========================================================================================================
         // Input ingredient names, quantities, and units
@@ -82,6 +89,26 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 stepDescriptions[i] = Console.ReadLine();
                 Console.WriteLine();
             }
+        }
+        //========================================================================================================
+        // Display recipe
+        public void displayReceipe()
+        {
+            Console.WriteLine("******************************************************************************");
+            Console.WriteLine("Receipe name: " + receipeName);
+            Console.WriteLine();
+            Console.WriteLine("Ingredients:");
+            for (int i = 0; i < ingredientNames.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]}");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Steps:");
+            for (int i = 0; i < stepDescriptions.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
+            }
+            Console.WriteLine("******************************************************************************");
         }
         //========================================================================================================
     }
