@@ -74,6 +74,16 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 resetQuantities();
             }
+
+            Console.WriteLine("Would you like to clear the data for a new receipe?(1 - Yes, 0 - No)");
+            int response4 = Convert.ToInt32(Console.ReadLine());
+
+            if (response2 == 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Data cleared");
+                clearData();
+            }
         }
         //========================================================================================================
         // Input ingredient names, quantities, and units
