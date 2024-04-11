@@ -36,8 +36,20 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
             Console.WriteLine("Name and Quantity of your ingredients:");
             nameQuanUnit();
+
+            Console.WriteLine();
+            Console.WriteLine("How many steps are there?");
+            repSteps = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("******************************************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Please enter a description for each step: ");
+            steps();
+            Console.WriteLine("******************************************************************************");
+            Console.WriteLine();
+
         }
-        //============================================================================================
+        //========================================================================================================
         // Input ingredient names, quantities, and units
         public void nameQuanUnit()
         {
@@ -59,5 +71,18 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
             }
         }
+        //========================================================================================================
+        // Input instructions on how to make the dish.
+        public void steps()
+        {
+            stepDescriptions = new string[repSteps];
+            for (int i = 0; i < repSteps; i++)
+            {
+                Console.WriteLine($"Step {i + 1}: ");
+                stepDescriptions[i] = Console.ReadLine();
+                Console.WriteLine();
+            }
+        }
+        //========================================================================================================
     }
 }
