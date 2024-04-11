@@ -12,6 +12,7 @@ namespace ST10259527_Kayla_Ferreira_POE
         static void Main(string[] args)
         {
             Receipes receipe = new Receipes();
+            receipe.userInput();
         }
     }
 }
