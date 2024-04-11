@@ -143,5 +143,18 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         }
 
         //========================================================================================================
+        // Reset quantities to the orginal amount that was inputed by the user.
+        public void resetQuantities()
+        {
+            // Iterate through ingredQuantity and reset each quantity to its original value
+            for (int i = 0; i < ingredQuantity.Length; i++)
+            {
+                ingredQuantity[i] = originalQuantities[i];
+            }
+            Console.WriteLine("Quantities reverted to original values.");
+            displayReceipe();
+        }
+
+        //========================================================================================================
     }
 }
