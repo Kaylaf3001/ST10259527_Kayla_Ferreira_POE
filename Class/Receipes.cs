@@ -19,86 +19,93 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         private int ingreNo = 0;
         public void userInput()
         {
-            try
+            bool validInput = false;
+
+            while (!validInput)
             {
-                Console.WriteLine("What is the name of the recipe?");
-                receipeName = Console.ReadLine();
-                Console.WriteLine();
-
-                Console.WriteLine("How many Ingredients does your recipe have?");
-                ingreNo = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine();
-
-                // Arrays to store the data
-                ingredientNames = new string[ingreNo];
-                ingredQuantity = new double[ingreNo];
-                originalQuantities = new double[ingreNo];
-                unitOfMeasurement = new string[ingreNo];
-
-                Console.WriteLine("Name and Quantity of your ingredients:");
-                nameQuanUnit();
-
-                Console.WriteLine();
-                Console.WriteLine("How many steps are there?");
-                repSteps = Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine("******************************************************************************");
-                Console.WriteLine();
-                Console.WriteLine("Please enter a description for each step: ");
-                steps();
-                Console.WriteLine("******************************************************************************");
-                Console.WriteLine();
-
-                Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
-                int response = Convert.ToInt32(Console.ReadLine());
-
-                if (response == 1)
+                try
                 {
-                    displayReceipe();
-                }
-
-                Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
-                int response2 = Convert.ToInt32(Console.ReadLine());
-
-                if (response2 == 1)
-                {
-                    Console.WriteLine("What would you like to scale down to?");
-                    string scaleInput = Console.ReadLine();
-                    scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
-                    scale();
-                }
-
-                Console.WriteLine("Would you like to revert back to the orginal quantities? (1 - Yes, 0 - No)");
-                int response3 = Convert.ToInt32(Console.ReadLine());
-
-                if (response3 == 1)
-                {
-                    resetQuantities();
-                }
-
-                Console.WriteLine("Would you like to clear the data for a new receipe?(1 - Yes, 0 - No)");
-                int response4 = Convert.ToInt32(Console.ReadLine());
-
-                if (response2 == 1)
-                {
+                    Console.WriteLine("What is the name of the recipe?");
+                    receipeName = Console.ReadLine();
                     Console.WriteLine();
-                    Console.WriteLine("Data cleared");
-                    clearData();
+
+                    Console.WriteLine("How many Ingredients does your recipe have?");
+                    ingreNo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
+
+                    // Arrays to store the data
+                    ingredientNames = new string[ingreNo];
+                    ingredQuantity = new double[ingreNo];
+                    originalQuantities = new double[ingreNo];
+                    unitOfMeasurement = new string[ingreNo];
+
+                    Console.WriteLine("Name and Quantity of your ingredients:");
+                    nameQuanUnit();
+
+                    Console.WriteLine();
+                    Console.WriteLine("How many steps are there?");
+                    repSteps = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a description for each step: ");
+                    steps();
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+
+                    Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
+                    int response = Convert.ToInt32(Console.ReadLine());
+
+                    if (response == 1)
+                    {
+                        displayReceipe();
+                    }
+
+                    Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
+                    int response2 = Convert.ToInt32(Console.ReadLine());
+
+                    if (response2 == 1)
+                    {
+                        Console.WriteLine("What would you like to scale down to?");
+                        string scaleInput = Console.ReadLine();
+                        scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
+                        scale();
+                    }
+
+                    Console.WriteLine("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)");
+                    int response3 = Convert.ToInt32(Console.ReadLine());
+
+                    if (response3 == 1)
+                    {
+                        resetQuantities();
+                    }
+
+                    Console.WriteLine("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)");
+                    int response4 = Convert.ToInt32(Console.ReadLine());
+
+                    if (response4 == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Data cleared");
+                        clearData();
+                    }
+
+                    validInput = true; // If no exception occurs, set validInput to true to exit the loop
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input format. Please enter a valid number.");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Input is too large to be converted to an integer.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input format. Please enter a valid number.");
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("Input is too large to be converted to an integer.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }        
-    }
+        }
         //========================================================================================================
         // Input ingredient names, quantities, and units
         public void nameQuanUnit()
