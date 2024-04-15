@@ -25,7 +25,9 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("********** Recipe Book **********");
+                    Console.ResetColor();
                     Console.WriteLine("What is the name of the recipe?");
                     receipeName = Console.ReadLine();
 
@@ -43,7 +45,6 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
                     Console.WriteLine("\nHow many steps are there?");
                     repSteps = Convert.ToInt32(Console.ReadLine());
-
                     Console.WriteLine("Please enter a description for each step: ");
                     steps();
 
@@ -79,8 +80,6 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
                     if (response4 == 1)
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("Data cleared");
                         clearData();
                     } else
                     {
@@ -91,15 +90,21 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 }
                 catch (FormatException)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid input format. Please enter a valid number.");
+                    Console.ResetColor();
                 }
                 catch (OverflowException)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Input is too large to be converted to an integer.");
+                    Console.ResetColor();
                 }
                 catch (Exception ex)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"An error occurred: {ex.Message}");
+                    Console.ResetColor();
                 }
             }
         }
@@ -143,13 +148,15 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public void displayReceipe()
         {
             Console.WriteLine("________________________________________________________________________");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\n******* " + receipeName + " *******");
+            Console.ResetColor();
             Console.WriteLine("Ingredients: ");
             for (int i = 0; i < ingredientNames.Length; i++)
             {
-                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]} \n");
+                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]}");
             }
-            Console.WriteLine("Steps:");
+            Console.WriteLine("\nSteps:");
             for (int i = 0; i < stepDescriptions.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
@@ -187,16 +194,34 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         // Clear data for new recipe
         public void clearData()
         {
-            receipeName = "";
-            ingredientNames = new string[] { };
-            stepDescriptions = new string[] { };
-            ingredQuantity = new double[] { };
-            originalQuantities = new double[] { };
-            scaleNumber = 0;
-            unitOfMeasurement = new string[] { };
+            Console.WriteLine("Are you sure you want to clear all data? (1 - Yes and 0 - No)");
+            int confirmation = Convert.ToInt32(Console.ReadLine());
+
+            if (confirmation == 1)
+            {
+                // Clear data
+                receipeName = "";
+                ingredientNames = new string[] { };
+                stepDescriptions = new string[] { };
+                ingredQuantity = new double[] { };
+                originalQuantities = new double[] { };
+                scaleNumber = 0;
+                unitOfMeasurement = new string[] { };
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Data cleared successfully.");
+                Console.ResetColor();   
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Data not cleared.");
+                Console.ResetColor();
+
+            }
 
             userInput();
         }
-        //========================================================================================================
+        //=======================================================================================================
     }
 }
