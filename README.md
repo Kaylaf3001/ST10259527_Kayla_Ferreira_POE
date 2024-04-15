@@ -9,7 +9,7 @@ Input Recipe Details
 - Specify the number of ingredients and steps in your recipe.
 - Input the name, quantity, and unit of measurement (if applicable) for each ingredient.
 - Describe each step of the recipe.
-- 
+  
 View Recipe
 - Optionally, you can view the complete recipe including ingredients and steps.
 
