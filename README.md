@@ -3,7 +3,7 @@ Recipe Book - Welcome to the Recipe Book application! This program allows you to
 
 Overview: The Recipes class provides functionality to input recipe details such as ingredients, quantities, steps, and more. You can scale recipes, revert to original quantities, and clear data for a new recipe.
 
-- Usage -
+ - Usage -
 Input Recipe Details
 - Start by entering the name of your recipe.
 - Specify the number of ingredients and steps in your recipe.
@@ -22,7 +22,7 @@ Revert to Original Quantities
 Clear Data
 - Clear all data to start afresh with a new recipe.
   
-- How to Use -
+ - How to Use -
 1. Clone or download this repository.
 2. Open the solution in your preferred IDE.
 3. Compile and run the program.
