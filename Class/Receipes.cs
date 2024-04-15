@@ -8,6 +8,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 {
     internal class Receipes
     {
+        // Member variables to store recipe details
         private string receipeName = "";
         private string[] ingredientNames = { };
         private string[] stepDescriptions = { };
@@ -17,6 +18,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         private string[] unitOfMeasurement = { };
         private int repSteps = 0;
         private int ingreNo = 0;
+
+        // Method to take user input for recipe details
         public void userInput()
         {
             bool validInput = false;
@@ -25,6 +28,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 try
                 {
+                    // Prompt user for recipe details
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("********** Recipe Book **********");
                     Console.ResetColor();
@@ -32,7 +36,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     receipeName = Console.ReadLine();
 
                     Console.WriteLine("\nHow many Ingredients does your recipe have?");
-                    ingreNo = Convert.ToInt32(Console.ReadLine());                  
+                    ingreNo = Convert.ToInt32(Console.ReadLine());
 
                     // Arrays to store the data
                     ingredientNames = new string[ingreNo];
@@ -41,19 +45,20 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     unitOfMeasurement = new string[ingreNo];
 
                     Console.WriteLine("\nName and Quantity of your ingredients:");
-                    nameQuanUnit();
+                    nameQuanUnit(); // Method to input ingredient names, quantities, and units
 
                     Console.WriteLine("\nHow many steps are there?");
                     repSteps = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Please enter a description for each step: ");
-                    steps();
+                    steps(); // Method to input instructions on how to make the dish
 
+                    // Prompt user for additional actions
                     Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
                     int response = Convert.ToInt32(Console.ReadLine());
 
                     if (response == 1)
                     {
-                        displayReceipe();
+                        displayReceipe(); // Method to display recipe
                     }
 
                     Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
@@ -64,7 +69,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                         Console.WriteLine("What would you like to scale down to?");
                         string scaleInput = Console.ReadLine();
                         scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
-                        scale();
+                        scale(); // Method to scale the recipe up or down
                     }
 
                     Console.WriteLine("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)");
@@ -72,7 +77,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
                     if (response3 == 1)
                     {
-                        resetQuantities();
+                        resetQuantities(); // Method to reset quantities to the original amount input by the user
                     }
 
                     Console.WriteLine("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)");
@@ -80,10 +85,11 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
                     if (response4 == 1)
                     {
-                        clearData();
-                    } else
+                        clearData(); // Method to clear data for a new recipe
+                    }
+                    else
                     {
-                        userInput();
+                        userInput(); // Recursive call to continue with another recipe
                     }
 
                     validInput = true; // If no exception occurs, set validInput to true to exit the loop
@@ -108,8 +114,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 }
             }
         }
-        //========================================================================================================
-        // Input ingredient names, quantities, and units
+
+        // Method to input ingredient names, quantities, and units
         public void nameQuanUnit()
         {
             for (int i = 0; i < ingreNo; i++)
@@ -130,21 +136,21 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Console.WriteLine();
             }
         }
-        //========================================================================================================
-        // Input instructions on how to make the dish.
+
+        // Method to input instructions on how to make the dish
         public void steps()
         {
             stepDescriptions = new string[repSteps];
             Console.WriteLine("________________________________________________________________________");
             for (int i = 0; i < repSteps; i++)
-            {   
+            {
                 Console.WriteLine($"Step {i + 1}: ");
-                stepDescriptions[i] = Console.ReadLine();    
+                stepDescriptions[i] = Console.ReadLine();
             }
             Console.WriteLine("________________________________________________________________________\n");
         }
-        //========================================================================================================
-        // Display recipe
+
+        // Method to display recipe
         public void displayReceipe()
         {
             Console.WriteLine("________________________________________________________________________");
@@ -163,13 +169,13 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             }
             Console.WriteLine("________________________________________________________________________\n");
         }
-        //========================================================================================================
-        // Scale the recipe up or down.
+
+        // Method to scale the recipe up or down
         public void scale()
         {
             Console.WriteLine("\n________________________________________________________________________");
             for (int i = 0; i < ingredQuantity.Length; i++)
-            {  
+            {
                 double newQuantity = originalQuantities[i] * scaleNumber;
                 Console.WriteLine("Old: " + ingredQuantity[i] + " New: " + newQuantity);
                 ingredQuantity[i] = newQuantity;
@@ -178,8 +184,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             displayReceipe();
         }
 
-        //========================================================================================================
-        // Reset quantities to the orginal amount that was inputed by the user.
+        // Method to reset quantities to the original amount input by the user
         public void resetQuantities()
         {
             // Iterate through ingredQuantity and reset each quantity to its original value
@@ -190,8 +195,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             Console.WriteLine("\nQuantities reverted to original values.");
             displayReceipe();
         }
-        //========================================================================================================
-        // Clear data for new recipe
+
+        // Method to clear data for a new recipe
         public void clearData()
         {
             Console.WriteLine("Are you sure you want to clear all data? (1 - Yes and 0 - No)");
@@ -210,7 +215,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Data cleared successfully.");
-                Console.ResetColor();   
+                Console.ResetColor();
             }
             else
             {
@@ -220,8 +225,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
             }
 
+            // Restart userInput() to allow user to enter a new recipe
             userInput();
         }
-        //=======================================================================================================
     }
 }
