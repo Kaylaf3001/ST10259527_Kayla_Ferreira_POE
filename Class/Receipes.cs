@@ -25,13 +25,12 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 try
                 {
+                    Console.WriteLine("********** Recipe Book **********");
                     Console.WriteLine("What is the name of the recipe?");
                     receipeName = Console.ReadLine();
-                    Console.WriteLine();
 
-                    Console.WriteLine("How many Ingredients does your recipe have?");
-                    ingreNo = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine();
+                    Console.WriteLine("\nHow many Ingredients does your recipe have?");
+                    ingreNo = Convert.ToInt32(Console.ReadLine());                  
 
                     // Arrays to store the data
                     ingredientNames = new string[ingreNo];
@@ -39,19 +38,14 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     originalQuantities = new double[ingreNo];
                     unitOfMeasurement = new string[ingreNo];
 
-                    Console.WriteLine("Name and Quantity of your ingredients:");
+                    Console.WriteLine("\nName and Quantity of your ingredients:");
                     nameQuanUnit();
 
-                    Console.WriteLine();
-                    Console.WriteLine("How many steps are there?");
+                    Console.WriteLine("\nHow many steps are there?");
                     repSteps = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("******************************************************************************");
-                    Console.WriteLine();
                     Console.WriteLine("Please enter a description for each step: ");
                     steps();
-                    Console.WriteLine("******************************************************************************");
-                    Console.WriteLine();
 
                     Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
                     int response = Convert.ToInt32(Console.ReadLine());
@@ -88,6 +82,9 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                         Console.WriteLine();
                         Console.WriteLine("Data cleared");
                         clearData();
+                    } else
+                    {
+                        userInput();
                     }
 
                     validInput = true; // If no exception occurs, set validInput to true to exit the loop
@@ -125,7 +122,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     Console.WriteLine("What is the unit of measurement?");
                     unitOfMeasurement[i] = Console.ReadLine();
                 }
-
+                Console.WriteLine();
             }
         }
         //========================================================================================================
@@ -133,44 +130,44 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public void steps()
         {
             stepDescriptions = new string[repSteps];
+            Console.WriteLine("________________________________________________________________________");
             for (int i = 0; i < repSteps; i++)
-            {
+            {   
                 Console.WriteLine($"Step {i + 1}: ");
-                stepDescriptions[i] = Console.ReadLine();
-                Console.WriteLine();
+                stepDescriptions[i] = Console.ReadLine();    
             }
+            Console.WriteLine("________________________________________________________________________\n");
         }
         //========================================================================================================
         // Display recipe
         public void displayReceipe()
         {
-            Console.WriteLine();
-            Console.WriteLine("******************************************************************************");
-            Console.WriteLine("Receipe name: " + receipeName);
-            Console.WriteLine();
-            Console.WriteLine("Ingredients:");
+            Console.WriteLine("________________________________________________________________________");
+            Console.WriteLine("\n******* " + receipeName + " *******");
+            Console.WriteLine("Ingredients: ");
             for (int i = 0; i < ingredientNames.Length; i++)
             {
-                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]}");
+                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]} \n");
             }
-            Console.WriteLine();
             Console.WriteLine("Steps:");
             for (int i = 0; i < stepDescriptions.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
             }
-            Console.WriteLine("******************************************************************************");
+            Console.WriteLine("________________________________________________________________________\n");
         }
         //========================================================================================================
         // Scale the recipe up or down.
         public void scale()
         {
+            Console.WriteLine("\n________________________________________________________________________");
             for (int i = 0; i < ingredQuantity.Length; i++)
-            {
+            {  
                 double newQuantity = originalQuantities[i] * scaleNumber;
                 Console.WriteLine("Old: " + ingredQuantity[i] + " New: " + newQuantity);
                 ingredQuantity[i] = newQuantity;
             }
+            Console.WriteLine("________________________________________________________________________\n");
             displayReceipe();
         }
 
@@ -183,7 +180,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 ingredQuantity[i] = originalQuantities[i];
             }
-            Console.WriteLine("Quantities reverted to original values.");
+            Console.WriteLine("\nQuantities reverted to original values.");
             displayReceipe();
         }
         //========================================================================================================
