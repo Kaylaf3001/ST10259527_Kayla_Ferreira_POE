@@ -13,48 +13,16 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public string receipeName = "";
         public int ingreNo = 0;
         public List<Ingredients> Ingredients { get; set; }
-        public string[] stepDescriptions = { };
+        public List<string> stepDescriptions { get; set; }
         public int repSteps = 0;
         public double scaleNumber = 0;
 
         public Receipes()
         {
             Ingredients = new List<Ingredients>();
+            stepDescriptions = new List<string>();
         }
 
-        // Method to take user input for recipe details
-        public void userInput()
-        {
-            bool validInput = false;
-
-            while (!validInput)
-            {
-                try
-                {
-                    
-
-                    validInput = true; // If no exception occurs, set validInput to true to exit the loop
-                }
-                catch (FormatException)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid input format. Please enter a valid number.");
-                    Console.ResetColor();
-                }
-                catch (OverflowException)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Input is too large to be converted to an integer.");
-                    Console.ResetColor();
-                }
-                catch (Exception ex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"An error occurred: {ex.Message}");
-                    Console.ResetColor();
-                }
-            }
-        }
         //=======================================================================================================================================================================
         // Method to display recipe
         //=======================================================================================================================================================================
@@ -70,7 +38,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Console.WriteLine($"{i + 1}. {Ingredients[i].ingredientName}: {Ingredients[i].ingredientQuantity} {Ingredients[i].unitOfMeasurement}");
             }
             Console.WriteLine("\nSteps:");
-            for (int i = 0; i < stepDescriptions.Length; i++)
+            for (int i = 0; i < stepDescriptions.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
             }
@@ -79,7 +47,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         //=======================================================================================================================================================================
         // Method to scale the recipe up or down
         //=======================================================================================================================================================================
-        public void scale()
+        public void scale(double scaleNumber)
         {
             Console.WriteLine("\n________________________________________________________________________");
             for (int i = 0; i < Ingredients.Count; i++)

@@ -1,7 +1,9 @@
 ﻿using ST10259527_Kayla_Ferreira_POE.Class;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,8 +73,7 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.WriteLine("What is the name of the recipe?");
                 receipe.receipeName = Console.ReadLine();
 
-                Console.WriteLine("\nHow many Ingredients does your recipe have?");
-                receipe.ingreNo = Convert.ToInt32(Console.ReadLine());
+                receipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?");
 
                 Console.WriteLine("\nName and Quantity of your ingredients:");
 
@@ -82,46 +83,39 @@ namespace ST10259527_Kayla_Ferreira_POE
                     receipe.Ingredients.Add(newIngredient);
                 }
 
-                Console.WriteLine("\nHow many steps are there?");
-                receipe.repSteps = Convert.ToInt32(Console.ReadLine());
+                receipe.repSteps = (int)NumberInput("\nHow many steps are there?");
                 Console.WriteLine("Please enter a description for each step: ");
 
                 Console.WriteLine("________________________________________________________________________");
                 for (int i = 0; i < receipe.repSteps; i++)
                 {
                     Console.WriteLine($"Step {i + 1}: ");
-                    receipe.stepDescriptions[i] = Console.ReadLine();
+                    receipe.stepDescriptions.Add(Console.ReadLine());
                 }
                 Console.WriteLine("________________________________________________________________________\n");
 
-                Console.WriteLine("Would yoy like to view you receipe? (1 - Yes, 0 - No)");
-                int response = Convert.ToInt32(Console.ReadLine());
+                int response = (int)NumberInput("Would you like to view you receipe? (1 - Yes, 0 - No)");
                 if (response == 1)
                 {
                     receipe.displayReceipe();
                 }
 
-                Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
-                int response2 = Convert.ToInt32(Console.ReadLine());
+                int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
 
                 if (response2 == 1)
                 {
-                    Console.WriteLine("What would you like to scale down to?");
-                    string scaleInput = Console.ReadLine();
-                    receipe.scaleNumber = double.Parse(scaleInput, System.Globalization.CultureInfo.InvariantCulture);
-                    receipe.scale(); // Method to scale the recipe up or down
+                    double scaleNumber = NumberInput("What would you like to scale it to?");
+                    receipe.scale(scaleNumber); // Method to scale the recipe up or down
                 }
 
-                Console.WriteLine("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)");
-                int response3 = Convert.ToInt32(Console.ReadLine());
+                int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)");
 
                 if (response3 == 1)
                 {
                     receipe.resetQuantities(); // Method to reset quantities to the original amount input by the user
                 }
 
-                Console.WriteLine("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)");
-                int response4 = Convert.ToInt32(Console.ReadLine());
+                int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)");
 
                 if (response4 == 1)
                 {
@@ -131,7 +125,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"An error occurred. Please re-enter");
+                Console.WriteLine(ex.Message);
                 Console.ResetColor();
             }
             return receipe;
@@ -147,33 +141,24 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.Write("Name: ");
             string ingredientNames = Console.ReadLine();
 
-            Console.Write("Quantity: ");
-            double ingredQuantity = Convert.ToInt32(Console.ReadLine());
+
+            double ingredQuantity = NumberInput("Quantity: ");
             double originalQuantities = ingredQuantity; // Store original
-            int resp = 1; 
-            
-            try
-            {
-                Console.WriteLine("Is there a unit of measurement? (1 - Yes and 0 - No)");
-                resp = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"An error occurred. Please re-enter");
-                Console.ResetColor();
-            }
+            int resp = 1;
+
+            resp = (int)NumberInput("Is there a unit of measurement? (1 - Yes and 0 - No)");
+
             Ingredients newIngredient;
-                if (resp == 1)
-                {
-                    Console.WriteLine("What is the unit of measurement?");
-                    string unitOfMeasurement = Console.ReadLine();
-                    newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement);
-                }
-                else
-                {
-                    newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities);
-                }        
+            if (resp == 1)
+            {
+                Console.WriteLine("What is the unit of measurement?");
+                string unitOfMeasurement = Console.ReadLine();
+                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement);
+            }
+            else
+            {
+                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities);
+            }
             return newIngredient;
         }
         //=======================================================================================================================================================================
@@ -181,8 +166,7 @@ namespace ST10259527_Kayla_Ferreira_POE
         //=======================================================================================================================================================================
         public void clearData()
         {
-            Console.WriteLine("Are you sure you want to clear all data? (1 - Yes and 0 - No)");
-            int confirmation = Convert.ToInt32(Console.ReadLine());
+            int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)");
 
             if (confirmation == 1)
             {
@@ -199,7 +183,24 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Data not cleared.");
                 Console.ResetColor();
-
+            }
+        }
+        private double NumberInput(string prompt)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine(prompt);
+                    double response = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    return response;
+                }
+                catch (FormatException)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.ResetColor();
+                }
             }
         }
     }
