@@ -27,19 +27,10 @@ namespace ST10259527_Kayla_Ferreira_POE
             switch (choice)
             {
                 case 1:
-
-                    Console.WriteLine("What is the name of the recipe?");
-                    receipe.receipeName = Console.ReadLine();
-
-                    Console.WriteLine("\nHow many Ingredients does your recipe have?");
-                    receipe.ingreNo = Convert.ToInt32(Console.ReadLine());
-
-                    Console.WriteLine("\nName and Quantity of your ingredients:");
                     receipe.nameQuanUnit();// Method to input ingredient names, quantities, and units
 
                     Console.WriteLine("\nHow many steps are there?");
                     receipe.repSteps = Convert.ToInt32(Console.ReadLine());
-
                     Console.WriteLine("Please enter a description for each step: ");
                     receipe.steps(); // Method to input instructions on how to make the dish
 
@@ -47,6 +38,7 @@ namespace ST10259527_Kayla_Ferreira_POE
                 case 2:
                     
                     receipe.displayReceipe(); // Method to display recipe
+
                     break;
                 case 3:
                     Exit();
