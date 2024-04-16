@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,19 +10,23 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
     internal class Receipes
     {
         // Member variables to store recipe details
-        private string receipeName = "";
-        private string[] ingredientNames = { };
-        private string[] stepDescriptions = { };
-        private double[] ingredQuantity = { };
-        private double[] originalQuantities = { };
-        private double scaleNumber = 0;
-        private string[] unitOfMeasurement = { };
-        private int repSteps = 0;
-        private int ingreNo = 0;
+        Receipes receipes; 
+        public string receipeName = "";
+        public int ingreNo = 0;
+        public List<Ingredients> Ingredients { get; set; }
+        public string[] stepDescriptions = { };
+        public int repSteps = 0;
+        public double scaleNumber = 0;
+
+        public Receipes()
+        {
+            Ingredients = new List<Ingredients>();
+        }
 
         // Method to take user input for recipe details
         public void userInput()
         {
+            receipes = new Receipes();
             bool validInput = false;
 
             while (!validInput)
@@ -32,34 +37,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("********** Recipe Book **********");
                     Console.ResetColor();
-                    Console.WriteLine("What is the name of the recipe?");
-                    receipeName = Console.ReadLine();
-
-                    Console.WriteLine("\nHow many Ingredients does your recipe have?");
-                    ingreNo = Convert.ToInt32(Console.ReadLine());
-
-                    // Arrays to store the data
-                    ingredientNames = new string[ingreNo];
-                    ingredQuantity = new double[ingreNo];
-                    originalQuantities = new double[ingreNo];
-                    unitOfMeasurement = new string[ingreNo];
-
-                    Console.WriteLine("\nName and Quantity of your ingredients:");
-                    nameQuanUnit(); // Method to input ingredient names, quantities, and units
-
-                    Console.WriteLine("\nHow many steps are there?");
-                    repSteps = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Please enter a description for each step: ");
-                    steps(); // Method to input instructions on how to make the dish
-
-                    // Prompt user for additional actions
-                    Console.WriteLine("Would you like to view the recipe? (1 - Yes and 0 - No)");
-                    int response = Convert.ToInt32(Console.ReadLine());
-
-                    if (response == 1)
-                    {
-                        displayReceipe(); // Method to display recipe
-                    }
+                    
 
                     Console.WriteLine("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
                     int response2 = Convert.ToInt32(Console.ReadLine());
@@ -121,18 +99,30 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < ingreNo; i++)
             {
                 Console.WriteLine($"Ingredient {i + 1}:");
+
                 Console.Write("Name: ");
-                ingredientNames[i] = Console.ReadLine();
+                string ingredientNames = Console.ReadLine();
+
                 Console.Write("Quantity: ");
-                ingredQuantity[i] = Convert.ToInt32(Console.ReadLine());
-                originalQuantities[i] = ingredQuantity[i]; // Store original quantity
+                double ingredQuantity = Convert.ToInt32(Console.ReadLine());
+
+                double originalQuantities = ingredQuantity; // Store original quantity
+
                 Console.WriteLine("Is there a unit of measurement? (1 - Yes and 0 - No)");
                 int resp = Convert.ToInt32(Console.ReadLine());
+
+                Ingredients newIngredient;
                 if (resp == 1)
                 {
                     Console.WriteLine("What is the unit of measurement?");
-                    unitOfMeasurement[i] = Console.ReadLine();
+                    string unitOfMeasurement = Console.ReadLine();
+                    newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement);
                 }
+                else
+                {
+                    newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities);
+                }
+                receipes.Ingredients.Add(newIngredient);
                 Console.WriteLine();
             }
         }
@@ -153,14 +143,14 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         // Method to display recipe
         public void displayReceipe()
         {
-            Console.WriteLine("________________________________________________________________________");
+            Console.WriteLine("\n________________________________________________________________________");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("\n******* " + receipeName + " *******");
+            Console.WriteLine("******* " + receipeName + " *******");
             Console.ResetColor();
             Console.WriteLine("Ingredients: ");
-            for (int i = 0; i < ingredientNames.Length; i++)
+            for (int i = 0; i < receipes.Ingredients.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {ingredientNames[i]}: {ingredQuantity[i]} {unitOfMeasurement[i]}");
+                Console.WriteLine($"{i + 1}. {receipes.Ingredients[i].ingredientName}: {receipes.Ingredients[i].ingredientQuantity} {receipes.Ingredients[i].unitOfMeasurement}");
             }
             Console.WriteLine("\nSteps:");
             for (int i = 0; i < stepDescriptions.Length; i++)
@@ -174,11 +164,11 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public void scale()
         {
             Console.WriteLine("\n________________________________________________________________________");
-            for (int i = 0; i < ingredQuantity.Length; i++)
+            for (int i = 0; i < receipes.Ingredients.Count; i++)
             {
-                double newQuantity = originalQuantities[i] * scaleNumber;
-                Console.WriteLine("Old: " + ingredQuantity[i] + " New: " + newQuantity);
-                ingredQuantity[i] = newQuantity;
+                double newQuantity = receipes.Ingredients[i].originalQuantity * scaleNumber;
+                Console.WriteLine("Old: " + receipes.Ingredients[i].ingredientQuantity + " New: " + newQuantity);
+                receipes.Ingredients[i].ingredientQuantity = newQuantity;
             }
             Console.WriteLine("________________________________________________________________________\n");
             displayReceipe();
@@ -188,9 +178,9 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public void resetQuantities()
         {
             // Iterate through ingredQuantity and reset each quantity to its original value
-            for (int i = 0; i < ingredQuantity.Length; i++)
+            for (int i = 0; i < receipes.Ingredients.Count; i++)
             {
-                ingredQuantity[i] = originalQuantities[i];
+                receipes.Ingredients[i].ingredientQuantity = receipes.Ingredients[i].originalQuantity;
             }
             Console.WriteLine("\nQuantities reverted to original values.");
             displayReceipe();
@@ -206,13 +196,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 // Clear data
                 receipeName = "";
-                ingredientNames = new string[] { };
-                stepDescriptions = new string[] { };
-                ingredQuantity = new double[] { };
-                originalQuantities = new double[] { };
-                scaleNumber = 0;
-                unitOfMeasurement = new string[] { };
-
+                receipes = null;
+                
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Data cleared successfully.");
                 Console.ResetColor();
