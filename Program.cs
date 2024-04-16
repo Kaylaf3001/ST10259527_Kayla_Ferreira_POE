@@ -8,84 +8,122 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ST10259527_Kayla_Ferreira_POE
-{
+{   //Kayla Ferreira
+    //ST10259527 - Group 2
+
+    //Reference List
+    //https://www.w3schools.com/
+    //https://www.youtube.com/@BroCodez
+
+    //________________________________________________________________________________________________________
+    // The main class of the application
+    //________________________________________________________________________________________________________
     internal class Program
     {
+        // Instance of the Receipes class
         Receipes receipe;
+
+        // The main entry point of the application
         static void Main(string[] args)
         {
+            // Create an instance of the Program class and run the application
             Program worker = new Program();
             worker.Run();
         }
+
+        //________________________________________________________________________________________________________
+        // The main loop of the application
+        //________________________________________________________________________________________________________
         private void Run()
         {
+            // Flag to control the main loop
             bool exit = false;
+
+            // Main loop
             while (!exit)
             {
                 try
                 {
+                    // Set console color and print welcome message
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("Welcome to the Recipe Application!!");
+                    Console.WriteLine("________________________________________________________________________");
                     Console.ResetColor();
+
+                    // Print menu options
                     Console.WriteLine("Please select an option");
                     Console.WriteLine("1. Add a Recipe");
                     Console.WriteLine("2. View Recipe");
                     Console.WriteLine("3. Exit");
                     Console.Write("Please enter your choice: ");
+
+                    // Get user choice
                     int choice = Convert.ToInt32(Console.ReadLine());
+
+                    // Process user choice
                     switch (choice)
                     {
                         case 1:
-                            UserGetsReceipe(); // Method to input ingredient names, quantities, and units
+                            // User chose to add a recipe
+                            UserGetsReceipe();
                             break;
 
                         case 2:
-                            receipe.displayReceipe(); // Method to display recipe
+                            // User chose to view a recipe
+                            receipe.displayReceipe();
                             break;
 
                         case 3:
+                            // User chose to exit the application
                             Console.WriteLine("Exiting the Recipe Application...");
-                            exit = true; // Set exit flag to true to exit the loop
+                            exit = true;
                             break;
 
                         default:
+                            // User entered an invalid choice
                             Console.WriteLine("Invalid choice");
                             break;
                     }
                 }
                 catch (Exception ex)
                 {
+                    // An error occurred, print error message
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"An error occurred. Please re-enter");
                     Console.ResetColor();
                 }
             }
         }
-        //=======================================================================================================================================================================
-        // Method to create and get a recipe.
-        //=======================================================================================================================================================================
+        //________________________________________________________________________________________________________
+        // Method to create and get a recipe from the user
+        //________________________________________________________________________________________________________
         private Receipes UserGetsReceipe()
         {
             try
             {
+                // Create a new recipe
                 receipe = new Receipes();
 
+                // Get recipe name from the user
                 Console.WriteLine("What is the name of the recipe?");
                 receipe.receipeName = Console.ReadLine();
 
-                receipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?");
+                // Get number of ingredients from the user
+                receipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?\n");
 
+                // Get ingredients from the user
                 Console.WriteLine("\nName and Quantity of your ingredients:");
-
                 for (int i = 0; i < receipe.ingreNo; i++)
                 {
                     Ingredients newIngredient = UserGetsIngredient(i);
                     receipe.Ingredients.Add(newIngredient);
                 }
 
-                receipe.repSteps = (int)NumberInput("\nHow many steps are there?");
+                // Get number of steps from the user
+                receipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
                 Console.WriteLine("Please enter a description for each step: ");
 
+                // Get steps from the user
                 Console.WriteLine("________________________________________________________________________");
                 for (int i = 0; i < receipe.repSteps; i++)
                 {
@@ -94,63 +132,68 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
                 Console.WriteLine("________________________________________________________________________\n");
 
-                int response = (int)NumberInput("Would you like to view you receipe? (1 - Yes, 0 - No)");
+                // Ask user if they want to view the recipe
+                int response = (int)NumberInput("Would you like to view you receipe? (1 - Yes, 0 - No)\n");
                 if (response == 1)
                 {
                     receipe.displayReceipe();
                 }
 
-                int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)");
-
+                // Ask user if they want to scale the recipe
+                int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
                 if (response2 == 1)
                 {
-                    double scaleNumber = NumberInput("What would you like to scale it to?");
-                    receipe.scale(scaleNumber); // Method to scale the recipe up or down
+                    double scaleNumber = NumberInput("What would you like to scale it to?\n");
+                    receipe.scale(scaleNumber);
                 }
 
-                int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)");
-
+                // Ask user if they want to reset the quantities
+                int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
                 if (response3 == 1)
                 {
-                    receipe.resetQuantities(); // Method to reset quantities to the original amount input by the user
+                    receipe.resetQuantities();
                 }
 
-                int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)");
-
+                // Ask user if they want to clear the data for a new recipe
+                int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
                 if (response4 == 1)
                 {
-                    clearData(); // Method to clear data for a new recipe
+                    clearData();
                 }
             }
             catch (Exception ex)
             {
+                // An error occurred, print error message
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
             }
+
+            // Return the created recipe
             return receipe;
         }
-        //=======================================================================================================================================================================
-        // Method gets and prints the ingredients.
-        //=======================================================================================================================================================================
+        //________________________________________________________________________________________________________
+        // Method to get an ingredient from the user
+        //________________________________________________________________________________________________________
         private Ingredients UserGetsIngredient(int i)
         {
-
+            // Get ingredient name from the user
             Console.WriteLine($"Ingredient {i + 1}:");
-
             Console.Write("Name: ");
             string ingredientNames = Console.ReadLine();
 
-
+            // Get ingredient quantity from the user
             double ingredQuantity = NumberInput("Quantity: ");
-            double originalQuantities = ingredQuantity; // Store original
-            int resp = 1;
+            double originalQuantities = ingredQuantity;
 
-            resp = (int)NumberInput("Is there a unit of measurement? (1 - Yes and 0 - No)");
+            // Ask user if there is a unit of measurement
+            int resp = (int)NumberInput("Is there a unit of measurement? (1 - Yes and 0 - No)\n");
 
+            // Create a new ingredient
             Ingredients newIngredient;
             if (resp == 1)
             {
+                // Get unit of measurement from the user
                 Console.WriteLine("What is the unit of measurement?");
                 string unitOfMeasurement = Console.ReadLine();
                 newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement);
@@ -159,14 +202,18 @@ namespace ST10259527_Kayla_Ferreira_POE
             {
                 newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities);
             }
+
+            // Return the created ingredient
             return newIngredient;
         }
-        //=======================================================================================================================================================================
+
+        //________________________________________________________________________________________________________
         // Method to clear data for a new recipe
-        //=======================================================================================================================================================================
+        //________________________________________________________________________________________________________
         public void clearData()
         {
-            int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)");
+            // Ask user for confirmation
+            int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
 
             if (confirmation == 1)
             {
@@ -174,34 +221,44 @@ namespace ST10259527_Kayla_Ferreira_POE
                 receipe.receipeName = "";
                 receipe = null;
 
+                // Print success message
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Data cleared successfully.");
                 Console.ResetColor();
             }
             else
             {
+                // Print message that data was not cleared
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("Data not cleared.");
                 Console.ResetColor();
             }
         }
+        //________________________________________________________________________________________________________
+        // Method to get a number input from the user
+        //________________________________________________________________________________________________________
         private double NumberInput(string prompt)
         {
             while (true)
             {
                 try
                 {
-                    Console.WriteLine(prompt);
+                    // Print prompt and get input from the user
+                    Console.Write(prompt);
                     double response = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
                     return response;
                 }
                 catch (FormatException)
                 {
+                    // Input was not a valid number, print error message
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid input. Please enter a valid number.");
                     Console.ResetColor();
                 }
             }
         }
+        
+        //________________________________________________________________________________________________________
     }
+    //________________________________________________________________________________________________________
 }
