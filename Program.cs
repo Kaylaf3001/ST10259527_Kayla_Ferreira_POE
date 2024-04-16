@@ -40,7 +40,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             bool exit = false;
 
             // Main loop
-            while (!exit)
+            while (true)
             {
                 try
                 {
@@ -65,18 +65,18 @@ namespace ST10259527_Kayla_Ferreira_POE
                     {
                         case 1:
                             // User chose to add a recipe
-                            UserGetsReceipe();
+                            receipe = UserGetsReceipe();
                             break;
 
                         case 2:
                             // User chose to view a recipe
-                            receipe.displayReceipe();
+                            UserInputDisplay();
                             break;
 
                         case 3:
                             // User chose to exit the application
                             Console.WriteLine("Exiting the Recipe Application...");
-                            exit = true;
+                            Environment.Exit(0); // Terminate the program immediately
                             break;
 
                         default:
@@ -99,67 +99,39 @@ namespace ST10259527_Kayla_Ferreira_POE
         //________________________________________________________________________________________________________
         private Receipes UserGetsReceipe()
         {
+
+            // Create a new recipe
+            Receipes tempReceipe = new Receipes();
             try
             {
-                // Create a new recipe
-                receipe = new Receipes();
-
                 // Get recipe name from the user
                 Console.WriteLine("What is the name of the recipe?");
-                receipe.receipeName = Console.ReadLine();
+                tempReceipe.receipeName = Console.ReadLine();
 
                 // Get number of ingredients from the user
-                receipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?\n");
+                tempReceipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?\n");
 
                 // Get ingredients from the user
                 Console.WriteLine("\nName and Quantity of your ingredients:");
-                for (int i = 0; i < receipe.ingreNo; i++)
+                for (int i = 0; i < tempReceipe.ingreNo; i++)
                 {
                     Ingredients newIngredient = UserGetsIngredient(i);
-                    receipe.Ingredients.Add(newIngredient);
+                    tempReceipe.Ingredients.Add(newIngredient);
                 }
 
                 // Get number of steps from the user
-                receipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
+                tempReceipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
                 Console.WriteLine("Please enter a description for each step: ");
 
                 // Get steps from the user
                 Console.WriteLine("________________________________________________________________________");
-                for (int i = 0; i < receipe.repSteps; i++)
+                for (int i = 0; i < tempReceipe.repSteps; i++)
                 {
                     Console.WriteLine($"Step {i + 1}: ");
-                    receipe.stepDescriptions.Add(Console.ReadLine());
+                    tempReceipe.stepDescriptions.Add(Console.ReadLine());
                 }
                 Console.WriteLine("________________________________________________________________________\n");
-
-                // Ask user if they want to view the recipe
-                int response = (int)NumberInput("Would you like to view you receipe? (1 - Yes, 0 - No)\n");
-                if (response == 1)
-                {
-                    receipe.displayReceipe();
-                }
-
-                // Ask user if they want to scale the recipe
-                int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
-                if (response2 == 1)
-                {
-                    double scaleNumber = NumberInput("What would you like to scale it to?\n");
-                    receipe.scale(scaleNumber);
-                }
-
-                // Ask user if they want to reset the quantities
-                int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
-                if (response3 == 1)
-                {
-                    receipe.resetQuantities();
-                }
-
-                // Ask user if they want to clear the data for a new recipe
-                int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
-                if (response4 == 1)
-                {
-                    clearData();
-                }
+  
             }
             catch (Exception ex)
             {
@@ -170,7 +142,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             }
 
             // Return the created recipe
-            return receipe;
+            return tempReceipe;
         }
         //________________________________________________________________________________________________________
         // Method to get an ingredient from the user
@@ -257,7 +229,46 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
             }
         }
-        
+        //________________________________________________________________________________________________________
+        // Method to display the recipe and ask user if they want to scale the recipe
+        //________________________________________________________________________________________________________
+        private void UserInputDisplay()
+        {
+            // Display the recipe
+            if (receipe == null)
+            {
+                // No recipe has been added yet
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No recipe has been added yet.");
+                Console.ResetColor();
+                return;
+            }else
+            {
+                receipe.displayReceipe();
+            }
+            
+            // Ask user if they want to scale the recipe
+            int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
+            if (response2 == 1)
+            {
+                double scaleNumber = NumberInput("What would you like to scale it to?\n");
+                receipe.scale(scaleNumber);
+            }
+
+            // Ask user if they want to reset the quantities
+            int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
+            if (response3 == 1)
+            {
+                receipe.resetQuantities();
+            }
+
+            // Ask user if they want to clear the data for a new recipe
+            int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
+            if (response4 == 1)
+            {
+                clearData();
+            }
+        }
         //________________________________________________________________________________________________________
     }
     //________________________________________________________________________________________________________
