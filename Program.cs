@@ -15,13 +15,16 @@ namespace ST10259527_Kayla_Ferreira_POE
     //https://www.w3schools.com/
     //https://www.youtube.com/@BroCodez
 
-    //________________________________________________________________________________________________________
+    //=============================================================================================================
     // The main class of the application
-    //________________________________________________________________________________________________________
+    //=============================================================================================================
     internal class Program
     {
         // Instance of the Receipes class
         Receipes receipe;
+        // Instance of the Receipes class
+        List<Receipes> allReceipes = new List<Receipes>();
+
 
         // The main entry point of the application
         static void Main(string[] args)
@@ -30,10 +33,9 @@ namespace ST10259527_Kayla_Ferreira_POE
             Program worker = new Program();
             worker.Run();
         }
-
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         // The main loop of the application
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         private void Run()
         {
             // Flag to control the main loop
@@ -70,10 +72,24 @@ namespace ST10259527_Kayla_Ferreira_POE
 
                         case 2:
                             // User chose to view a recipe
-                            UserInputDisplay();
+                            Console.WriteLine("Enter the name of the recipe you want to view:");
+                            string recipeName = Console.ReadLine();
+                            Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
+                            if (recipeToView != null)
+                            {
+                                recipeToView.displayReceipe();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Recipe not found.");
+                            }
+                            break;
+                        case 3: 
+                            // User chose to view all recipes in alphabetical order
+                            alaphabeticalOrder();
                             break;
 
-                        case 3:
+                        case 4:
                             // User chose to exit the application
                             Console.WriteLine("Exiting the Recipe Application...");
                             Environment.Exit(0); // Terminate the program immediately
@@ -94,9 +110,9 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
             }
         }
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         // Method to create and get a recipe from the user
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         private Receipes UserGetsReceipe()
         {
 
@@ -131,7 +147,8 @@ namespace ST10259527_Kayla_Ferreira_POE
                     tempReceipe.stepDescriptions.Add(Console.ReadLine());
                 }
                 Console.WriteLine("________________________________________________________________________\n");
-  
+
+                allReceipes.Add(tempReceipe);
             }
             catch (Exception ex)
             {
@@ -144,9 +161,10 @@ namespace ST10259527_Kayla_Ferreira_POE
             // Return the created recipe
             return tempReceipe;
         }
-        //________________________________________________________________________________________________________
+
+        //=============================================================================================================
         // Method to get an ingredient from the user
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         private Ingredients UserGetsIngredient(int i)
         {
             // Get ingredient name from the user
@@ -179,9 +197,9 @@ namespace ST10259527_Kayla_Ferreira_POE
             return newIngredient;
         }
 
-        //________________________________________________________________________________________________________
+        ////=============================================================================================================
         // Method to clear data for a new recipe
-        //________________________________________________________________________________________________________
+        ////=============================================================================================================
         public void clearData()
         {
             // Ask user for confirmation
@@ -206,9 +224,9 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.ResetColor();
             }
         }
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         // Method to get a number input from the user
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         private double NumberInput(string prompt)
         {
             while (true)
@@ -229,9 +247,9 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
             }
         }
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         // Method to display the recipe and ask user if they want to scale the recipe
-        //________________________________________________________________________________________________________
+        //=============================================================================================================
         private void UserInputDisplay()
         {
             // Display the recipe
@@ -269,7 +287,16 @@ namespace ST10259527_Kayla_Ferreira_POE
                 clearData();
             }
         }
-        //________________________________________________________________________________________________________
+
+        public void alaphabeticalOrder()
+        {
+            allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
+            foreach (var item in allReceipes)
+            {
+                Console.WriteLine(item.receipeName);
+            }
+        }
+        //=============================================================================================================
     }
-    //________________________________________________________________________________________________________
+    //=============================================================================================================
 }
