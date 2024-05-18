@@ -43,7 +43,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < Ingredients.Count; i++)
             {
                 // Print each ingredient
-                Console.WriteLine($"{i + 1}. {Ingredients[i].ingredientName}: {Ingredients[i].ingredientQuantity} {Ingredients[i].unitOfMeasurement}");
+                Console.WriteLine($"{i + 1}. {Ingredients[i].ingredientName}: \n Quantity: {Ingredients[i].ingredientQuantity}" +
+                    $"{Ingredients[i].unitOfMeasurement}\nCalories: {Ingredients[i].calories} \nFood Group: {Ingredients[i].foodGroup}");
             }
             Console.WriteLine("\nSteps:");
             for (int i = 0; i < stepDescriptions.Count; i++)
@@ -51,6 +52,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 // Print each step
                 Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
             }
+            Console.Write("\nTotal Calories: ");
             Console.WriteLine("________________________________________________________________________\n");
         }
 
@@ -89,7 +91,30 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             // Display the updated recipe
             displayReceipe();
         }
+        //
+        //Calculate the total calories in the recipe
         //________________________________________________________________________________________________________
+        public void totalCalories()
+        {
+            double totalCalories = 0;
+            for (int i = 0; i < Ingredients.Count; i++)
+            {
+                totalCalories += Ingredients[i].calories;
+            }
+            Console.WriteLine("Total Calories: " + totalCalories);
+        }
+        //________________________________________________________________________________________________________
+        //Allows the user to input a food group
+        //________________________________________________________________________________________________________
+        public void foodGroup()
+        {
+            Console.WriteLine("Food Group: ");
+            for (int i = 0; i < Ingredients.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Ingredients[i].foodGroup}");
+            }
+        }
     }
+
     //________________________________________________________________________________________________________
 }

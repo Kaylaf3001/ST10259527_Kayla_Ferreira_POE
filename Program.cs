@@ -55,7 +55,7 @@ namespace ST10259527_Kayla_Ferreira_POE
                     // Print menu options
                     Console.WriteLine("Please select an option");
                     Console.WriteLine("1. Add a Recipe");
-                    Console.WriteLine("2. View Recipe");
+                    Console.WriteLine("2. View All Receipes");
                     Console.WriteLine("3. Exit");
                     Console.Write("Please enter your choice: ");
 
@@ -71,25 +71,27 @@ namespace ST10259527_Kayla_Ferreira_POE
                             break;
 
                         case 2:
-                            // User chose to view a recipe
-                            Console.WriteLine("Enter the name of the recipe you want to view:");
-                            string recipeName = Console.ReadLine();
-                            Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
-                            if (recipeToView != null)
-                            {
-                                recipeToView.displayReceipe();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Recipe not found.");
-                            }
-                            break;
-                        case 3: 
                             // User chose to view all recipes in alphabetical order
                             alaphabeticalOrder();
+                            int resp = (int)NumberInput("Would you like to view a recipe? (1 - Yes and 0 - No)\n");
+                            if (resp == 1)
+                            {
+                                Console.WriteLine("Enter the name of the recipe you want to view:");
+                                string recipeName = Console.ReadLine();
+                                Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
+                                if (recipeToView != null)
+                                {
+                                    recipeToView.displayReceipe();
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Recipe not found.");
+                                    Console.ResetColor();
+                                }
+                            }
                             break;
-
-                        case 4:
+                        case 3:
                             // User chose to exit the application
                             Console.WriteLine("Exiting the Recipe Application...");
                             Environment.Exit(0); // Terminate the program immediately
@@ -172,6 +174,14 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.Write("Name: ");
             string ingredientNames = Console.ReadLine();
 
+            //Input food group
+            Console.Write("Food Group: ");
+            string foodGroup = Console.ReadLine();
+
+            // Get calories from the user
+            Console.Write("Calories: ");
+            double calories = Convert.ToDouble(Console.ReadLine());
+
             // Get ingredient quantity from the user
             double ingredQuantity = NumberInput("Quantity: ");
             double originalQuantities = ingredQuantity;
@@ -186,11 +196,11 @@ namespace ST10259527_Kayla_Ferreira_POE
                 // Get unit of measurement from the user
                 Console.WriteLine("What is the unit of measurement?");
                 string unitOfMeasurement = Console.ReadLine();
-                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement);
+                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement, calories, foodGroup);
             }
             else
             {
-                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities);
+                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities,calories,foodGroup);
             }
 
             // Return the created ingredient
@@ -287,7 +297,7 @@ namespace ST10259527_Kayla_Ferreira_POE
                 clearData();
             }
         }
-
+        //============================================================================================================
         public void alaphabeticalOrder()
         {
             allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
