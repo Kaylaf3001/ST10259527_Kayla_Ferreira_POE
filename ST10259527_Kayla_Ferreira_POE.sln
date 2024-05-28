@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST10259527_Kayla_Ferreira_POE", "ST10259527_Kayla_Ferreira_POE.csproj", "{583F3AF8-AD98-4DAF-9464-16E853CC95A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receipe.Test", "..\Receipe.Test\Receipe.Test.csproj", "{989B19B2-39CD-46F9-89B7-E7C611C34157}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{583F3AF8-AD98-4DAF-9464-16E853CC95A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{583F3AF8-AD98-4DAF-9464-16E853CC95A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{583F3AF8-AD98-4DAF-9464-16E853CC95A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989B19B2-39CD-46F9-89B7-E7C611C34157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989B19B2-39CD-46F9-89B7-E7C611C34157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989B19B2-39CD-46F9-89B7-E7C611C34157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989B19B2-39CD-46F9-89B7-E7C611C34157}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Class\Ingredients.cs" />
     <Compile Include="Class\Receipes.cs" />
+    <Compile Include="Class\UnitConverterMeasure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

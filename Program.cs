@@ -130,12 +130,16 @@ namespace ST10259527_Kayla_Ferreira_POE
                 tempReceipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?\n");
 
                 // Get ingredients from the user
-                Console.WriteLine("\nName and Quantity of your ingredients:");
+                Console.WriteLine("\nName, Quantity, Calories and Food Group:");
                 for (int i = 0; i < tempReceipe.ingreNo; i++)
                 {
                     Ingredients newIngredient = UserGetsIngredient(i);
                     tempReceipe.Ingredients.Add(newIngredient);
+
+                    // Call the delegate to check total calories after each ingredient is added
+                    tempReceipe.totalCaloriesCheckDelegate();
                 }
+
 
                 // Get number of steps from the user
                 tempReceipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
@@ -150,7 +154,12 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
                 Console.WriteLine("________________________________________________________________________\n");
 
+                Console.Write("Total Calories: " + tempReceipe.totalCalories() + "\n");
+                tempReceipe.totalCaloriesCheckDelegate();
+                Console.WriteLine("________________________________________________________________________\n");
                 allReceipes.Add(tempReceipe);
+
+
             }
             catch (Exception ex)
             {
@@ -181,6 +190,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             // Get calories from the user
             Console.Write("Calories: ");
             double calories = Convert.ToDouble(Console.ReadLine());
+
 
             // Get ingredient quantity from the user
             double ingredQuantity = NumberInput("Quantity: ");

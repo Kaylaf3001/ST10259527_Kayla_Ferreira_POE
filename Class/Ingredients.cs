@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ST10259527_Kayla_Ferreira_POE.Class
 {
     // Class to represent an ingredient
-    internal class Ingredients
+    public class Ingredients
     {
         //________________________________________________________________________________________________________
         // Member variables to store ingredient details
