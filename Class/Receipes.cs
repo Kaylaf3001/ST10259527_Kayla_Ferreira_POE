@@ -5,6 +5,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 {
     // Delegate definition that returns void and takes no parameters
     public delegate bool TotalCaloriesCheckDelegate();
+
     //--------------------------------------------------------------------------------------------------------
     // Class to represent a recipe
     //--------------------------------------------------------------------------------------------------------
@@ -20,6 +21,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
 
         // Instance of the delegate
         public TotalCaloriesCheckDelegate totalCaloriesCheckDelegate;
+
         //--------------------------------------------------------------------------------------------------------
         // Constructor for the Receipes class
         //--------------------------------------------------------------------------------------------------------
@@ -31,6 +33,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             // Assign the totalCalorieCheck method to the delegate
             totalCaloriesCheckDelegate = totalCalorieCheck;
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Method to display recipe
         //--------------------------------------------------------------------------------------------------------
@@ -39,29 +42,33 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             // Print recipe details
             Console.WriteLine("\n________________________________________________________________________");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("******* " + receipeName + " *******");
+            Console.WriteLine($"******* {receipeName} *******");
             Console.ResetColor();
-            Console.WriteLine("Ingredients: ");
+
+            Console.WriteLine("\nIngredients:");
             for (int i = 0; i < Ingredients.Count; i++)
             {
                 // Print each ingredient
-                Console.WriteLine($"{i + 1}. {Ingredients[i].ingredientName}: \n Quantity: {Ingredients[i].ingredientQuantity} " +
-                    $"{Ingredients[i].unitOfMeasurement}\nCalories: {Ingredients[i].calories} \nFood Group: {Ingredients[i].foodGroup}");
+                Console.WriteLine($"{i + 1}. {Ingredients[i].ingredientName}");
+                Console.WriteLine($"   Quantity: {Ingredients[i].ingredientQuantity} {Ingredients[i].unitOfMeasurement}");
+                Console.WriteLine($"   Calories: {Ingredients[i].calories}");
+                Console.WriteLine($"   Food Group: {Ingredients[i].foodGroup}\n");
             }
 
             // Call totalCalories() and capture the returned value
             double totalCal = totalCalories();
-            Console.WriteLine("Total Calories: " + totalCal);
+            Console.WriteLine($"Total Calories: {totalCal}\n");
 
-            Console.WriteLine("\nSteps:");
+            Console.WriteLine("Steps:");
             for (int i = 0; i < stepDescriptions.Count; i++)
             {
                 // Print each step
-                Console.WriteLine($"{i + 1}. {stepDescriptions[i]} ");
+                Console.WriteLine($"{i + 1}. {stepDescriptions[i]}");
             }
-            Console.Write("\nTotal Calories: " + totalCalories() + "\n");
+
             Console.WriteLine("________________________________________________________________________\n");
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Method to scale the recipe up or down
         //--------------------------------------------------------------------------------------------------------
@@ -87,6 +94,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             // Display the updated recipe
             displayReceipe();
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Method to reset quantities to the original amount input by the user
         //--------------------------------------------------------------------------------------------------------
@@ -102,6 +110,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             // Display the updated recipe
             displayReceipe();
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Calculate the total calories in the recipe
         //--------------------------------------------------------------------------------------------------------
@@ -111,10 +120,10 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < Ingredients.Count; i++)
             {
                 totalCalories += Ingredients[i].calories;
-                
             }
             return totalCalories;
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Allows the user to input a food group
         //--------------------------------------------------------------------------------------------------------
@@ -126,6 +135,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Console.WriteLine($"{i + 1}. {Ingredients[i].foodGroup}");
             }
         }
+
         //--------------------------------------------------------------------------------------------------------
         // Method to check the total calories and determine if the recipe is healthy
         //--------------------------------------------------------------------------------------------------------
@@ -148,6 +158,6 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 return true;
             }
         }
-       //--------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------
     }
 }

@@ -72,7 +72,7 @@ namespace ST10259527_Kayla_Ferreira_POE
 
                         case 2:
                             // User chose to view all recipes in alphabetical order
-                            alaphabeticalOrder();2
+                            alaphabeticalOrder();
                             int resp = (int)NumberInput("Would you like to view a recipe? (1 - Yes and 0 - No)\n");
                             if (resp == 1)
                             {
@@ -117,7 +117,6 @@ namespace ST10259527_Kayla_Ferreira_POE
         //=============================================================================================================
         private Receipes UserGetsReceipe()
         {
-
             // Create a new recipe
             Receipes tempReceipe = new Receipes();
             try
@@ -140,7 +139,6 @@ namespace ST10259527_Kayla_Ferreira_POE
                     tempReceipe.totalCaloriesCheckDelegate();
                 }
 
-
                 // Get number of steps from the user
                 tempReceipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
                 Console.WriteLine("Please enter a description for each step: ");
@@ -157,7 +155,12 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.Write("Total Calories: " + tempReceipe.totalCalories() + "\n");
                 tempReceipe.totalCaloriesCheckDelegate();
                 Console.WriteLine("________________________________________________________________________\n");
+
+                // Add the created recipe to the list of all recipes
                 allReceipes.Add(tempReceipe);
+
+                // Update receipe
+                receipe = tempReceipe;
 
                 // Display the recipe and ask user if they want to scale the recipe
                 UserInputDisplay();
@@ -222,35 +225,35 @@ namespace ST10259527_Kayla_Ferreira_POE
         ////=============================================================================================================
         // Method to clear data for a new recipe
         ////=============================================================================================================
-        public void clearData()
-        {
-            // Ask user for confirmation
-            int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
-
-            if (confirmation == 1)
+            public void clearData()
             {
-                // Clear data
-                receipe.receipeName = "";
-                receipe = null;
+                // Ask user for confirmation
+                int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
 
-                // Print success message
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Data cleared successfully.");
-                Console.ResetColor();
+                if (confirmation == 1)
+                {
+                    // Clear data
+                    receipe.receipeName = "";
+                    receipe = new Receipes(); // Create a new instance of Receipes
+
+                    // Print success message
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Data cleared successfully.");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    // Print message that data was not cleared
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Data not cleared.");
+                    Console.ResetColor();
+                }
             }
-            else
+            //=============================================================================================================
+            // Method to get a number input from the user
+            //=============================================================================================================
+            private double NumberInput(string prompt)
             {
-                // Print message that data was not cleared
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Data not cleared.");
-                Console.ResetColor();
-            }
-        }
-        //=============================================================================================================
-        // Method to get a number input from the user
-        //=============================================================================================================
-        private double NumberInput(string prompt)
-        {
             while (true)
             {
                 try
