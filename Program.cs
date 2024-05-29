@@ -72,7 +72,7 @@ namespace ST10259527_Kayla_Ferreira_POE
 
                         case 2:
                             // User chose to view all recipes in alphabetical order
-                            alaphabeticalOrder();
+                            alaphabeticalOrder();2
                             int resp = (int)NumberInput("Would you like to view a recipe? (1 - Yes and 0 - No)\n");
                             if (resp == 1)
                             {
@@ -159,6 +159,8 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.WriteLine("________________________________________________________________________\n");
                 allReceipes.Add(tempReceipe);
 
+                // Display the recipe and ask user if they want to scale the recipe
+                UserInputDisplay();
 
             }
             catch (Exception ex)

@@ -69,7 +69,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 newQuantity = quantity;         
             }
-        }
-
+            return newQuantity;
+        }  
     }
 }
