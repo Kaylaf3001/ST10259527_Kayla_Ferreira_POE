@@ -22,9 +22,8 @@ namespace ST10259527_Kayla_Ferreira_POE
     {
         // Instance of the Receipes class
         Receipes receipe;
-        // Instance of the Receipes class
+        // List to store all recipes
         List<Receipes> allReceipes = new List<Receipes>();
-
 
         // The main entry point of the application
         static void Main(string[] args)
@@ -33,34 +32,19 @@ namespace ST10259527_Kayla_Ferreira_POE
             Program worker = new Program();
             worker.Run();
         }
-        //=============================================================================================================
+
         // The main loop of the application
-        //=============================================================================================================
         private void Run()
         {
-            // Flag to control the main loop
-            bool exit = false;
-
             // Main loop
             while (true)
             {
                 try
                 {
-                    // Set console color and print welcome message
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine("Welcome to the Recipe Application!!");
-                    Console.WriteLine("________________________________________________________________________");
-                    Console.ResetColor();
-
-                    // Print menu options
-                    Console.WriteLine("Please select an option");
-                    Console.WriteLine("1. Add a Recipe");
-                    Console.WriteLine("2. View All Receipes");
-                    Console.WriteLine("3. Exit");
-                    Console.Write("Please enter your choice: ");
-
+                    // Display menu options
+                    DisplayMenu();
                     // Get user choice
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                    int choice = (int)NumberInput("Please enter your choice: ");
 
                     // Process user choice
                     switch (choice)
@@ -69,112 +53,88 @@ namespace ST10259527_Kayla_Ferreira_POE
                             // User chose to add a recipe
                             receipe = UserGetsReceipe();
                             break;
-
                         case 2:
-                            // User chose to view all recipes in alphabetical order
+                            // User chose to view all recipes
                             alaphabeticalOrder();
-                            int resp = (int)NumberInput("Would you like to view a recipe? (1 - Yes and 0 - No)\n");
-                            if (resp == 1)
-                            {
-                                Console.WriteLine("Enter the name of the recipe you want to view:");
-                                string recipeName = Console.ReadLine();
-                                Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
-                                if (recipeToView != null)
-                                {
-                                    recipeToView.displayReceipe();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Recipe not found.");
-                                    Console.ResetColor();
-                                }
-                            }
                             break;
                         case 3:
                             // User chose to exit the application
                             Console.WriteLine("Exiting the Recipe Application...");
-                            Environment.Exit(0); // Terminate the program immediately
+                            Environment.Exit(0);
                             break;
-
                         default:
-                            // User entered an invalid choice
-                            Console.WriteLine("Invalid choice");
+                            // Invalid choice
+                            Console.WriteLine("Invalid choice. Please select a valid option.");
                             break;
                     }
                 }
                 catch (Exception ex)
                 {
-                    // An error occurred, print error message
+                    // An error occurred
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"An error occurred. Please re-enter");
+                    Console.WriteLine("An error occurred. Please try again.");
                     Console.ResetColor();
                 }
             }
         }
         //=============================================================================================================
-        // Method to create and get a recipe from the user
+        // Display menu options
         //=============================================================================================================
+        private void DisplayMenu()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Welcome to the Recipe Application!!");
+            Console.WriteLine("________________________________________________________________________");
+            Console.ResetColor();
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine("1. Add a Recipe");
+            Console.WriteLine("2. View All Recipes");
+            Console.WriteLine("3. Exit");
+        }
+
+        // Method to create and get a recipe from the user
         private Receipes UserGetsReceipe()
         {
-            // Create a new recipe
             Receipes tempReceipe = new Receipes();
             try
             {
-                // Get recipe name from the user
                 Console.WriteLine("What is the name of the recipe?");
                 tempReceipe.receipeName = Console.ReadLine();
 
-                // Get number of ingredients from the user
-                tempReceipe.ingreNo = (int)NumberInput("\nHow many Ingredients does your recipe have?\n");
-
-                // Get ingredients from the user
-                Console.WriteLine("\nName, Quantity, Calories and Food Group:");
+                tempReceipe.ingreNo = (int)NumberInput("How many ingredients does your recipe have? ");
+                Console.WriteLine("Name, Quantity, Calories and Food Group:");
                 for (int i = 0; i < tempReceipe.ingreNo; i++)
                 {
                     Ingredients newIngredient = UserGetsIngredient(i);
                     tempReceipe.Ingredients.Add(newIngredient);
-
-                    // Call the delegate to check total calories after each ingredient is added
                     tempReceipe.totalCaloriesCheckDelegate();
                 }
 
-                // Get number of steps from the user
-                tempReceipe.repSteps = (int)NumberInput("\nHow many steps are there?\n");
-                Console.WriteLine("Please enter a description for each step: ");
-
-                // Get steps from the user
+                tempReceipe.repSteps = (int)NumberInput("How many steps are there? ");
+                Console.WriteLine("Please enter a description for each step:");
                 Console.WriteLine("________________________________________________________________________");
                 for (int i = 0; i < tempReceipe.repSteps; i++)
                 {
                     Console.WriteLine($"Step {i + 1}: ");
                     tempReceipe.stepDescriptions.Add(Console.ReadLine());
                 }
-                Console.WriteLine("________________________________________________________________________\n");
 
-                Console.Write("Total Calories: " + tempReceipe.totalCalories() + "\n");
+                Console.WriteLine("________________________________________________________________________");
+                Console.WriteLine("Total Calories: " + tempReceipe.totalCalories());
                 tempReceipe.totalCaloriesCheckDelegate();
-                Console.WriteLine("________________________________________________________________________\n");
+                Console.WriteLine("________________________________________________________________________");
 
-                // Add the created recipe to the list of all recipes
                 allReceipes.Add(tempReceipe);
-
-                // Update receipe
                 receipe = tempReceipe;
-
-                // Display the recipe and ask user if they want to scale the recipe
                 UserInputDisplay();
 
             }
             catch (Exception ex)
             {
-                // An error occurred, print error message
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
             }
-
-            // Return the created recipe
             return tempReceipe;
         }
 
@@ -183,49 +143,36 @@ namespace ST10259527_Kayla_Ferreira_POE
         //=============================================================================================================
         private Ingredients UserGetsIngredient(int i)
         {
-            // Get ingredient name from the user
             Console.WriteLine($"Ingredient {i + 1}:");
             Console.Write("Name: ");
-            string ingredientNames = Console.ReadLine();
-
-            //Input food group
+            string ingredientName = Console.ReadLine();
             Console.Write("Food Group: ");
             string foodGroup = Console.ReadLine();
-
-            // Get calories from the user
             Console.Write("Calories: ");
             double calories = Convert.ToDouble(Console.ReadLine());
 
+            double ingredientQuantity = NumberInput("Quantity: ");
+            double originalQuantity = ingredientQuantity;
 
-            // Get ingredient quantity from the user
-            double ingredQuantity = NumberInput("Quantity: ");
-            double originalQuantities = ingredQuantity;
-
-            // Ask user if there is a unit of measurement
-            int resp = (int)NumberInput("Is there a unit of measurement? (1 - Yes and 0 - No)\n");
-
-            // Create a new ingredient
+            int hasUnitOfMeasurement = (int)NumberInput("Is there a unit of measurement? (1 - Yes, 0 - No)\n");
             Ingredients newIngredient;
-            if (resp == 1)
+            if (hasUnitOfMeasurement == 1)
             {
-                // Get unit of measurement from the user
                 Console.WriteLine("What is the unit of measurement?");
                 string unitOfMeasurement = Console.ReadLine();
-                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities, unitOfMeasurement, calories, foodGroup);
+                newIngredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, unitOfMeasurement, calories, foodGroup);
             }
             else
             {
-                newIngredient = new Ingredients(ingredientNames, ingredQuantity, originalQuantities,calories,foodGroup);
+                newIngredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, calories, foodGroup);
             }
-
-            // Return the created ingredient
             return newIngredient;
         }
 
         ////=============================================================================================================
         // Method to clear data for a new recipe
         ////=============================================================================================================
-            public void clearData()
+        public void clearData()
             {
                 // Ask user for confirmation
                 int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
@@ -320,8 +267,26 @@ namespace ST10259527_Kayla_Ferreira_POE
             {
                 Console.WriteLine(item.receipeName);
             }
+
+            int viewResponse = (int)NumberInput("Would you like to view a recipe? (1 - Yes, 0 - No)\n");
+            if (viewResponse == 1)
+            {
+                Console.WriteLine("Enter the name of the recipe you want to view:");
+                string recipeName = Console.ReadLine();
+                Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
+                if (recipeToView != null)
+                {
+                    recipeToView.displayReceipe();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Recipe not found.");
+                    Console.ResetColor();
+                }
+            }
         }
-        //=============================================================================================================
-    }
+            //=============================================================================================================
+        }
     //=============================================================================================================
 }
