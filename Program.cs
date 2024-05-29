@@ -90,6 +90,8 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.WriteLine("1. Add a Recipe");
             Console.WriteLine("2. View All Recipes");
             Console.WriteLine("3. Exit");
+            Console.WriteLine("________________________________________________________________________");
+
         }
 
         // Method to create and get a recipe from the user

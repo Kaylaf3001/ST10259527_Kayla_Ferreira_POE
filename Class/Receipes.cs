@@ -146,7 +146,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             if (totalCal > 300)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This recipe is unhealthy");
+                Console.WriteLine("This recipe is unhealthy." + "\n" + "This recipe has a high calorie count, which may not be suitable for those on a low-calorie diet.");
                 Console.ResetColor();
                 return false;
             }
