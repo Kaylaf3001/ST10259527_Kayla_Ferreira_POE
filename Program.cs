@@ -148,15 +148,51 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.WriteLine($"Ingredient {i + 1}:");
             Console.Write("Name: ");
             string ingredientName = Console.ReadLine();
-            Console.Write("Food Group: ");
-            string foodGroup = Console.ReadLine();
-            Console.Write("Calories: ");
-            double calories = Convert.ToDouble(Console.ReadLine());
 
             double ingredientQuantity = NumberInput("Quantity: ");
             double originalQuantity = ingredientQuantity;
 
+            Console.Write("Calories: ");
+            double calories = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Food Group:");
+            Console.WriteLine("1. Fruits");
+            Console.WriteLine("2. Vegetables");
+            Console.WriteLine("3. Grains");
+            Console.WriteLine("4. Proteins");
+            Console.WriteLine("5. Dairy");
+            Console.WriteLine("6. Fats and Oils");
+            Console.Write("Select the food group (1-6): ");
+            int foodGroupIndex = int.Parse(Console.ReadLine());
+            string foodGroup = "";
+            switch (foodGroupIndex)
+            {
+                case 1:
+                    foodGroup = "Fruits";
+                    break;
+                case 2:
+                    foodGroup = "Vegetables";
+                    break;
+                case 3:
+                    foodGroup = "Grains";
+                    break;
+                case 4:
+                    foodGroup = "Proteins";
+                    break;
+                case 5:
+                    foodGroup = "Dairy";
+                    break;
+                case 6:
+                    foodGroup = "Fats and Oils";
+                    break;
+                default:
+                    Console.WriteLine("Invalid food group selection. Defaulting to Other.");
+                    foodGroup = "Other";
+                    break;
+            }
+
             int hasUnitOfMeasurement = (int)NumberInput("Is there a unit of measurement? (1 - Yes, 0 - No)\n");
+
             Ingredients newIngredient;
             if (hasUnitOfMeasurement == 1)
             {
@@ -264,11 +300,22 @@ namespace ST10259527_Kayla_Ferreira_POE
         //============================================================================================================
         public void alaphabeticalOrder()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("________________________________________________________________________");
+            Console.WriteLine($"******* Cook Book *******");
+            Console.ResetColor();
+
             allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
             foreach (var item in allReceipes)
             {
+
                 Console.WriteLine(item.receipeName);
+
             }
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("________________________________________________________________________\n");
+            Console.ResetColor();
 
             int viewResponse = (int)NumberInput("Would you like to view a recipe? (1 - Yes, 0 - No)\n");
             if (viewResponse == 1)
@@ -278,7 +325,9 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
                 if (recipeToView != null)
                 {
+
                     recipeToView.displayReceipe();
+
                 }
                 else
                 {
