@@ -1,5 +1,6 @@
 # ST10259527_Kayla_Ferreira_POE
 ---- Recipe Management System ----
+
 This is a console-based Recipe Management System developed in C#. It allows users to create, display, and manage recipes. Each recipe consists of a list of ingredients and a list of step descriptions. The system also provides functionality to scale the quantity of ingredients up or down, reset quantities to their original values, and calculate the total calories in a recipe.
 
 ~ Classes ~
