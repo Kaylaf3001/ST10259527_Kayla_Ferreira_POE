@@ -88,8 +88,13 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Ingredients[i].ingredientQuantity = newQuantity;
 
                 // Convert the unit of measurement
-                double convertedQuantity = converter.convertUnitOfMeasurement(newQuantity, Ingredients[i].unitOfMeasurement, "newUnitOfMeasurement");
+                string newUnitOfMeasurement = Ingredients[i].unitOfMeasurement;
+                double convertedQuantity = converter.convertUnitOfMeasurement(newQuantity, Ingredients[i].unitOfMeasurement, newUnitOfMeasurement);
                 Console.WriteLine("Converted: " + convertedQuantity);
+
+                // Update the ingredient quantity and unit of measurement
+                Ingredients[i].ingredientQuantity = convertedQuantity;
+                Ingredients[i].unitOfMeasurement = newUnitOfMeasurement;
             }
             // Print separator
             Console.WriteLine("________________________________________________________________________\n");
