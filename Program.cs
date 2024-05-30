@@ -105,8 +105,15 @@ namespace ST10259527_Kayla_Ferreira_POE
                 Console.WriteLine("What is the name of the recipe?");
                 tempReceipe.receipeName = Console.ReadLine();
 
-                tempReceipe.ingreNo = (int)NumberInput("How many ingredients does your recipe have? ");
-                Console.WriteLine("Name, Quantity, Calories and Food Group:");
+                //TDO: Add spacing
+                tempReceipe.ingreNo = (int)NumberInput("\nHow many ingredients does your recipe have? ");
+                Console.WriteLine("\nName, Quantity, Calories and Food Group:\n");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Note: Calories are units of energy that measure the amount of energy food provides \n" +
+                    "to the body, essential for maintaining bodily functions and fueling physical activity.\nFood groups categorize " +
+                    "different types of foods based on their nutritional properties,\nincluding categories such as fruits, vegetables," +
+                    "grains, proteins, and dairy, to help\nensure a balanced and nutritious diet.\n");
+                Console.ResetColor();
                 for (int i = 0; i < tempReceipe.ingreNo; i++)
                 {
                     Ingredients newIngredient = UserGetsIngredient(i);
@@ -114,7 +121,7 @@ namespace ST10259527_Kayla_Ferreira_POE
                     tempReceipe.totalCaloriesCheckDelegate();
                 }
 
-                tempReceipe.repSteps = (int)NumberInput("How many steps are there? ");
+                tempReceipe.repSteps = (int)NumberInput("\nHow many steps are there? ");
                 Console.WriteLine("Please enter a description for each step:");
                 Console.WriteLine("________________________________________________________________________");
                 for (int i = 0; i < tempReceipe.repSteps; i++)
@@ -147,6 +154,7 @@ namespace ST10259527_Kayla_Ferreira_POE
         //=============================================================================================================
         private Ingredients UserGetsIngredient(int i)
         {
+
             Console.WriteLine($"Ingredient {i + 1}:");
             Console.Write("Name: ");
             string ingredientName = Console.ReadLine();
@@ -156,8 +164,12 @@ namespace ST10259527_Kayla_Ferreira_POE
 
             Console.Write("Calories: ");
             double calories = double.Parse(Console.ReadLine());
+            
+            // Get the food group
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\n> Food Group:");
+            Console.ResetColor();
 
-            Console.WriteLine("Food Group:");
             Console.WriteLine("1. Fruits");
             Console.WriteLine("2. Vegetables");
             Console.WriteLine("3. Grains");
@@ -165,8 +177,10 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.WriteLine("5. Dairy");
             Console.WriteLine("6. Fats and Oils");
             Console.Write("Select the food group (1-6): ");
+
             int foodGroupIndex = int.Parse(Console.ReadLine());
             string foodGroup = "";
+
             switch (foodGroupIndex)
             {
                 case 1:
@@ -195,13 +209,57 @@ namespace ST10259527_Kayla_Ferreira_POE
                     break;
             }
 
-            int hasUnitOfMeasurement = (int)NumberInput("Is there a unit of measurement? (1 - Yes, 0 - No)\n");
+            int hasUnitOfMeasurement = (int)NumberInput("Is there a unit of measurement? (1 - Yes, 0 - No)");
 
             Ingredients newIngredient;
             if (hasUnitOfMeasurement == 1)
             {
-                Console.WriteLine("What is the unit of measurement?");
-                string unitOfMeasurement = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\n> Pick your unit of measurement");
+                Console.ResetColor();
+
+                Console.WriteLine("1. g");
+                Console.WriteLine("2. kg");
+                Console.WriteLine("3. ml");
+                Console.WriteLine("4. l");
+                Console.WriteLine("5. tsp");
+                Console.WriteLine("6. tbsp");
+                Console.WriteLine("7. cup");
+                Console.Write("Select the unit of measurement (1-7): ");
+
+                int unitOfMeasurementIndex = int.Parse(Console.ReadLine());
+                string unitOfMeasurement = "";
+
+                switch (unitOfMeasurementIndex)
+                {
+                    case 1:
+                        unitOfMeasurement = "g";
+                        break;
+                    case 2:
+                        unitOfMeasurement = "kg";
+                        break;
+                    case 3:
+                        unitOfMeasurement = "ml";
+                        break;
+                    case 4:
+                        unitOfMeasurement = "l";
+                        break;
+                    case 5:
+                        unitOfMeasurement = "tsp";
+                        break;
+                    case 6:
+                        unitOfMeasurement = "tbsp";
+                        break;
+                    case 7:
+                        unitOfMeasurement = "cup";
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid unit of measurement selection.");
+                        Console.ResetColor();
+                        unitOfMeasurement = "";
+                        break;
+                }
                 newIngredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, unitOfMeasurement, calories, foodGroup);
             }
             else
@@ -253,6 +311,8 @@ namespace ST10259527_Kayla_Ferreira_POE
             
         }
         //============================================================================================================
+        // Method to display the recipes in alphabetical order
+        //=============================================================================================================
         public void alaphabeticalOrder()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -260,6 +320,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.WriteLine($"******* Cook Book *******");
             Console.ResetColor();
 
+            // Sort the recipes in alphabetical order
             allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
             foreach (var item in allReceipes)
             {

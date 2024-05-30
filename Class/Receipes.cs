@@ -63,9 +63,10 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < stepDescriptions.Count; i++)
             {
                 // Print each step
-                Console.WriteLine($"{i + 1}. {stepDescriptions[i]}");
+                Console.WriteLine($"{i + 1}. {stepDescriptions[i]}\n");
             }
 
+            // Call totalCalorieMeaning() and display the result
             totalCalorieMeaning();
 
             Console.WriteLine("________________________________________________________________________\n");
@@ -83,14 +84,17 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < Ingredients.Count; i++)
             {
                 // Calculate new quantity and print old and new quantities
-                double newQuantity = Ingredients[i].originalQuantity * scaleNumber;
+                double newQuantity = Ingredients[i].ingredientQuantity * scaleNumber;
                 Console.WriteLine("Old: " + Ingredients[i].ingredientQuantity + " New: " + newQuantity);
                 Ingredients[i].ingredientQuantity = newQuantity;
 
                 // Convert the unit of measurement
-                string newUnitOfMeasurement = Ingredients[i].unitOfMeasurement;
-                double convertedQuantity = converter.convertUnitOfMeasurement(newQuantity, Ingredients[i].unitOfMeasurement, newUnitOfMeasurement);
+                (double convertedQuantity, string newUnitOfMeasurement) = converter.convertUnitOfMeasurement(newQuantity, Ingredients[i].unitOfMeasurement);
                 Console.WriteLine("Converted: " + convertedQuantity);
+
+                //Scale the calories
+                Ingredients[i].calories = Ingredients[i].calories * scaleNumber;
+                Console.WriteLine("Calories: " + Ingredients[i].calories);
 
                 // Update the ingredient quantity and unit of measurement
                 Ingredients[i].ingredientQuantity = convertedQuantity;

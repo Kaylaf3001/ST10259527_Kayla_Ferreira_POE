@@ -11,65 +11,57 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         //________________________________________________________________________________________________________
         // Method to convert the unit of measurement
         //________________________________________________________________________________________________________
-        public double convertUnitOfMeasurement(double quantity, string unitOfMeasurement, string newUnitOfMeasurement)
+        public (double,string) convertUnitOfMeasurement(double quantity, string unitOfMeasurement)
         {
             //________________________________________________________________________________________________________
             // Convert the unit of measurement
             //________________________________________________________________________________________________________
-            double newQuantity = 0;
-            if (unitOfMeasurement == "g" && newUnitOfMeasurement == "kg")
+            double newQuantity = quantity;
+            string newUnitOfMeasurement = unitOfMeasurement;
+            if (unitOfMeasurement == "g" && quantity >= 1000)
             {
                 newQuantity = quantity / 1000;
+                newUnitOfMeasurement = "kg";
             }
-            else if (unitOfMeasurement == "kg" && newUnitOfMeasurement == "g")
+            else if (unitOfMeasurement == "kg" && quantity < 1)
             {
                 newQuantity = quantity * 1000;
+                newUnitOfMeasurement = "g";
             }
-            else if (unitOfMeasurement == "ml" && newUnitOfMeasurement == "l")
+            else if (unitOfMeasurement == "ml" && quantity >= 1000)
             {
                 newQuantity = quantity / 1000;
+                newUnitOfMeasurement = "l";
             }
-            else if (unitOfMeasurement == "l" && newUnitOfMeasurement == "ml")
+            else if (unitOfMeasurement == "l" && quantity < 1)
             {
                 newQuantity = quantity * 1000;
+                newUnitOfMeasurement = "ml";
             }
-            else if (unitOfMeasurement == "tsp" && newUnitOfMeasurement == "tbsp")
+            else if (unitOfMeasurement == "tsp" && quantity >= 3)
             {
                 newQuantity = quantity / 3;
+                newUnitOfMeasurement = "tbsp";
             }
-            else if (unitOfMeasurement == "tbsp" && newUnitOfMeasurement == "tsp")
+            else if (unitOfMeasurement == "tbsp" && quantity >= 16)
+            {
+                newQuantity = quantity / 16;
+                newUnitOfMeasurement = "cup";
+                
+            }
+            else if (unitOfMeasurement == "tbsp" && quantity < 0.3333)
             {
                 newQuantity = quantity * 3;
+                newUnitOfMeasurement = "tsp";
             }
-            else if (unitOfMeasurement == "cup" && newUnitOfMeasurement == "ml")
+            else if (unitOfMeasurement == "cup" && quantity < 1)
             {
-                newQuantity = quantity * 250;
+                newQuantity = quantity / 0.0625;
+                newUnitOfMeasurement = "tbsp";
             }
-            else if (unitOfMeasurement == "ml" && newUnitOfMeasurement == "cup")
-            {
-                newQuantity = quantity / 250;
-            }
-            else if (unitOfMeasurement == "cup" && newUnitOfMeasurement == "l")
-            {
-                newQuantity = quantity / 4;
-            }
-            else if (unitOfMeasurement == "l" && newUnitOfMeasurement == "cup")
-            {
-                newQuantity = quantity * 4;
-            }
-            else if (unitOfMeasurement == "g" && newUnitOfMeasurement == "ml")
-            {
-                newQuantity = quantity;
-            }
-            else if (unitOfMeasurement == "ml" && newUnitOfMeasurement == "g")
-            {
-                newQuantity = quantity;
-            }
-            else if (unitOfMeasurement == "kg" && newUnitOfMeasurement == "l")
-            {
-                newQuantity = quantity;         
-            }
-            return newQuantity;
-        }  
+           
+           return (newQuantity, newUnitOfMeasurement);
+        }
+        
     }
 }
