@@ -66,6 +66,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Console.WriteLine($"{i + 1}. {stepDescriptions[i]}");
             }
 
+            totalCalorieMeaning();
+
             Console.WriteLine("________________________________________________________________________\n");
         }
 
@@ -106,7 +108,9 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 Ingredients[i].ingredientQuantity = Ingredients[i].originalQuantity;
             }
             // Print message that quantities have been reset
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("\nQuantities reverted to original values.");
+            Console.ResetColor();
             // Display the updated recipe
             displayReceipe();
         }
@@ -123,7 +127,33 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             }
             return totalCalories;
         }
-
+        //--------------------------------------------------------------------------------------------------------
+        // Method to check the total calories and determine if the recipe is healthy
+        //--------------------------------------------------------------------------------------------------------
+        public bool totalCalorieMeaning()
+        {
+            if (totalCalories() > 500)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("This recipe has a high calorie count, which is not suitable for those on a low-calorie diet.");
+                Console.ResetColor();
+                return false;
+            }
+            else if (totalCalories() >= 300 && totalCalories() <= 500)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("This meal has a moderate calorie content and is healthy.");
+                Console.ResetColor();
+                return true;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You might want to consider adding some more calories to this meal.");
+                Console.ResetColor();
+                return true;
+            }
+        }
         //--------------------------------------------------------------------------------------------------------
         // Allows the user to input a food group
         //--------------------------------------------------------------------------------------------------------
@@ -146,15 +176,12 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             if (totalCal > 300)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This recipe is unhealthy." + "\n" + "This recipe has a high calorie count, which may not be suitable for those on a low-calorie diet.");
+                Console.WriteLine("Note: The receipe has exceeded 300 calories");
                 Console.ResetColor();
                 return false;
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("This recipe is healthy");
-                Console.ResetColor();
                 return true;
             }
         }

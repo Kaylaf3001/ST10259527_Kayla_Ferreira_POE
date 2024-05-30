@@ -32,8 +32,9 @@ namespace ST10259527_Kayla_Ferreira_POE
             Program worker = new Program();
             worker.Run();
         }
-
+        //=============================================================================================================
         // The main loop of the application
+        //=============================================================================================================
         private void Run()
         {
             // Main loop
@@ -93,8 +94,9 @@ namespace ST10259527_Kayla_Ferreira_POE
             Console.WriteLine("________________________________________________________________________");
 
         }
-
+        //=============================================================================================================
         // Method to create and get a recipe from the user
+        //=============================================================================================================
         private Receipes UserGetsReceipe()
         {
             Receipes tempReceipe = new Receipes();
@@ -186,7 +188,9 @@ namespace ST10259527_Kayla_Ferreira_POE
                     foodGroup = "Fats and Oils";
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid food group selection. Defaulting to Other.");
+                    Console.ResetColor();
                     foodGroup = "Other";
                     break;
             }
@@ -206,34 +210,6 @@ namespace ST10259527_Kayla_Ferreira_POE
             }
             return newIngredient;
         }
-
-        ////=============================================================================================================
-        // Method to clear data for a new recipe
-        ////=============================================================================================================
-        public void clearData()
-            {
-                // Ask user for confirmation
-                int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
-
-                if (confirmation == 1)
-                {
-                    // Clear data
-                    receipe.receipeName = "";
-                    receipe = new Receipes(); // Create a new instance of Receipes
-
-                    // Print success message
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("Data cleared successfully.");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    // Print message that data was not cleared
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("Data not cleared.");
-                    Console.ResetColor();
-                }
-            }
             //=============================================================================================================
             // Method to get a number input from the user
             //=============================================================================================================
@@ -275,27 +251,6 @@ namespace ST10259527_Kayla_Ferreira_POE
                 receipe.displayReceipe();
             }
             
-            // Ask user if they want to scale the recipe
-            int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
-            if (response2 == 1)
-            {
-                double scaleNumber = NumberInput("What would you like to scale it to?\n");
-                receipe.scale(scaleNumber);
-            }
-
-            // Ask user if they want to reset the quantities
-            int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
-            if (response3 == 1)
-            {
-                receipe.resetQuantities();
-            }
-
-            // Ask user if they want to clear the data for a new recipe
-            int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
-            if (response4 == 1)
-            {
-                clearData();
-            }
         }
         //============================================================================================================
         public void alaphabeticalOrder()
@@ -308,9 +263,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
             foreach (var item in allReceipes)
             {
-
                 Console.WriteLine(item.receipeName);
-
             }
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -328,6 +281,27 @@ namespace ST10259527_Kayla_Ferreira_POE
 
                     recipeToView.displayReceipe();
 
+                    // Ask user if they want to scale the recipe
+                    int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
+                    if (response2 == 1)
+                    {
+                        double scaleNumber = NumberInput("What would you like to scale it to?\n");
+                        receipe.scale(scaleNumber);
+                    }
+
+                    // Ask user if they want to reset the quantities
+                    int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
+                    if (response3 == 1)
+                    {
+                        receipe.resetQuantities();
+                    }
+
+                    // Ask user if they want to clear the data for a new recipe
+                    int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
+                    if (response4 == 1)
+                    {
+                        clearData();
+                    }
                 }
                 else
                 {
@@ -337,7 +311,35 @@ namespace ST10259527_Kayla_Ferreira_POE
                 }
             }
         }
-            //=============================================================================================================
+
+        ////=============================================================================================================
+        // Method to clear data for a new recipe
+        ////=============================================================================================================
+        public void clearData()
+        {
+            // Ask user for confirmation
+            int confirmation = (int)NumberInput("Are you sure you want to clear all data? (1 - Yes and 0 - No)\n");
+
+            if (confirmation == 1)
+            {
+                // Clear data
+                receipe.receipeName = "";
+                receipe = new Receipes(); // Create a new instance of Receipes
+
+                // Print success message
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Data cleared successfully.");
+                Console.ResetColor();
+            }
+            else
+            {
+                // Print message that data was not cleared
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Data not cleared.");
+                Console.ResetColor();
+            }
         }
+        //=============================================================================================================
+    }
     //=============================================================================================================
 }
