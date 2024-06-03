@@ -1,0 +1,13 @@
+﻿<Window x:Class="WPF_POE_Kayla_Ferreira.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+    <Grid Background="#FFC49AF5">
+        <Image Source="https://i.pinimg.com/564x/2c/10/ee/2c10ee9c1d799035ba074e1878ac7703.jpg" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="311" Margin="509,0,0,0"/>
+
+    </Grid>
+</Window>

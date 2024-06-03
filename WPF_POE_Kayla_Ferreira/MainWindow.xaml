@@ -1,0 +1,27 @@
+﻿<Window x:Class="WPF_POE_Kayla_Ferreira.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Viewbox>
+    <Grid Width="797">
+            <Image Source="https://i.pinimg.com/564x/5f/67/d2/5f67d24906ecd956a8ff182fd98c6b38.jpg" HorizontalAlignment="Left" Height="426" VerticalAlignment="Center" Width="290"/>
+        <Label Content="The Recipe Book" HorizontalAlignment="Left" Height="56" Margin="306,10,0,0" VerticalAlignment="Top" Width="431" FontSize="36" FontFamily="Sitka Heading Semibold" HorizontalContentAlignment="Center"/>
+        <Button x:Name="New_Recipe" Content="Button" HorizontalAlignment="Left" Margin="320,309,0,0" VerticalAlignment="Top" Height="35" Width="62" Background="#FF347978" BorderBrush="#FF347978" FontFamily="Sitka Display" Foreground="#FFFBFBFB"/>
+        <Ellipse HorizontalAlignment="Left" Height="100" Margin="294,134,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="113" Fill="#FFBE877C"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="294,184,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="113" Fill="#FFBE877C"/>
+        <Ellipse HorizontalAlignment="Left" Height="100" Margin="466,134,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="112" Fill="#FFBE877C"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="466,184,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="112" Fill="#FFBE877C"/>
+        <Ellipse HorizontalAlignment="Left" Height="100" Margin="631,134,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="113" Fill="#FFBE877C"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="631,184,0,0" Stroke="#FFBE877C" VerticalAlignment="Top" Width="113" Fill="#FFBE877C"/>
+        <Button x:Name="New_Recipe_Copy" Content="New Recipe" HorizontalAlignment="Left" Margin="314,309,0,0" VerticalAlignment="Top" Height="35" Width="72" Background="#FF347978" BorderBrush="#FF347978" FontFamily="Sitka Display" Foreground="#FFFBFBFB" Click="New_Recipe_Copy_Click"/>
+        <Button x:Name="New_Recipe_Copy1" Content="View Recipes" HorizontalAlignment="Left" Margin="486,309,0,0" VerticalAlignment="Top" Height="35" Width="72" Background="#FF347978" BorderBrush="#FF347978" FontFamily="Sitka Display" Foreground="#FFFBFBFB" Click="New_Recipe_Copy1_Click"/>
+        <Button x:Name="New_Recipe_Copy2" Content="Button" HorizontalAlignment="Left" Margin="652,309,0,0" VerticalAlignment="Top" Height="35" Width="72" Background="#FF347978" BorderBrush="#FF347978" FontFamily="Sitka Display" Foreground="#FFFBFBFB" Click="New_Recipe_Copy2_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="105" Margin="293,179,0,0" TextWrapping="Wrap" Text="New recipes can be seamlessly added to enrich your culinary collection." VerticalAlignment="Top" Width="114" TextAlignment="Center" FontFamily="Goudy Old Style" FontSize="16"/>
+
+    </Grid>
+    </Viewbox>
+</Window>

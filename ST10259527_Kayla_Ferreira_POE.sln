@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayla_Ferreira_POE", "Prog6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayla_Ferreira_POE.Test", "Kayla_Ferreira_POE.Test\Kayla_Ferreira_POE.Test.csproj", "{953ECB59-523D-4C4A-AFCD-BDB3B249E47E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_POE_Kayla_Ferreira", "WPF_POE_Kayla_Ferreira\WPF_POE_Kayla_Ferreira.csproj", "{10658B36-3B87-4FEA-982D-680B2AE21CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{953ECB59-523D-4C4A-AFCD-BDB3B249E47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{953ECB59-523D-4C4A-AFCD-BDB3B249E47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{953ECB59-523D-4C4A-AFCD-BDB3B249E47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10658B36-3B87-4FEA-982D-680B2AE21CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10658B36-3B87-4FEA-982D-680B2AE21CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10658B36-3B87-4FEA-982D-680B2AE21CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10658B36-3B87-4FEA-982D-680B2AE21CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
