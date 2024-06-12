@@ -1,13 +1,50 @@
 ﻿<Window x:Class="WPF_POE_Kayla_Ferreira.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
-        mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid Background="#FFC49AF5">
-        <Image Source="https://i.pinimg.com/564x/2c/10/ee/2c10ee9c1d799035ba074e1878ac7703.jpg" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="311" Margin="509,0,0,0"/>
+        Title="Recipe Input" Height="600" Width="800">
+    <Grid Margin="0,0,0,-74">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="Enter Recipe Information" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="Recipe Name:" Width="214" HorizontalAlignment="Left"/>
+            <TextBox x:Name="RecipeNameTextBox" Width="300" Height="20"/>
+
+            <TextBlock Text="Number of Ingredients:" Margin="10,0,0,0"/>
+            <TextBox x:Name="IngredientsNumberTextBox" Width="100"/>
+
+            <Button Content="Add Ingredients" Click="AddIngredients_Click" Margin="10,10,0,0" Width="110"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,3,20,256" Grid.Row="1">
+            <TextBlock Text="Ingredients List" FontSize="16" FontWeight="Bold" Height="65"/>
+            <ItemsControl x:Name="IngredientsList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="{Binding Name}" Width="150"/>
+                            <TextBlock Text="{Binding Quantity}" Width="50"/>
+                            <TextBlock Text="{Binding Unit}" Width="50"/>
+                            <TextBlock Text="{Binding Calories}" Width="50"/>
+                            <TextBlock Text="{Binding FoodGroup}" Width="100"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Add Recipe Step TextBox and Button -->
+        <StackPanel Grid.Row="1" Margin="0,118,20,321">
+            <TextBox x:Name="RecipeStepTextBox" Width="300" Margin="0,0,0,10"/>
+            <Button Content="Add Recipe Step" Click="AddRecipeStep_Click" Width="106"/>
+        </StackPanel>
+
+        <!-- Recipe Details TextBox -->
+        <TextBox x:Name="RecipeDetailsTextBox" Grid.Row="1" Margin="0,253,0,0" VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Text="Recipe Steps" FontSize="16" FontWeight="Bold" Margin="10,101,10,291" Grid.Row="1"/>
     </Grid>
 </Window>

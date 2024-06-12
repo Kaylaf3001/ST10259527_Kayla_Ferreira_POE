@@ -55,12 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddRecipe.xaml.cs">
+    <Compile Include="IngredientInput.xaml.cs">
+      <DependentUpon>IngredientInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.cs">
       <DependentUpon>AddRecipe.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewRecipes.xaml.cs">
       <DependentUpon>ViewRecipes.xaml</DependentUpon>
     </Compile>
+    <Page Include="IngredientInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,6 +114,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RecipeMain.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RecipeViewMain.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\OtherMainRecipe.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

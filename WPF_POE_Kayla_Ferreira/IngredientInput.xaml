@@ -1,0 +1,52 @@
+﻿<Window x:Class="WPF_POE_Kayla_Ferreira.IngredientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Ingredient" Height="384" Width="502">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Ingredient Name:" Grid.Row="0"/>
+        <TextBox x:Name="IngredientNameTextBox" Grid.Row="1"/>
+
+        <TextBlock Text="Quantity:" Grid.Row="2" Margin="0,10,0,0"/>
+        <TextBox x:Name="QuantityTextBox" Grid.Row="3" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Calories:" Grid.Row="4" Margin="0,10,0,0"/>
+        <TextBox x:Name="CaloriesTextBox" Grid.Row="5" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Food Group:" Grid.Row="6" Margin="0,10,0,0"/>
+        <ComboBox x:Name="FoodGroupComboBox" Grid.Row="7" Margin="0,0,0,10" SelectionChanged="FoodGroupComboBox_SelectionChanged">
+            <ComboBoxItem Content="Fruits"/>
+            <ComboBoxItem Content="Vegetables"/>
+            <ComboBoxItem Content="Grains"/>
+            <ComboBoxItem Content="Proteins"/>
+            <ComboBoxItem Content="Dairy"/>
+            <ComboBoxItem Content="Fats and Oils"/>
+        </ComboBox>
+
+        <TextBlock Text="Unit of Measurement:" Grid.Row="8" Margin="0,10,0,0"/>
+        <ComboBox x:Name="UnitComboBox" Grid.Row="9" Margin="0,0,0,10">
+            <ComboBoxItem Content="g"/>
+            <ComboBoxItem Content="kg"/>
+            <ComboBoxItem Content="ml"/>
+            <ComboBoxItem Content="l"/>
+            <ComboBoxItem Content="tsp"/>
+            <ComboBoxItem Content="tbsp"/>
+            <ComboBoxItem Content="cup"/>
+        </ComboBox>
+
+        <Button Content="Add Ingredient" Grid.Row="10" Click="AddIngredient_Click" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
