@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,10 +10,17 @@ namespace WPF_POE_Kayla_Ferreira
     {
         private List<Ingredient> ingredients = new List<Ingredient>();
         private List<string> recipeSteps = new List<string>();
+        public static List<Recipe> AllRecipes { get; private set; } = new List<Recipe>();
 
         public Window1()
         {
             InitializeComponent();
+        }
+        public class Recipe
+        {
+            public string Name { get; set; }
+            public List<Ingredient> Ingredients { get; set; }
+            public List<string> Steps { get; set; }
         }
 
         private void AddIngredients_Click(object sender, RoutedEventArgs e)
@@ -62,9 +70,11 @@ namespace WPF_POE_Kayla_Ferreira
 
             // Recipe steps
             RecipeDetailsTextBox.AppendText("\nSteps:\n");
+            int stepNumber = 1;
             foreach (var step in recipeSteps)
             {
-                RecipeDetailsTextBox.AppendText(step + "\n");
+                RecipeDetailsTextBox.AppendText($"{stepNumber}. {step}\n");
+                stepNumber++;
             }
         }
 
@@ -75,6 +85,34 @@ namespace WPF_POE_Kayla_Ferreira
 
             // Display the complete recipe
             DisplayRecipe();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a new Recipe instance when the "Done" button is clicked
+            Recipe newRecipe = new Recipe
+            {
+                Name = RecipeNameTextBox.Text,
+                Ingredients = ingredients,
+                Steps = recipeSteps
+            };
+
+            // Add the new recipe to AllRecipes
+            AllRecipes.Add(newRecipe);
+
+            // Show a message box indicating that the recipe has been saved
+            MessageBox.Show("Recipe has been saved!");
+
+            // Close the current window
+            this.Close();
+
+            MainWindow existingMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (existingMainWindow == null)
+            {
+                // If not, open a new MainWindow
+                MainWindow newWindow1 = new MainWindow();
+                newWindow1.Show();
+            }
         }
     }
 

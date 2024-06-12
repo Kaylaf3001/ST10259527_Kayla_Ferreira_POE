@@ -33,13 +33,20 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void New_Recipe_Copy1_Click(object sender, RoutedEventArgs e)
         {
-            Window2 newWindow2 = new Window2();
-            newWindow2.Show();
-        }
+            if (Window1.AllRecipes.Count > 0)
+            {
+                Window2 window2 = new Window2(Window1.AllRecipes);
+                window2.Show();
+            }
+            else
+            {
+                MessageBox.Show("No recipes have been created yet!");
+            }
+    }
 
         private void New_Recipe_Copy2_Click(object sender, RoutedEventArgs e)
         {
-            Window2 newWindow2 = new Window2();
+            Window1 newWindow2 = new Window1();
         }
     }
 }

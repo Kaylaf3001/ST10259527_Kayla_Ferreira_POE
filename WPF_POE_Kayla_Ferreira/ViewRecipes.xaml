@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="800">
-    <Grid>
-        
+        Title="View Recipe" Height="600" Width="800">
+    <Grid Margin="10">
+        <TextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" />
     </Grid>
 </Window>
