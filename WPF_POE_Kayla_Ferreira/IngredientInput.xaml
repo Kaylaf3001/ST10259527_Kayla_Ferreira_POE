@@ -37,7 +37,13 @@
         </ComboBox>
 
         <TextBlock Text="Unit of Measurement:" Grid.Row="8" Margin="0,10,0,0"/>
-        <ComboBox x:Name="UnitComboBox" Grid.Row="9" Margin="0,0,0,10">
+        <ComboBox x:Name="UnitComboBox" Grid.Row="9" Margin="0,0,0,10" Foreground="Black" SelectionChanged="UnitComboBox_SelectionChanged" BorderBrush="#FFECECEC">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
             <ComboBoxItem Content="g"/>
             <ComboBoxItem Content="kg"/>
             <ComboBoxItem Content="ml"/>
@@ -47,6 +53,6 @@
             <ComboBoxItem Content="cup"/>
         </ComboBox>
 
-        <Button Content="Add Ingredient" Grid.Row="10" Click="AddIngredient_Click" Margin="0,10,0,0"/>
+        <Button Content="Add Ingredient" Grid.Row="10" Click="AddIngredient_Click" Margin="172,17,172,17" BorderBrush="#FFDDDDDD" Foreground="Black" Background="#FFAB6767"/>
     </Grid>
 </Window>

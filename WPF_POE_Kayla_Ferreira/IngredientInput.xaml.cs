@@ -74,6 +74,11 @@ namespace WPF_POE_Kayla_Ferreira
                 }
             }
         }
+
+        private void UnitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
 

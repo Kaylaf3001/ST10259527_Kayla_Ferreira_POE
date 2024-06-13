@@ -30,7 +30,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="59*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -53,20 +54,21 @@
         </StackPanel>
 
         <!-- Ingredients List -->
-        <StackPanel Grid.Column="0" Margin="0,141,10,242" Background="#FFDDDDDD" Grid.RowSpan="3">
+        <StackPanel Grid.Column="0" Margin="0,5,10,6" Background="#FF9CC8CE" Grid.Row="2">
             <TextBlock Text="Ingredients List" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Center" FontFamily="High Tower Text"/>
             <ItemsControl x:Name="IngredientsList" ItemTemplate="{StaticResource IngredientTemplate}"/>
         </StackPanel>
 
         <!-- Add Recipe Step Section -->
-        <StackPanel Margin="0,200,10,136" Grid.Row="2">
+        <StackPanel Margin="0,8,10,91" Grid.Row="3">
             <TextBlock Text="Recipe Steps" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Center" FontFamily="High Tower Text"/>
-            <TextBox x:Name="RecipeStepTextBox" Width="266" Margin="0,5"/>
-            <Button Content="Add Step" Click="AddRecipeStep_Click" Width="100" FontFamily="High Tower Text"/>
+            <TextBox x:Name="RecipeStepTextBox" Width="268" Margin="0,5" Height="74"/>
+            <Button Content="Add Step" Click="AddRecipeStep_Click" Width="100" FontFamily="High Tower Text" Height="22"/>
         </StackPanel>
 
         <!-- Recipe Details TextBox -->
-        <TextBox x:Name="RecipeDetailsTextBox" Grid.Column="1" Margin="10,0,10,0" VerticalScrollBarVisibility="Auto" Grid.RowSpan="3"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,377,0,0" Grid.Row="2" VerticalAlignment="Top" Width="292" Click="Button_Click"/>
+        <TextBox x:Name="RecipeDetailsTextBox" Grid.Column="1" Margin="10,0,10,0" VerticalScrollBarVisibility="Auto" Grid.RowSpan="4" BorderBrush="#FF212D53"/>
+        <Button Content="Done" HorizontalAlignment="Center" Margin="0,185,0,0" Grid.Row="3" VerticalAlignment="Top" Width="64" Click="Button_Click" Height="32" Background="#FF2F9574" FontWeight="Bold"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="182" Grid.Row="2" VerticalAlignment="Center" Width="302"/>
     </Grid>
 </Window>
