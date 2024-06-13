@@ -1,54 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static WPF_POE_Kayla_Ferreira.Window1;
 
 namespace WPF_POE_Kayla_Ferreira
 {
-    /// <summary>
-    /// Interaction logic for Window2.xaml
-    /// </summary>
     public partial class Window2 : Window
     {
+        private List<Recipe> _allRecipes;
+
         public Window2(List<Recipe> allRecipes)
         {
             InitializeComponent();
-            foreach (var recipe in allRecipes)
+            _allRecipes = allRecipes.OrderBy(r => r.Name).ToList(); // Sort recipes alphabetically
+            foreach (var recipe in _allRecipes)
             {
-                DisplayRecipe(recipe.Name, recipe.Ingredients, recipe.Steps);
+                RecipeListBox.Items.Add(recipe.Name);
             }
+        }
+
+        private void RecipeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (RecipeListBox.SelectedItem != null)
+            {
+                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.Name == RecipeListBox.SelectedItem.ToString());
+                if (selectedRecipe != null)
+                {
+                    DisplayRecipe(selectedRecipe.Name, selectedRecipe.Ingredients, selectedRecipe.Steps);
+                }
+            }
+        }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close(); // Simply close this window to go back to the MainWindow.
+        }
+
+        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the selection and steps.
+            RecipeListBox.SelectedItem = null;
+            RecipeDetailsTextBox.Document.Blocks.Clear();
+            RecipeStepsListView.Items.Clear();
+            RecipeStepsListView.Visibility = Visibility.Collapsed;
         }
 
         private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> recipeSteps)
         {
+            RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
+            RecipeStepsListView.Items.Clear();
+            RecipeStepsListView.Visibility = Visibility.Visible;
+
             // Recipe name
-            RecipeDetailsTextBox.AppendText($"Recipe Name: {recipeName}\n\n");
+            var recipeNameParagraph = new Paragraph(new Run($"Recipe Name: {recipeName}\n\n"));
+            RecipeDetailsTextBox.Document.Blocks.Add(recipeNameParagraph);
 
             // Ingredients
-            RecipeDetailsTextBox.AppendText("Ingredients:\n");
+            var ingredientsParagraph = new Paragraph(new Run("Ingredients:\n"));
             foreach (var ingredient in ingredients)
             {
-                RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
+                ingredientsParagraph.Inlines.Add(new Run($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n"));
             }
+            RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Recipe steps
-            RecipeDetailsTextBox.AppendText("\nSteps:\n");
-            int stepNumber = 1;
+            var stepsParagraph = new Paragraph(new Run("\nSteps:\n"));
+            RecipeDetailsTextBox.Document.Blocks.Add(stepsParagraph);
             foreach (var step in recipeSteps)
             {
-                RecipeDetailsTextBox.AppendText($"{stepNumber}. {step}\n");
-                stepNumber++;
+                var checkBox = new CheckBox { Content = step };
+                RecipeStepsListView.Items.Add(checkBox);
             }
+
         }
     }
 }

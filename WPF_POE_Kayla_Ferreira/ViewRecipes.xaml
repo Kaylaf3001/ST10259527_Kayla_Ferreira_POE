@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="View Recipe" Height="600" Width="800">
     <Grid Margin="10">
-        <TextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="RecipeListBox" Grid.Row="1" SelectionChanged="RecipeListBox_SelectionChanged" />
+        <Grid Grid.Column="1" Grid.Row="1">
+            <RichTextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+            <ListView x:Name="RecipeStepsListView" Visibility="Collapsed" Margin="0,0,0,10"/>
+        </Grid>
+        <Button Content="Back" Grid.Column="0" Grid.Row="2" Click="BackButton_Click"/>
+        <Button Content="Done" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Click="DoneButton_Click"/>
     </Grid>
 </Window>
