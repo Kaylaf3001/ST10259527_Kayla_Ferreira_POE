@@ -65,14 +65,22 @@ namespace WPF_POE_Kayla_Ferreira
             }
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
+            // Adding a separator line between ingredients and steps for better readability
+            var separator = new Paragraph(new Run("\n----------------\n"));
+            RecipeDetailsTextBox.Document.Blocks.Add(separator);
+
             // Recipe steps
-            var stepsParagraph = new Paragraph(new Run("\nSteps:\n"));
+            var stepsParagraph = new Paragraph(new Run("Steps:\n"));
             RecipeDetailsTextBox.Document.Blocks.Add(stepsParagraph);
             foreach (var step in recipeSteps)
             {
-                var checkBox = new CheckBox { Content = step };
+                var checkBox = new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) };
                 RecipeStepsListView.Items.Add(checkBox);
             }
+        }
+
+        private void RecipeDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }
