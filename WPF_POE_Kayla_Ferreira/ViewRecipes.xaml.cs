@@ -54,7 +54,7 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeStepsListView.Visibility = Visibility.Visible;
 
             // Recipe name
-            var recipeNameParagraph = new Paragraph(new Run($"Recipe Name: {recipeName}\n\n"));
+            var recipeNameParagraph = new Paragraph(new Run($"Recipe Name: {recipeName}"));
             RecipeDetailsTextBox.Document.Blocks.Add(recipeNameParagraph);
 
             // Ingredients
@@ -66,12 +66,8 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Adding a separator line between ingredients and steps for better readability
-            var separator = new Paragraph(new Run("\n----------------\n"));
-            RecipeDetailsTextBox.Document.Blocks.Add(separator);
-
-            // Recipe steps
-            var stepsParagraph = new Paragraph(new Run("Steps:\n"));
-            RecipeDetailsTextBox.Document.Blocks.Add(stepsParagraph);
+            
+            
             foreach (var step in recipeSteps)
             {
                 var checkBox = new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) };

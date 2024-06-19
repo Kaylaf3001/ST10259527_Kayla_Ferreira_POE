@@ -19,11 +19,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="RecipeListBox" Grid.Row="1" SelectionChanged="RecipeListBox_SelectionChanged" Margin="0,61,0,0" Background="White" />
-        <Grid Grid.Column="2" Grid.Row="1" Margin="2,204,0,1">
+        <Grid Grid.Column="2" Grid.Row="1" Margin="2,204,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <RichTextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Height="137" VerticalAlignment="Top" TextChanged="RecipeDetailsTextBox_TextChanged" Margin="0,-141,-1,0" />
+            <RichTextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Height="140" VerticalAlignment="Top" TextChanged="RecipeDetailsTextBox_TextChanged" Margin="0,-144,-1,0" />
             <ListView x:Name="RecipeStepsListView" Visibility="Collapsed" Margin="0,0,0,10"/>
         </Grid>
         <Button Content="Back" Grid.Row="2" Click="BackButton_Click" Margin="0,29,157,2" Background="#FF72B7E0" RenderTransformOrigin="-1.102,0.704" HorizontalAlignment="Right" Width="43"/>

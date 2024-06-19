@@ -41,9 +41,9 @@
 
         <!-- Input Section -->
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
-            <TextBlock Text="Enter Recipe Information" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" FontFamily="High Tower Text"/>
+            <TextBlock Text="Enter Recipe Information" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" FontFamily="High Tower Text" Foreground="#FF1E2A76"/>
             <StackPanel Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Recipe Name:" Width="100" FontFamily="High Tower Text" FontSize="14"/>
+                <TextBlock Text="Recipe Name:" Width="100" FontFamily="High Tower Text" FontSize="14" />
                 <TextBox x:Name="RecipeNameTextBox" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10">
@@ -60,15 +60,15 @@
         </StackPanel>
 
         <!-- Add Recipe Step Section -->
-        <StackPanel Margin="0,8,10,91" Grid.Row="3">
+        <StackPanel Margin="0,8,10,75" Grid.Row="3">
             <TextBlock Text="Recipe Steps" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Center" FontFamily="High Tower Text"/>
             <TextBox x:Name="RecipeStepTextBox" Width="268" Margin="0,5" Height="74"/>
-            <Button Content="Add Step" Click="AddRecipeStep_Click" Width="100" FontFamily="High Tower Text" Height="22"/>
+            <Button Content="Add Step" Click="AddRecipeStep_Click" Width="100" FontFamily="High Tower Text" Height="29"/>
         </StackPanel>
 
         <!-- Recipe Details TextBox -->
         <TextBox x:Name="RecipeDetailsTextBox" Grid.Column="1" Margin="10,0,10,0" VerticalScrollBarVisibility="Auto" Grid.RowSpan="4" BorderBrush="#FF212D53"/>
-        <Button Content="Done" HorizontalAlignment="Center" Margin="0,185,0,0" Grid.Row="3" VerticalAlignment="Top" Width="64" Click="Button_Click" Height="32" Background="#FF2F9574" FontWeight="Bold"/>
+        <Button Content="Done" HorizontalAlignment="Center" Margin="0,185,0,0" Grid.Row="3" VerticalAlignment="Top" Width="64" Click="Button_Click" Height="32" Background="#9bceda" FontWeight="Bold"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="182" Grid.Row="2" VerticalAlignment="Center" Width="302"/>
     </Grid>
 </Window>
