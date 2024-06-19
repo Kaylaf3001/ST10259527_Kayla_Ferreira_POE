@@ -46,7 +46,8 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void New_Recipe_Copy2_Click(object sender, RoutedEventArgs e)
         {
-            Window1 newWindow2 = new Window1();
+            Search newSearch = new Search();
+            newSearch.Show();
         }
     }
 }

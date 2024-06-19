@@ -47,7 +47,7 @@
                     Canvas.Left="502" Canvas.Top="225" Click="New_Recipe_Copy_Click" VerticalAlignment="Center" />
             <Button x:Name="ViewRecipeButton" Content="View Recipes" Style="{StaticResource MenuButtons}"
                     Canvas.Left="502" Canvas.Top="293" Click="New_Recipe_Copy1_Click" VerticalAlignment="Center" />
-            <Button x:Name="New_Recipe_Copy2" Content="Button" Style="{StaticResource MenuButtons}"
+            <Button x:Name="New_Recipe_Copy2" Content="Search" Style="{StaticResource MenuButtons}"
                     Canvas.Left="503" Canvas.Top="359" Click="New_Recipe_Copy2_Click" HorizontalAlignment="Center" Height="37" />
         </Canvas>
     </Viewbox>
