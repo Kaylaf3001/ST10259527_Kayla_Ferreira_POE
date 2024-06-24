@@ -15,7 +15,41 @@ namespace WPF_POE_Kayla_Ferreira
         public Window2(List<Recipe> allRecipes)
         {
             InitializeComponent();
-            _allRecipes = allRecipes.OrderBy(r => r.Name).ToList(); // Sort recipes alphabetically
+
+            // Check if recipes are provided, if not, create test data
+            if (allRecipes == null || allRecipes.Count == 0)
+            {
+                // Create test data
+                _allRecipes = new List<Recipe>
+        {
+            new Recipe
+            {
+                Name = "Test Recipe 1",
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient { Name = "Ingredient 1", Quantity = 2, Unit = "cups", Calories = 100, FoodGroup = "Grains" },
+                    new Ingredient { Name = "Ingredient 2", Quantity = 1, Unit = "tbsp", Calories = 50, FoodGroup = "Fats and oils" }
+                },
+                Steps = new List<string> { "Step 1: Do something.", "Step 2: Do the next thing." }
+            },
+            new Recipe
+            {
+                Name = "Test Recipe 2",
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient { Name = "Ingredient A", Quantity = 3, Unit = "lbs", Calories = 300, FoodGroup = "Protein" },
+                    new Ingredient { Name = "Ingredient B", Quantity = 0.5, Unit = "cup", Calories = 150, FoodGroup = "Dairy" }
+                },
+                Steps = new List<string> { "Step 1: Prepare something.", "Step 2: Cook it." }
+            }
+        };
+            }
+            else
+            {
+                _allRecipes = allRecipes.OrderBy(r => r.Name).ToList(); // Sort recipes alphabetically if provided
+            }
+
+            // Populate the ListBox with recipe names
             foreach (var recipe in _allRecipes)
             {
                 RecipeListBox.Items.Add(recipe.Name);

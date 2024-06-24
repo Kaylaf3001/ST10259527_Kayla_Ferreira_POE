@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
-        Title="Search" Height="450" Width="800">
+        Title="Search" Height="342" Width="712">
     <Grid>
-        
+        <Grid HorizontalAlignment="Left" Height="326" VerticalAlignment="Center" Width="246">
+            <TextBlock HorizontalAlignment="Center" Height="42" Margin="0,15,0,0" TextWrapping="Wrap" Text="Search for a specific ingredient or recipe" VerticalAlignment="Top" Width="226" TextAlignment="Center" FontSize="14" FontFamily="Century Gothic" Foreground="#FF170A78"/>
+            <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="10,63,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="190" TextChanged="TextBox_Search" FontFamily="Century Gothic" Foreground="#FF8992A9" BorderBrush="#FF3B529A" Background="White" SelectionBrush="#FF0078D7"/>
+            
+            <TextBlock HorizontalAlignment="Left" Height="19" Margin="10,91,0,0" TextWrapping="Wrap" Text="Food Groups" VerticalAlignment="Top" Width="190" FontFamily="Century Gothic" Foreground="#FF170A78"/>
+            <CheckBox x:Name="FruitsCheckBox" Content="Fruits" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Checked="CheckBox_Fruits" FontFamily="Century Gothic"/>
+            <CheckBox x:Name="VegetablesCheckBox" Content="Vegetables" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Checked="CheckBox_Vegetables"/>
+            <CheckBox x:Name="GrainsCheckBox" Content="Grains" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Checked="CheckBox_Grains"/>
+            <CheckBox x:Name="ProteinCheckBox" Content="Protein" HorizontalAlignment="Left" Margin="105,115,0,0" VerticalAlignment="Top" Checked="CheckBox_Protein" FontFamily="Century Gothic"/>
+            <CheckBox x:Name="DairyCheckBox" Content="Dairy" HorizontalAlignment="Left" Margin="105,135,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Checked="CheckBox_Dairy"/>
+            <CheckBox x:Name="FatsAndOilsCheckBox" Content="Fats and oils" HorizontalAlignment="Left" Margin="105,155,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Checked="CheckBox_FatsAndOils"/>
+            <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,196,0,0" TextWrapping="Wrap" Text="Calories" VerticalAlignment="Top" Width="119" FontFamily="Century Gothic" Foreground="#FF170A78"/>
+            <Slider x:Name="CaloriesSlider" HorizontalAlignment="Center" Margin="0,237,0,0" VerticalAlignment="Top" Width="218" ValueChanged="Slider_Calories"/>
+        </Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="326" VerticalAlignment="Center" Width="258"/>
+        <ListBox x:Name="RecipeListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="263,0,0,0" SelectionChanged="ListBox_SelectionChanged"/>
     </Grid>
 </Window>

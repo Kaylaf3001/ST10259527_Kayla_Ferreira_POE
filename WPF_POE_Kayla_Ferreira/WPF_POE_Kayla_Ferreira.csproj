@@ -134,5 +134,17 @@
   <ItemGroup>
     <Resource Include="Images\GreekMain.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Image2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
