@@ -16,44 +16,41 @@ namespace WPF_POE_Kayla_Ferreira
         {
             InitializeComponent();
 
-            // Check if recipes are provided, if not, create test data
-            if (allRecipes == null || allRecipes.Count == 0)
-            {
-                // Create test data
-                _allRecipes = new List<Recipe>
-        {
-            new Recipe
-            {
-                Name = "Test Recipe 1",
-                Ingredients = new List<Ingredient>
-                {
-                    new Ingredient { Name = "Ingredient 1", Quantity = 2, Unit = "cups", Calories = 100, FoodGroup = "Grains" },
-                    new Ingredient { Name = "Ingredient 2", Quantity = 1, Unit = "tbsp", Calories = 50, FoodGroup = "Fats and oils" }
-                },
-                Steps = new List<string> { "Step 1: Do something.", "Step 2: Do the next thing." }
-            },
-            new Recipe
-            {
-                Name = "Test Recipe 2",
-                Ingredients = new List<Ingredient>
-                {
-                    new Ingredient { Name = "Ingredient A", Quantity = 3, Unit = "lbs", Calories = 300, FoodGroup = "Protein" },
-                    new Ingredient { Name = "Ingredient B", Quantity = 0.5, Unit = "cup", Calories = 150, FoodGroup = "Dairy" }
-                },
-                Steps = new List<string> { "Step 1: Prepare something.", "Step 2: Cook it." }
-            }
-        };
-            }
-            else
-            {
-                _allRecipes = allRecipes.OrderBy(r => r.Name).ToList(); // Sort recipes alphabetically if provided
-            }
+            _allRecipes = allRecipes ?? CreateTestRecipes();
 
             // Populate the ListBox with recipe names
             foreach (var recipe in _allRecipes)
             {
                 RecipeListBox.Items.Add(recipe.Name);
             }
+        }
+
+        private List<Recipe> CreateTestRecipes()
+        {
+            // Create test data if no recipes are provided
+            return new List<Recipe>
+            {
+                new Recipe
+                {
+                    Name = "Test Recipe 1",
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { Name = "Ingredient 1", Quantity = 2, Unit = "cups", Calories = 100, FoodGroup = "Grains" },
+                        new Ingredient { Name = "Ingredient 2", Quantity = 1, Unit = "tbsp", Calories = 50, FoodGroup = "Fats and oils" }
+                    },
+                    Steps = new List<string> { "Step 1: Do something.", "Step 2: Do the next thing." }
+                },
+                new Recipe
+                {
+                    Name = "Test Recipe 2",
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { Name = "Ingredient A", Quantity = 3, Unit = "lbs", Calories = 300, FoodGroup = "Protein" },
+                        new Ingredient { Name = "Ingredient B", Quantity = 0.5, Unit = "cup", Calories = 150, FoodGroup = "Dairy" }
+                    },
+                    Steps = new List<string> { "Step 1: Prepare something.", "Step 2: Cook it." }
+                }
+            };
         }
 
         private void RecipeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,6 +64,7 @@ namespace WPF_POE_Kayla_Ferreira
                 }
             }
         }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close(); // Simply close this window to go back to the MainWindow.
@@ -100,8 +98,8 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Adding a separator line between ingredients and steps for better readability
-            
-            
+            RecipeDetailsTextBox.Document.Blocks.Add(new Paragraph(new Run("\nSteps:\n")));
+
             foreach (var step in recipeSteps)
             {
                 var checkBox = new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) };
@@ -111,7 +109,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void RecipeDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Handle text changed event if needed
         }
     }
 }

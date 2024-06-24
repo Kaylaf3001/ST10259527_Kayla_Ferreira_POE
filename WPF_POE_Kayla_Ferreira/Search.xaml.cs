@@ -12,13 +12,12 @@ namespace WPF_POE_Kayla_Ferreira
         public Search()
         {
             InitializeComponent();
-            _allRecipes = Window1.AllRecipes;
-            UpdateRecipeList();
+            this.Loaded += Search_Loaded;
         }
 
         private void Search_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateRecipeList(); // Now called when the window is fully loaded
+            _allRecipes = Window1.AllRecipes ?? new List<Window1.Recipe>();
         }
 
         private void TextBox_Search(object sender, TextChangedEventArgs e)
@@ -60,17 +59,17 @@ namespace WPF_POE_Kayla_Ferreira
         {
             UpdateRecipeList();
         }
-
+        
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (RecipeListBox.SelectedItem != null)
             {
                 var selectedRecipeName = RecipeListBox.SelectedItem.ToString();
                 var selectedRecipe = _allRecipes.FirstOrDefault(r => r.Name == selectedRecipeName);
+
                 if (selectedRecipe != null)
                 {
-                    var viewRecipeWindow = new Window2(_allRecipes);
-                    viewRecipeWindow.Show();
+                    DisplayRecipe(selectedRecipe.Name, selectedRecipe.Ingredients, selectedRecipe.Steps);
                 }
             }
         }
@@ -80,12 +79,14 @@ namespace WPF_POE_Kayla_Ferreira
             var filteredRecipes = new List<string>();
             var searchQuery = SearchTextBox.Text.ToLower();
             var foodGroups = new List<string>();
+
             if (FruitsCheckBox.IsChecked == true) foodGroups.Add("Fruits");
             if (VegetablesCheckBox.IsChecked == true) foodGroups.Add("Vegetables");
             if (GrainsCheckBox.IsChecked == true) foodGroups.Add("Grains");
             if (ProteinCheckBox.IsChecked == true) foodGroups.Add("Protein");
             if (DairyCheckBox.IsChecked == true) foodGroups.Add("Dairy");
             if (FatsAndOilsCheckBox.IsChecked == true) foodGroups.Add("Fats and Oils");
+
             var maxCalories = (int)CaloriesSlider.Value;
 
             foreach (var recipe in _allRecipes)
@@ -113,7 +114,51 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UpdateRecipeList();
+            UpdateRecipeList(); // Trigger update on search button click
+            DisplayFirstRecipeDetails(); // Display details of the first recipe in the list
+        }
+
+        private void DisplayFirstRecipeDetails()
+        {
+            if (RecipeListBox.Items.Count > 0)
+            {
+                var firstRecipeName = RecipeListBox.Items[0].ToString();
+                var firstRecipe = _allRecipes.FirstOrDefault(r => r.Name == firstRecipeName);
+
+                if (firstRecipe != null)
+                {
+                    DisplayRecipe(firstRecipe.Name, firstRecipe.Ingredients, firstRecipe.Steps);
+                }
+            }
+            else
+            {
+                ClearRecipeDetails();
+            }
+        }
+
+        private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> steps)
+        {
+            RecipeDetailsTextBox.Document.Blocks.Clear();
+            RecipeDetailsTextBox.AppendText($"Recipe Name: {recipeName}\n\n");
+
+            // Display Ingredients
+            RecipeDetailsTextBox.AppendText("Ingredients:\n");
+            foreach (var ingredient in ingredients)
+            {
+                RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
+            }
+
+            // Display Steps
+            RecipeDetailsTextBox.AppendText("\nSteps:\n");
+            foreach (var step in steps)
+            {
+                RecipeDetailsTextBox.AppendText($"{step}\n");
+            }
+        }
+
+        private void ClearRecipeDetails()
+        {
+            RecipeDetailsTextBox.Document.Blocks.Clear();
         }
     }
 }
