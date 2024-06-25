@@ -5,31 +5,99 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
-        Title="View Recipe" Height="599" Width="810"
-        ResizeMode="NoResize">
+        Title="View Recipe" Height="617" Width="810"
+        ResizeMode="NoResize"
+        Background="#FF5ABED5">
+    <Window.Resources>
+        <!-- Style for the button with rounded corners and cute colors -->
+        <Style x:Key="CuteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF72B7E0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="20"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto" MinHeight="56.96"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="RecipeListBox" Grid.Row="1" SelectionChanged="RecipeListBox_SelectionChanged" Margin="0,61,0,0" Background="White" />
-        <Grid Grid.Column="2" Grid.Row="1" Margin="2,204,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <RichTextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Height="140" VerticalAlignment="Top" TextChanged="RecipeDetailsTextBox_TextChanged" Margin="0,-144,-1,0" />
-            <ListView x:Name="RecipeStepsListView" Visibility="Collapsed" Margin="0,0,0,10"/>
+
+        <!-- Recipe List Box -->
+        <Border CornerRadius="15" Background="White" BorderBrush="#FF8DAEE1" BorderThickness="1" Grid.Row="1" Grid.Column="0">
+            <ListBox x:Name="RecipeListBox" SelectionChanged="RecipeListBox_SelectionChanged" Margin="5" Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <!-- Recipe Details Panel -->
+        <Grid Grid.Column="1" Margin="30,193,34,5" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Recipe Details Text Box -->
+            <Border CornerRadius="15" Background="White" BorderBrush="#FF8DAEE1" BorderThickness="1" Margin="0,-203,2,0">
+                <RichTextBox x:Name="RecipeDetailsTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Height="200" VerticalAlignment="Center" Background="Transparent" Margin="-1,0,0,0"/>
+            </Border>
+
+            <!-- Recipe Steps List View -->
+            <Border CornerRadius="15" Background="White" BorderBrush="#FF8DAEE1" BorderThickness="1" Margin="0,10,0,4" Grid.Row="1">
+                <ListView x:Name="RecipeStepsListView" Visibility="Collapsed" Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding}" Margin="0,2,0,2"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <!-- Buttons Panel -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="-230,161,0,-3" Width="197" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.223"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Button Content="Done" Style="{StaticResource CuteButtonStyle}" Click="BackButton_Click" Width="80" Height="40" Margin="10" Background="#FF6AC65E" Foreground="Black"/>
+                <Button Content="Clear" Style="{StaticResource CuteButtonStyle}" Click="DoneButton_Click" Width="80" Height="40" Margin="10" Background="#FF6AC65E" Foreground="Black"/>
+            </StackPanel>
         </Grid>
-        <Button Content="Back" Grid.Row="2" Click="BackButton_Click" Margin="0,29,157,2" Background="#FF72B7E0" RenderTransformOrigin="-1.102,0.704" HorizontalAlignment="Right" Width="43"/>
-        <Button Content="Done" Grid.Row="2" HorizontalAlignment="Left" Click="DoneButton_Click" Margin="523,29,0,0" Background="#FF72B7E0" Width="47" Grid.Column="2" RenderTransformOrigin="-0.017,0.753" Height="26" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Center" Height="50" Grid.RowSpan="2" TextWrapping="Wrap" Text="Recipes" VerticalAlignment="Top" Width="200" FontSize="48" TextAlignment="Center" FontFamily="Felix Titling" Foreground="#FF1E2A76" Background="White"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="56" Grid.RowSpan="2" VerticalAlignment="Top" Width="200"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="445" Margin="0,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="200"/>
+
+        <!-- Header Text Block -->
+        <TextBlock Text="Recipes" FontSize="100" FontFamily="Century Gothic" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="10,0,384,0" Grid.ColumnSpan="2"/>
+
+        <!-- Decorative Image -->
+        <Image Source="Images\FoodIcon1.0.png" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="430,0,0,0" Grid.Column="1"/>
     </Grid>
 </Window>

@@ -20,6 +20,7 @@ namespace WPF_POE_Kayla_Ferreira
             _allRecipes = Window1.AllRecipes ?? new List<Window1.Recipe>();
         }
 
+        //=======================================================================================================
         private void TextBox_Search(object sender, TextChangedEventArgs e)
         {
             UpdateRecipeList();
@@ -59,10 +60,12 @@ namespace WPF_POE_Kayla_Ferreira
         {
             UpdateRecipeList();
         }
-        
+        //=======================================================================================================
+
+        //=======================================================================================================
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (RecipeListBox.SelectedItem != null)
+            if (RecipeListBox != null && RecipeListBox.SelectedItem != null)
             {
                 var selectedRecipeName = RecipeListBox.SelectedItem.ToString();
                 var selectedRecipe = _allRecipes.FirstOrDefault(r => r.Name == selectedRecipeName);
@@ -73,27 +76,35 @@ namespace WPF_POE_Kayla_Ferreira
                 }
             }
         }
+        //=======================================================================================================
 
+        //=======================================================================================================
+        // Get the filtered recipe names based on the search query, food groups, and max calories
+        //=======================================================================================================
         private List<string> GetFilteredRecipeNames()
         {
             var filteredRecipes = new List<string>();
-            var searchQuery = SearchTextBox.Text.ToLower();
-            var foodGroups = new List<string>();
+            var searchQuery = SearchTextBox.Text.Trim().ToLower();
 
-            if (FruitsCheckBox.IsChecked == true) foodGroups.Add("Fruits");
-            if (VegetablesCheckBox.IsChecked == true) foodGroups.Add("Vegetables");
-            if (GrainsCheckBox.IsChecked == true) foodGroups.Add("Grains");
-            if (ProteinCheckBox.IsChecked == true) foodGroups.Add("Protein");
-            if (DairyCheckBox.IsChecked == true) foodGroups.Add("Dairy");
-            if (FatsAndOilsCheckBox.IsChecked == true) foodGroups.Add("Fats and Oils");
+            // Determine selected food groups
+            var selectedFoodGroups = new List<string>();
+            foreach (var child in FoodGroupsPanel.Children)
+            {
+                if (child is CheckBox checkbox && checkbox.IsChecked == true)
+                {
+                    selectedFoodGroups.Add(checkbox.Content.ToString());
+                }
+            }
 
             var maxCalories = (int)CaloriesSlider.Value;
 
             foreach (var recipe in _allRecipes)
             {
-                if (recipe.Name.ToLower().Contains(searchQuery) &&
-                    (foodGroups.Count == 0 || foodGroups.Any(fg => recipe.Ingredients.Any(ing => ing.FoodGroup == fg))) &&
-                    recipe.Ingredients.Sum(i => i.Calories) <= maxCalories)
+                var matchesSearchQuery = string.IsNullOrWhiteSpace(searchQuery) || recipe.Name.ToLower().Contains(searchQuery);
+                var matchesFoodGroups = selectedFoodGroups.Count == 0 || recipe.Ingredients.Any(ing => selectedFoodGroups.Contains(ing.FoodGroup));
+                var withinCalories = maxCalories == 0 || recipe.Ingredients.Sum(ing => ing.Calories) <= maxCalories;
+
+                if (matchesSearchQuery && matchesFoodGroups && withinCalories)
                 {
                     filteredRecipes.Add(recipe.Name);
                 }
@@ -102,8 +113,15 @@ namespace WPF_POE_Kayla_Ferreira
             return filteredRecipes;
         }
 
+        //=======================================================================================================
+
+        //=======================================================================================================
+        // Update the recipe list based on the search query, food groups, and max calories
+        //=======================================================================================================
         private void UpdateRecipeList()
         {
+            if (RecipeListBox == null) return;
+
             RecipeListBox.Items.Clear();
             var filteredRecipeNames = GetFilteredRecipeNames();
             foreach (var name in filteredRecipeNames)
@@ -111,54 +129,46 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeListBox.Items.Add(name);
             }
         }
+        //=======================================================================================================
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateRecipeList(); // Trigger update on search button click
-            DisplayFirstRecipeDetails(); // Display details of the first recipe in the list
-        }
-
-        private void DisplayFirstRecipeDetails()
-        {
-            if (RecipeListBox.Items.Count > 0)
-            {
-                var firstRecipeName = RecipeListBox.Items[0].ToString();
-                var firstRecipe = _allRecipes.FirstOrDefault(r => r.Name == firstRecipeName);
-
-                if (firstRecipe != null)
-                {
-                    DisplayRecipe(firstRecipe.Name, firstRecipe.Ingredients, firstRecipe.Steps);
-                }
-            }
-            else
-            {
-                ClearRecipeDetails();
-            }
-        }
-
+        //=======================================================================================================
+        // Display the details of the selected recipe
+        //=======================================================================================================
         private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> steps)
         {
-            RecipeDetailsTextBox.Document.Blocks.Clear();
-            RecipeDetailsTextBox.AppendText($"Recipe Name: {recipeName}\n\n");
-
-            // Display Ingredients
-            RecipeDetailsTextBox.AppendText("Ingredients:\n");
-            foreach (var ingredient in ingredients)
+            if (RecipeDetailsTextBox == null) return;
+            else
             {
-                RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
-            }
+                RecipeDetailsTextBox.Document.Blocks.Clear();
+                RecipeDetailsTextBox.AppendText($"Recipe Name: {recipeName}\n\n");
 
-            // Display Steps
-            RecipeDetailsTextBox.AppendText("\nSteps:\n");
-            foreach (var step in steps)
-            {
-                RecipeDetailsTextBox.AppendText($"{step}\n");
+                // Display Ingredients
+                RecipeDetailsTextBox.AppendText("Ingredients:\n");
+                foreach (var ingredient in ingredients)
+                {
+                    RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
+                }
+
+                // Display Steps
+                RecipeDetailsTextBox.AppendText("\nSteps:\n");
+                foreach (var step in steps)
+                {
+                    RecipeDetailsTextBox.AppendText($"{step}\n");
+                }
             }
         }
+        //=======================================================================================================
 
+        //=======================================================================================================
+        // Clear the recipe details
+        //=======================================================================================================
         private void ClearRecipeDetails()
         {
+            if (RecipeDetailsTextBox == null) return;
+
             RecipeDetailsTextBox.Document.Blocks.Clear();
         }
+        //=======================================================================================================
     }
 }
+//===============================================End-of-page========================================================

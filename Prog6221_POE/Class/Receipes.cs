@@ -195,5 +195,42 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             }
         }
         //--------------------------------------------------------------------------------------------------------
+        public List<Receipes> getDummyRecipes() {
+
+            List<Receipes> dummyRecipes = new List<Receipes>();
+            
+            var random = new Random();
+            var foodgroup = new [] { "Grains", "Fats and oils", "Protein", "Dairy","Fruits", "Vegatables" };
+            var units = new[] { "cup", "tablespoon", "teaspoon", "gram", "ounce", "piece", "slice" };
+            var ingredientsNames = new[] { "flour", "sugar", "butter", "milk", "eggs", "salt", "pepper", "chicken", 
+                "beef", "pork", "fish", "cheese", "tomato", "lettuce", "carrot", "apple", "banana", "orange", "strawberry", "blueberry" };
+            for (int i = 0; i <= 5; i++)
+            {
+                Receipes recipe = new Receipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+                recipe.receipeName = "Recipe " + (i + 1);
+                recipe.ingreNo = random.Next(3, 6);
+                for (int j = 0; j < recipe.ingreNo; j++)
+                {
+                   
+                    string ingredientName = ingredientsNames[random.Next(0, ingredientsNames.Length)];
+                    int ingredientQuantity = random.Next(1, 10);
+                    int originalQuantity = ingredientQuantity;
+                    string unitOfMeasurement = units[random.Next(0, units.Length)];
+                    int calories = random.Next(50, 200);
+                    string foodGroup = foodgroup[random.Next(0, foodgroup.Length)];
+                    Ingredients ingredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, calories, foodGroup);
+                    recipe.Ingredients.Add(ingredient);
+
+                }
+                recipe.repSteps = random.Next(3, 6);
+                for (int k = 0; k < recipe.repSteps; k++)
+                {
+                    recipe.stepDescriptions.Add("Step " + (k + 1) + ": Do something.");
+                }
+                dummyRecipes.Add(recipe);
+            }
+
+            return dummyRecipes;
+        }
     }
 }

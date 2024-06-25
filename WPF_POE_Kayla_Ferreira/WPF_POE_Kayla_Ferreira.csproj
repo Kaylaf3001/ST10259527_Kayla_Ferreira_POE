@@ -123,28 +123,43 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\RecipeMain.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\RecipeViewMain.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\OtherMainRecipe.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\GreekMain.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Image1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Image2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\SearchIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Search_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FoodIcon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FoodIcon1.0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageSearch2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageSearch3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SearchImage4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SearchImage7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SearchImage6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageSearch5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="WallP1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Theme1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SearchImage7.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

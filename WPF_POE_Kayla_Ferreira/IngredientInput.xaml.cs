@@ -79,6 +79,11 @@ namespace WPF_POE_Kayla_Ferreira
         {
 
         }
+
+        private void CaloriesTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
 

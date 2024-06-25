@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF0A214A">
+        Title="MainWindow" Height="450" Width="800" Background="#FFF5E1C9">
     <Window.Resources>
         <Style x:Key="MenuButtons" TargetType="Button">
             <Setter Property="Width" Value="137" />
@@ -31,24 +31,21 @@
     <Viewbox OpacityMask="#FF16290F">
         <Canvas Width="800" Height="450">
             <!-- Image -->
-            <Image Source="A:\source\ST10259527_Kayla_Ferreira_POE\WPF_POE_Kayla_Ferreira\Images\GreekMain.jpg"
-                   Canvas.Left="-77"
-                   Width="444" Height="635"
-                   Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
             <!-- TextBlock -->
             <TextBlock Text="The Recipe Book"
-                       Foreground="White" FontSize="72" FontFamily="Edwardian Script ITC"
-                       TextAlignment="Center" Canvas.Left="417" Canvas.Top="33"
-                       Width="308" Height="164" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                       Foreground="#FF122A05" FontSize="58" FontWeight="Bold" FontFamily="Century Gothic"
+                       TextAlignment="Center" Canvas.Left="372" Canvas.Top="50"
+                       Width="408" Height="151" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
             <!-- Buttons -->
             <Button x:Name="New_Recipe_Copy" Content="New Recipe" Style="{StaticResource MenuButtons}"
-                    Canvas.Left="502" Canvas.Top="225" Click="New_Recipe_Copy_Click" VerticalAlignment="Center" />
+                    Canvas.Left="502" Canvas.Top="225" Click="New_Recipe_Copy_Click" VerticalAlignment="Center" BorderBrush="#FF81B123" Background="#FF142A04" Foreground="White" FontFamily="Century Gothic" />
             <Button x:Name="ViewRecipeButton" Content="View Recipes" Style="{StaticResource MenuButtons}"
-                    Canvas.Left="502" Canvas.Top="293" Click="New_Recipe_Copy1_Click" VerticalAlignment="Center" />
+                    Canvas.Left="502" Canvas.Top="293" Click="New_Recipe_Copy1_Click" VerticalAlignment="Center" BorderBrush="#FF142A06" Background="#FF142A06" Foreground="White" FontFamily="Century Gothic" />
             <Button x:Name="New_Recipe_Copy2" Content="Search" Style="{StaticResource MenuButtons}"
-                    Canvas.Left="503" Canvas.Top="359" Click="New_Recipe_Copy2_Click" HorizontalAlignment="Center" Height="37" />
+                    Canvas.Left="503" Canvas.Top="359" Click="New_Recipe_Copy2_Click" HorizontalAlignment="Center" Height="37" Background="#FF142A06" BorderBrush="#FF142A06" Foreground="White" FontFamily="Century Gothic" />
+            <Image Height="500" Source="/WallP1.jpg" Stretch="Fill" Width="462" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-95"/>
         </Canvas>
     </Viewbox>
 </Window>

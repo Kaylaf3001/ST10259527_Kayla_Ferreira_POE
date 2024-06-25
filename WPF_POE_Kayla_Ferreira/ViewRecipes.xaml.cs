@@ -78,7 +78,8 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeStepsListView.Items.Clear();
             RecipeStepsListView.Visibility = Visibility.Collapsed;
         }
-
+        //=======================================================================================================
+        // Display the selected recipe details in the RecipeDetailsTextBox and RecipeStepsListView
         private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> recipeSteps)
         {
             RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
@@ -102,11 +103,14 @@ namespace WPF_POE_Kayla_Ferreira
 
             foreach (var step in recipeSteps)
             {
-                var checkBox = new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) };
-                RecipeStepsListView.Items.Add(checkBox);
+                RecipeStepsListView.Items.Add(new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) });
             }
         }
+        //=======================================================================================================
 
+        //=======================================================================================================
+        // The following methods are not used in this class, but are kept here for future reference if needed.
+        //=======================================================================================================
         private void RecipeDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Handle text changed event if needed

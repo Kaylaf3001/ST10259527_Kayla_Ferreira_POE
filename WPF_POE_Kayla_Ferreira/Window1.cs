@@ -14,6 +14,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         public Window1()
         {
+            
             InitializeComponent();
         }
         public class Recipe
@@ -87,9 +88,9 @@ namespace WPF_POE_Kayla_Ferreira
             DisplayRecipe();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Create a new Recipe instance when the "Done" button is clicked
+        // Create a new Recipe instance when the "Done" button is clicked
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        { 
             Recipe newRecipe = new Recipe
             {
                 Name = RecipeNameTextBox.Text,
@@ -113,6 +114,12 @@ namespace WPF_POE_Kayla_Ferreira
                 MainWindow newWindow1 = new MainWindow();
                 newWindow1.Show();
             }
+        }
+
+        private void RecipeNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Example implementation
+            Console.WriteLine("Recipe name text changed.");
         }
     }
 
