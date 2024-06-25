@@ -21,9 +21,9 @@ namespace ST10259527_Kayla_Ferreira_POE
     internal class Program
     {
         // Instance of the Receipes class
-        Receipes receipe;
+        Recipes receipe;
         // List to store all recipes
-        List<Receipes> allReceipes = new List<Receipes>();
+        List<Recipes> allReceipes = new List<Recipes>();
 
         // The main entry point of the application
         static void Main(string[] args)
@@ -97,9 +97,9 @@ namespace ST10259527_Kayla_Ferreira_POE
         //=============================================================================================================
         // Method to create and get a recipe from the user
         //=============================================================================================================
-        private Receipes UserGetsReceipe()
+        private Recipes UserGetsReceipe()
         {
-            Receipes tempReceipe = new Receipes();
+            Recipes tempReceipe = new Recipes();
             try
             {
                 Console.WriteLine("What is the name of the recipe?");
@@ -336,7 +336,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             {
                 Console.WriteLine("Enter the name of the recipe you want to view:");
                 string recipeName = Console.ReadLine();
-                Receipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
+                Recipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
                 if (recipeToView != null)
                 {
 
@@ -385,7 +385,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             {
                 // Clear data
                 receipe.receipeName = "";
-                receipe = new Receipes(); // Create a new instance of Receipes
+                receipe = new Recipes(); // Create a new instance of Receipes
 
                 // Print success message
                 Console.ForegroundColor = ConsoleColor.DarkGreen;

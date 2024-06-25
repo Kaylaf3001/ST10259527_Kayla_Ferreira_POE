@@ -80,7 +80,7 @@
             </Border>
 
             <!-- Buttons Panel -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="-230,161,0,-3" Width="197" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="-230,151,0,7" Width="197" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

@@ -9,7 +9,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
     //--------------------------------------------------------------------------------------------------------
     // Class to represent a recipe
     //--------------------------------------------------------------------------------------------------------
-    public class Receipes
+    public class Recipes
     {
         // Member variables to store recipe details
         public string receipeName = ""; // Name of the recipe
@@ -25,7 +25,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         //--------------------------------------------------------------------------------------------------------
         // Constructor for the Receipes class
         //--------------------------------------------------------------------------------------------------------
-        public Receipes()
+        public Recipes()
         {
             // Initialize the list of ingredients and step descriptions
             Ingredients = new List<Ingredients>();
@@ -195,9 +195,9 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             }
         }
         //--------------------------------------------------------------------------------------------------------
-        public List<Receipes> getDummyRecipes() {
+        public static List<Recipes> getDummyRecipes() {
 
-            List<Receipes> dummyRecipes = new List<Receipes>();
+            List<Recipes> dummyRecipes = new List<Recipes>();
             
             var random = new Random();
             var foodgroup = new [] { "Grains", "Fats and oils", "Protein", "Dairy","Fruits", "Vegatables" };
@@ -206,7 +206,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                 "beef", "pork", "fish", "cheese", "tomato", "lettuce", "carrot", "apple", "banana", "orange", "strawberry", "blueberry" };
             for (int i = 0; i <= 5; i++)
             {
-                Receipes recipe = new Receipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+                Recipes recipe = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
                 recipe.receipeName = "Recipe " + (i + 1);
                 recipe.ingreNo = random.Next(3, 6);
                 for (int j = 0; j < recipe.ingreNo; j++)

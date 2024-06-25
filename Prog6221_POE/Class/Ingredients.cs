@@ -32,6 +32,10 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             this.calories = calories;
             this.foodGroup = foodGroup;
         }
+        public Ingredients()
+        {
+
+        }   
 
         //________________________________________________________________________________________________________
         // Constructor for the Ingredients class without unit of measurement

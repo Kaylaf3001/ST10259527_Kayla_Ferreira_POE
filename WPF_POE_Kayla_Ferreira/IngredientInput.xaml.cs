@@ -1,11 +1,12 @@
-﻿using System.Windows;
+﻿using ST10259527_Kayla_Ferreira_POE.Class;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPF_POE_Kayla_Ferreira
 {
     public partial class IngredientWindow : Window
     {
-        public Ingredient Ingredient { get; private set; }
+        public Ingredients Ingredient { get; private set; }
 
         public IngredientWindow(int ingredientNumber)
         {
@@ -18,13 +19,14 @@ namespace WPF_POE_Kayla_Ferreira
             double quantity, calories;
             if (double.TryParse(QuantityTextBox.Text, out quantity) && double.TryParse(CaloriesTextBox.Text, out calories))
             {
-                Ingredient = new Ingredient
+                Ingredient = new Ingredients
                 {
-                    Name = IngredientNameTextBox.Text,
-                    Quantity = quantity,
-                    Unit = ((ComboBoxItem)UnitComboBox.SelectedItem)?.Content.ToString(),
-                    Calories = calories,
-                    FoodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem)?.Content.ToString()
+                    ingredientName = IngredientNameTextBox.Text,
+                    ingredientQuantity = quantity,
+                    originalQuantity = quantity,
+                    unitOfMeasurement = ((ComboBoxItem)UnitComboBox.SelectedItem)?.Content.ToString(),
+                    calories = calories,
+                    foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem)?.Content.ToString()
                 };
                 DialogResult = true;
             }

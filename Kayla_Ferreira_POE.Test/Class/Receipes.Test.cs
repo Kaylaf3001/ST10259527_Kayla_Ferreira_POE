@@ -13,7 +13,7 @@ namespace Kayla_Ferreira_POE.Test
         public void TestTotalCaloriesForNull()
         {
             // Arrange
-            Receipes receipe = new Receipes();
+            Recipes receipe = new Recipes();
 
             // Act
             double totalCalories = receipe.totalCalories();
@@ -28,7 +28,7 @@ namespace Kayla_Ferreira_POE.Test
         public void TestTotalCalorieCheckForFalse()
         {
             // Arrange
-            Receipes receipe = new Receipes();
+            Recipes receipe = new Recipes();
             // Add some ingredients to the recipe
             receipe.Ingredients.Add(new Ingredients("Eggs", 1, 1, 100, "Protein"));
             receipe.Ingredients.Add(new Ingredients("Bread", 2, 2, 200, "Starch"));
@@ -47,7 +47,7 @@ namespace Kayla_Ferreira_POE.Test
         public void TestTotalCalorieCheckForHealthyRecipe()
         {
             // Arrange
-            Receipes receipe = new Receipes();
+            Recipes receipe = new Recipes();
             // Add some ingredients to the recipe
             receipe.Ingredients.Add(new Ingredients("Eggs", 1, 1, 100, "Protein")); // Low calorie ingredient
             receipe.Ingredients.Add(new Ingredients("Bread", 2, 2, 100, "Starch")); // Low calorie ingredient

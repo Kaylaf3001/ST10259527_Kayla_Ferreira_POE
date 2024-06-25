@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ST10259527_Kayla_Ferreira_POE.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -10,57 +11,29 @@ namespace WPF_POE_Kayla_Ferreira
 {
     public partial class Window2 : Window
     {
-        private List<Recipe> _allRecipes;
+        private List<Recipes> _allRecipes;
 
-        public Window2(List<Recipe> allRecipes)
+        public Window2(List<Recipes> allRecipes)
         {
             InitializeComponent();
 
-            _allRecipes = allRecipes ?? CreateTestRecipes();
+            _allRecipes = allRecipes;
 
             // Populate the ListBox with recipe names
             foreach (var recipe in _allRecipes)
             {
-                RecipeListBox.Items.Add(recipe.Name);
+                RecipeListBox.Items.Add(recipe.receipeName);
             }
-        }
-
-        private List<Recipe> CreateTestRecipes()
-        {
-            // Create test data if no recipes are provided
-            return new List<Recipe>
-            {
-                new Recipe
-                {
-                    Name = "Test Recipe 1",
-                    Ingredients = new List<Ingredient>
-                    {
-                        new Ingredient { Name = "Ingredient 1", Quantity = 2, Unit = "cups", Calories = 100, FoodGroup = "Grains" },
-                        new Ingredient { Name = "Ingredient 2", Quantity = 1, Unit = "tbsp", Calories = 50, FoodGroup = "Fats and oils" }
-                    },
-                    Steps = new List<string> { "Step 1: Do something.", "Step 2: Do the next thing." }
-                },
-                new Recipe
-                {
-                    Name = "Test Recipe 2",
-                    Ingredients = new List<Ingredient>
-                    {
-                        new Ingredient { Name = "Ingredient A", Quantity = 3, Unit = "lbs", Calories = 300, FoodGroup = "Protein" },
-                        new Ingredient { Name = "Ingredient B", Quantity = 0.5, Unit = "cup", Calories = 150, FoodGroup = "Dairy" }
-                    },
-                    Steps = new List<string> { "Step 1: Prepare something.", "Step 2: Cook it." }
-                }
-            };
         }
 
         private void RecipeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (RecipeListBox.SelectedItem != null)
             {
-                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.Name == RecipeListBox.SelectedItem.ToString());
+                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.receipeName == RecipeListBox.SelectedItem.ToString());
                 if (selectedRecipe != null)
                 {
-                    DisplayRecipe(selectedRecipe.Name, selectedRecipe.Ingredients, selectedRecipe.Steps);
+                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions);
                 }
             }
         }
@@ -80,7 +53,7 @@ namespace WPF_POE_Kayla_Ferreira
         }
         //=======================================================================================================
         // Display the selected recipe details in the RecipeDetailsTextBox and RecipeStepsListView
-        private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> recipeSteps)
+        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> recipeSteps)
         {
             RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
             RecipeStepsListView.Items.Clear();
@@ -94,7 +67,7 @@ namespace WPF_POE_Kayla_Ferreira
             var ingredientsParagraph = new Paragraph(new Run("Ingredients:\n"));
             foreach (var ingredient in ingredients)
             {
-                ingredientsParagraph.Inlines.Add(new Run($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n"));
+                ingredientsParagraph.Inlines.Add(new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n"));
             }
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 

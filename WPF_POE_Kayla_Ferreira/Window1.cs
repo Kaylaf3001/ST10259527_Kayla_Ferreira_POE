@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ST10259527_Kayla_Ferreira_POE.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -8,21 +9,16 @@ namespace WPF_POE_Kayla_Ferreira
 {
     public partial class Window1 : Window
     {
-        private List<Ingredient> ingredients = new List<Ingredient>();
+        private List<Ingredients> ingredients = new List<Ingredients>();
         private List<string> recipeSteps = new List<string>();
-        public static List<Recipe> AllRecipes { get; private set; } = new List<Recipe>();
+        public static List<Recipes> AllRecipes { get; private set; } = new List<Recipes>();
 
         public Window1()
         {
-            
+            AllRecipes = Recipes.getDummyRecipes();
             InitializeComponent();
         }
-        public class Recipe
-        {
-            public string Name { get; set; }
-            public List<Ingredient> Ingredients { get; set; }
-            public List<string> Steps { get; set; }
-        }
+      
 
         private void AddIngredients_Click(object sender, RoutedEventArgs e)
         {
@@ -66,7 +62,7 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeDetailsTextBox.AppendText("Ingredients:\n");
             foreach (var ingredient in ingredients)
             {
-                RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
+                RecipeDetailsTextBox.AppendText($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n");
             }
 
             // Recipe steps
@@ -91,11 +87,11 @@ namespace WPF_POE_Kayla_Ferreira
         // Create a new Recipe instance when the "Done" button is clicked
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { 
-            Recipe newRecipe = new Recipe
+            Recipes newRecipe = new Recipes
             {
-                Name = RecipeNameTextBox.Text,
+                receipeName = RecipeNameTextBox.Text,
                 Ingredients = ingredients,
-                Steps = recipeSteps
+                stepDescriptions = recipeSteps
             };
 
             // Add the new recipe to AllRecipes
@@ -123,12 +119,4 @@ namespace WPF_POE_Kayla_Ferreira
         }
     }
 
-    public class Ingredient
-    {
-        public string Name { get; set; }
-        public double Quantity { get; set; }
-        public string Unit { get; set; }
-        public double Calories { get; set; }
-        public string FoodGroup { get; set; }
-    }
 }

@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ST10259527_Kayla_Ferreira_POE.Class;
 
 namespace WPF_POE_Kayla_Ferreira
 {
     public partial class Search : Window
     {
-        private List<Window1.Recipe> _allRecipes;
+        private List<Recipes> _allRecipes;
 
         public Search()
         {
@@ -17,7 +18,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void Search_Loaded(object sender, RoutedEventArgs e)
         {
-            _allRecipes = Window1.AllRecipes ?? new List<Window1.Recipe>();
+            _allRecipes = Window1.AllRecipes ?? new List<Recipes>();
         }
 
         //=======================================================================================================
@@ -68,11 +69,11 @@ namespace WPF_POE_Kayla_Ferreira
             if (RecipeListBox != null && RecipeListBox.SelectedItem != null)
             {
                 var selectedRecipeName = RecipeListBox.SelectedItem.ToString();
-                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.Name == selectedRecipeName);
+                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.receipeName == selectedRecipeName);
 
                 if (selectedRecipe != null)
                 {
-                    DisplayRecipe(selectedRecipe.Name, selectedRecipe.Ingredients, selectedRecipe.Steps);
+                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions);
                 }
             }
         }
@@ -100,13 +101,13 @@ namespace WPF_POE_Kayla_Ferreira
 
             foreach (var recipe in _allRecipes)
             {
-                var matchesSearchQuery = string.IsNullOrWhiteSpace(searchQuery) || recipe.Name.ToLower().Contains(searchQuery);
-                var matchesFoodGroups = selectedFoodGroups.Count == 0 || recipe.Ingredients.Any(ing => selectedFoodGroups.Contains(ing.FoodGroup));
-                var withinCalories = maxCalories == 0 || recipe.Ingredients.Sum(ing => ing.Calories) <= maxCalories;
+                var matchesSearchQuery = string.IsNullOrWhiteSpace(searchQuery) || recipe.receipeName.ToLower().Contains(searchQuery);
+                var matchesFoodGroups = selectedFoodGroups.Count == 0 || recipe.Ingredients.Any(ing => selectedFoodGroups.Contains(ing.foodGroup));
+                var withinCalories = maxCalories == 0 || recipe.Ingredients.Sum(ing => ing.calories) <= maxCalories;
 
                 if (matchesSearchQuery && matchesFoodGroups && withinCalories)
                 {
-                    filteredRecipes.Add(recipe.Name);
+                    filteredRecipes.Add(recipe.receipeName);
                 }
             }
 
@@ -134,7 +135,7 @@ namespace WPF_POE_Kayla_Ferreira
         //=======================================================================================================
         // Display the details of the selected recipe
         //=======================================================================================================
-        private void DisplayRecipe(string recipeName, List<Ingredient> ingredients, List<string> steps)
+        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> steps)
         {
             if (RecipeDetailsTextBox == null) return;
             else
@@ -146,7 +147,7 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeDetailsTextBox.AppendText("Ingredients:\n");
                 foreach (var ingredient in ingredients)
                 {
-                    RecipeDetailsTextBox.AppendText($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}, {ingredient.Calories} Calories, {ingredient.FoodGroup}\n");
+                    RecipeDetailsTextBox.AppendText($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n");
                 }
 
                 // Display Steps
