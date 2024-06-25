@@ -33,7 +33,7 @@ namespace WPF_POE_Kayla_Ferreira
                 var selectedRecipe = _allRecipes.FirstOrDefault(r => r.receipeName == RecipeListBox.SelectedItem.ToString());
                 if (selectedRecipe != null)
                 {
-                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions);
+                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace WPF_POE_Kayla_Ferreira
         }
         //=======================================================================================================
         // Display the selected recipe details in the RecipeDetailsTextBox and RecipeStepsListView
-        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> recipeSteps)
+        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> recipeSteps, double totalCalories)
         {
             RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
             RecipeStepsListView.Items.Clear();
@@ -71,9 +71,11 @@ namespace WPF_POE_Kayla_Ferreira
             }
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
-            // Adding a separator line between ingredients and steps for better readability
-            RecipeDetailsTextBox.Document.Blocks.Add(new Paragraph(new Run("\nSteps:\n")));
+            // Display total calories
+            var totalCaloriesParagraph = new Paragraph(new Run($"\nTotal Calories: {totalCalories}\n"));
+            RecipeDetailsTextBox.Document.Blocks.Add(totalCaloriesParagraph);
 
+            // Recipe steps
             foreach (var step in recipeSteps)
             {
                 RecipeStepsListView.Items.Add(new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) });
@@ -87,6 +89,11 @@ namespace WPF_POE_Kayla_Ferreira
         private void RecipeDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Handle text changed event if needed
+        }
+
+        private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

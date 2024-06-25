@@ -18,7 +18,6 @@ namespace WPF_POE_Kayla_Ferreira
             AllRecipes = Recipes.getDummyRecipes();
             InitializeComponent();
         }
-      
 
         private void AddIngredients_Click(object sender, RoutedEventArgs e)
         {
@@ -52,23 +51,35 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void DisplayRecipe()
         {
+            // Create a new recipe instance
+            Recipes currentRecipe = new Recipes
+            {
+                receipeName = RecipeNameTextBox.Text,
+                Ingredients = ingredients,
+                stepDescriptions = recipeSteps
+            };
+
             // Clear previous recipe details
             RecipeDetailsTextBox.Clear();
 
             // Recipe name
-            RecipeDetailsTextBox.AppendText($"Recipe Name: {RecipeNameTextBox.Text}\n\n");
+            RecipeDetailsTextBox.AppendText($"Recipe Name: {currentRecipe.receipeName}\n\n");
 
             // Ingredients
             RecipeDetailsTextBox.AppendText("Ingredients:\n");
-            foreach (var ingredient in ingredients)
+            foreach (var ingredient in currentRecipe.Ingredients)
             {
                 RecipeDetailsTextBox.AppendText($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n");
             }
 
+            // Display total calories
+            double totalCalories = currentRecipe.totalCalories();
+            RecipeDetailsTextBox.AppendText($"\nTotal Calories: {totalCalories}\n");
+
             // Recipe steps
             RecipeDetailsTextBox.AppendText("\nSteps:\n");
             int stepNumber = 1;
-            foreach (var step in recipeSteps)
+            foreach (var step in currentRecipe.stepDescriptions)
             {
                 RecipeDetailsTextBox.AppendText($"{stepNumber}. {step}\n");
                 stepNumber++;
@@ -86,7 +97,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         // Create a new Recipe instance when the "Done" button is clicked
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        { 
+        {
             Recipes newRecipe = new Recipes
             {
                 receipeName = RecipeNameTextBox.Text,
@@ -118,5 +129,4 @@ namespace WPF_POE_Kayla_Ferreira
             Console.WriteLine("Recipe name text changed.");
         }
     }
-
 }

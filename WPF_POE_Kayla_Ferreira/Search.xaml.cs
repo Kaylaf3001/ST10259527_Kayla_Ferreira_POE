@@ -73,7 +73,7 @@ namespace WPF_POE_Kayla_Ferreira
 
                 if (selectedRecipe != null)
                 {
-                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions);
+                    DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
                 }
             }
         }
@@ -135,7 +135,7 @@ namespace WPF_POE_Kayla_Ferreira
         //=======================================================================================================
         // Display the details of the selected recipe
         //=======================================================================================================
-        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> steps)
+        private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> steps, double totalCalories)
         {
             if (RecipeDetailsTextBox == null) return;
             else
@@ -149,6 +149,8 @@ namespace WPF_POE_Kayla_Ferreira
                 {
                     RecipeDetailsTextBox.AppendText($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n");
                 }
+                RecipeDetailsTextBox.AppendText($"\nTotal Calories: {totalCalories}\n");
+
 
                 // Display Steps
                 RecipeDetailsTextBox.AppendText("\nSteps:\n");
