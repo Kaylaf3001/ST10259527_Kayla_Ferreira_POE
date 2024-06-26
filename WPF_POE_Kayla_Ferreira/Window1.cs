@@ -7,13 +7,19 @@ using System.Windows.Controls;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+   //-----------------------------------------------------------------------------------------------
     public partial class Window1 : Window
     {
+        
+        // List to store the ingredients and recipe steps
         private List<Ingredients> ingredients = new List<Ingredients>();
         private List<string> recipeSteps = new List<string>();
         public static List<Recipes> AllRecipes { get; private set; } = new List<Recipes>();
         private bool hasShownCalorieWarning = false; // Flag to track if the warning has been shown
 
+        //-----------------------------------------------------------------------------------------------
+        // Constructor
+        //-----------------------------------------------------------------------------------------------
         public Window1()
         {
             List<Recipes> dummyRecipes = Recipes.getDummyRecipes();
@@ -23,7 +29,11 @@ namespace WPF_POE_Kayla_Ferreira
             }
             InitializeComponent();
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Event handlers
+        //-----------------------------------------------------------------------------------------------
         private void AddIngredients_Click(object sender, RoutedEventArgs e)
         {
             int ingredientCount;
@@ -39,7 +49,11 @@ namespace WPF_POE_Kayla_Ferreira
                 MessageBox.Show("Please enter a valid number of ingredients.");
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Method to add an ingredient to the recipe
+        //-----------------------------------------------------------------------------------------------
         private void AddIngredient(int ingredientNumber)
         {
             var ingredientWindow = new IngredientWindow(ingredientNumber);
@@ -53,7 +67,11 @@ namespace WPF_POE_Kayla_Ferreira
                 DisplayRecipe();
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Method to display the complete recipe
+        //-----------------------------------------------------------------------------------------------
         private void DisplayRecipe()
         {
             // Create a new recipe instance
@@ -97,7 +115,11 @@ namespace WPF_POE_Kayla_Ferreira
                 stepNumber++;
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Event handler for the Save Recipe button
+        //-----------------------------------------------------------------------------------------------
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             // Validate recipe name
@@ -146,13 +168,21 @@ namespace WPF_POE_Kayla_Ferreira
                 newMainWindow.Show();
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Event handler for the RecipeNameTextBox TextChanged event
+        //-----------------------------------------------------------------------------------------------
         private void RecipeNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Example implementation
             Console.WriteLine("Recipe name text changed.");
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Event handler for the AddRecipeStep button
+        //-----------------------------------------------------------------------------------------------
         private void AddRecipeStep_Click(object sender, RoutedEventArgs e)
         {
             recipeSteps.Add(RecipeStepTextBox.Text);
@@ -161,5 +191,8 @@ namespace WPF_POE_Kayla_Ferreira
             // Display the complete recipe
             DisplayRecipe();
         }
+        //-----------------------------------------------------------------------------------------------
     }
+    //-----------------------------------------------------------------------------------------------
 }
+//---------------------------------------End-of-File--------------------------------------------------------

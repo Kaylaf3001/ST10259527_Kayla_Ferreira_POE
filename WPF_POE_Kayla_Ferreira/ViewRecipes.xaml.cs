@@ -9,11 +9,16 @@ using System.Windows.Media;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+    //-----------------------------------------------------------------------------------------------
     public partial class Window2 : Window
     {
+        // List to store all recipes
         private List<Recipes> _allRecipes;
         private Recipes selectedRecipe;
 
+        //-----------------------------------------------------------------------------------------------
+        // Constructor
+        //-----------------------------------------------------------------------------------------------
         public Window2(List<Recipes> allRecipes)
         {
             InitializeComponent();
@@ -25,7 +30,11 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeListBox.Items.Add(recipe.receipeName);
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // select recipe from list
+        //-----------------------------------------------------------------------------------------------
         private void RecipeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (RecipeListBox.SelectedItem != null)
@@ -37,12 +46,20 @@ namespace WPF_POE_Kayla_Ferreira
                 }
             }
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Close the window
+        //-----------------------------------------------------------------------------------------------
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close(); // Simply close this window to go back to the MainWindow.
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Clear the selection and steps
+        //-----------------------------------------------------------------------------------------------
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear the selection and steps.
@@ -51,7 +68,11 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeStepsListView.Items.Clear();
             RecipeStepsListView.Visibility = Visibility.Collapsed;
         }
+        //-----------------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------------
+        // Display the recipe details
+        //-----------------------------------------------------------------------------------------------
         private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> recipeSteps, double totalCalories)
         {
             RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
@@ -94,6 +115,8 @@ namespace WPF_POE_Kayla_Ferreira
                 ingredientsParagraph.Inlines.Add(ingredientRun);
             
         }
+
+            // Add the ingredients paragraph to the RecipeDetailsTextBox
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Display total calories
@@ -113,6 +136,10 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeStepsListView.Items.Add(new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) });
             }
         }
+        //-----------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------
+        // Scale the recipe
 
         private void ScaleButton_Click(object sender, RoutedEventArgs e)
         {
@@ -128,7 +155,11 @@ namespace WPF_POE_Kayla_Ferreira
                 DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
             }
         }
-
+        //-----------------------------------------------------------------------------------------------
+        
+        //-----------------------------------------------------------------------------------------------
+        // Revert the recipe
+        //-----------------------------------------------------------------------------------------------
         private void Revert_Click(object sender, RoutedEventArgs e)
         {
             if (selectedRecipe != null)
@@ -137,5 +168,8 @@ namespace WPF_POE_Kayla_Ferreira
                 DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
             }
         }
+        //-----------------------------------------------------------------------------------------------
     }
+    //-----------------------------------------------------------------------------------------------
 }
+//--------------------------------------End-of-File-------------------------------------------------------
