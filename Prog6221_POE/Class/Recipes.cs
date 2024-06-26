@@ -115,13 +115,8 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             for (int i = 0; i < Ingredients.Count; i++)
             {
                 Ingredients[i].ingredientQuantity = Ingredients[i].originalQuantity;
+                Ingredients[i].calories = Ingredients[i].orignalCalories;
             }
-            // Print message that quantities have been reset
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("\nQuantities reverted to original values.");
-            Console.ResetColor();
-            // Display the updated recipe
-            displayReceipe();
         }
 
         //--------------------------------------------------------------------------------------------------------
@@ -219,7 +214,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
                     string unitOfMeasurement = units[random.Next(0, units.Length)];
                     int calories = random.Next(50, 200);
                     string foodGroup = foodgroup[random.Next(0, foodgroup.Length)];
-                    Ingredients ingredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, calories, foodGroup);
+                    Ingredients ingredient = new Ingredients(ingredientName, ingredientQuantity, calories, foodGroup);
                     recipe.Ingredients.Add(ingredient);
 
                 }

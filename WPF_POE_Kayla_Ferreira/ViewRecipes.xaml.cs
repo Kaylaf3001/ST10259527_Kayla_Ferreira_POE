@@ -128,6 +128,14 @@ namespace WPF_POE_Kayla_Ferreira
                 DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
             }
         }
-        
+
+        private void Revert_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedRecipe != null)
+            {
+                selectedRecipe.resetQuantities(); // Call resetQuantities() method
+                DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
+            }
+        }
     }
 }

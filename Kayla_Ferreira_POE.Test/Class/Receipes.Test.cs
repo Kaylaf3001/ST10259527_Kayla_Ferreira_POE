@@ -30,9 +30,9 @@ namespace Kayla_Ferreira_POE.Test
             // Arrange
             Recipes receipe = new Recipes();
             // Add some ingredients to the recipe
-            receipe.Ingredients.Add(new Ingredients("Eggs", 1, 1, 100, "Protein"));
-            receipe.Ingredients.Add(new Ingredients("Bread", 2, 2, 200, "Starch"));
-            receipe.Ingredients.Add(new Ingredients("Butter", 1, 1, 100, "Fats"));
+            receipe.Ingredients.Add(new Ingredients("Eggs", 1, 100, "Protein"));
+            receipe.Ingredients.Add(new Ingredients("Bread", 2, 200, "Starch"));
+            receipe.Ingredients.Add(new Ingredients("Butter", 1, 100, "Fats"));
 
             // Act
             bool overThree = receipe.totalCalorieCheck();
@@ -49,9 +49,9 @@ namespace Kayla_Ferreira_POE.Test
             // Arrange
             Recipes receipe = new Recipes();
             // Add some ingredients to the recipe
-            receipe.Ingredients.Add(new Ingredients("Eggs", 1, 1, 100, "Protein")); // Low calorie ingredient
-            receipe.Ingredients.Add(new Ingredients("Bread", 2, 2, 100, "Starch")); // Low calorie ingredient
-            receipe.Ingredients.Add(new Ingredients("Butter", 1, 1, 50, "Fats")); // Low calorie ingredient
+            receipe.Ingredients.Add(new Ingredients("Eggs", 1, 100, "Protein")); // Low calorie ingredient
+            receipe.Ingredients.Add(new Ingredients("Bread", 2, 100, "Starch")); // Low calorie ingredient
+            receipe.Ingredients.Add(new Ingredients("Butter", 1, 50, "Fats")); // Low calorie ingredient
 
             // Act
             bool belowThree = receipe.totalCalorieCheck();

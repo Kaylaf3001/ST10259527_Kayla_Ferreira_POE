@@ -89,6 +89,12 @@ namespace ST10259527_Kayla_Ferreira_POE
                                     if (response3 == 1)
                                     {
                                         receipe.resetQuantities();
+                                        // Print message that quantities have been reset
+                                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                        Console.WriteLine("\nQuantities reverted to original values.");
+                                        Console.ResetColor();
+                                        // Display the updated recipe
+                                        receipe.displayReceipe();
                                     }
 
                                     // Ask user if they want to clear the data for a new recipe
@@ -308,11 +314,11 @@ namespace ST10259527_Kayla_Ferreira_POE
                         unitOfMeasurement = "";
                         break;
                 }
-                newIngredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, unitOfMeasurement, calories, foodGroup);
+                newIngredient = new Ingredients(ingredientName, ingredientQuantity, unitOfMeasurement, calories, foodGroup);
             }
             else
             {
-                newIngredient = new Ingredients(ingredientName, ingredientQuantity, originalQuantity, calories, foodGroup);
+                newIngredient = new Ingredients(ingredientName, ingredientQuantity, calories, foodGroup);
             }
             return newIngredient;
         }

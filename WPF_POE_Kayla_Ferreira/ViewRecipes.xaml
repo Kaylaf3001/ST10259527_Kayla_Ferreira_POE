@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
         Title="View Recipe" 
-        Height="617"
+        Height="650"
         Width="810"
         Background="#FF5ABED5"
         WindowStartupLocation="CenterScreen"
@@ -155,7 +155,8 @@
                        FontFamily="Century Gothic"
                        FontWeight="Bold" 
                        Foreground="White"
-                       Margin="10"/>
+                       Margin="10"
+                       TextAlignment="Center"/>
             <Button Content="x2" 
                     Style="{StaticResource CuteButtonStyle}"
                     Click="ScaleButton_Click"
@@ -202,8 +203,7 @@
                     Foreground="Black" 
                     Tag="0,333"/>
             <Button Content="1/5" 
-                    Style="{StaticResource
-                CuteButtonStyle}" 
+                    Style="{StaticResource CuteButtonStyle}" 
                     Click="ScaleButton_Click" 
                     Width="100"
                     Height="40"
@@ -211,6 +211,14 @@
                     Background="#FF6AC65E" 
                     Foreground="Black"
                     Tag="0,2"/>
+            <Button Content="Revert"
+                    Style="{StaticResource CuteButtonStyle}"
+                    Click="Revert_Click"
+                    Width="100"
+                    Height="40"
+                    Margin="10"
+                    Background="#FF6AC65E"
+                    Foreground="Black" />
         </StackPanel>
 
         <!--  -->
