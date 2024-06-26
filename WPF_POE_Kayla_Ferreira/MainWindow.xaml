@@ -101,8 +101,10 @@
                     BorderBrush="#FF142A06" 
                     Foreground="White" 
                     FontFamily="Century Gothic" />
-            <Image Height="500" 
-                   Source="/WallP1.jpg" 
+            
+            <!-- Image -->
+            <Image Height="500"
+                   Source="Images\MainWindowSideImage.jpg" 
                    Stretch="Fill"
                    Width="462" 
                    HorizontalAlignment="Left" 

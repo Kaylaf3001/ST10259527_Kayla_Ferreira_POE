@@ -167,12 +167,13 @@
         </Button>
 
         <!-- Image -->
-        <Image  Source="/SearchImage7.png" 
-                Stretch="Fill" Grid.Row="4" 
-                Panel.ZIndex="993" 
+        <Image  Source="Images\IngredientInputTheme2.png"
+                Stretch="Fill"
+                Grid.Row="4"
+                Panel.ZIndex="993"
                 Margin="1,41,371,5"
-                Grid.RowSpan="6" 
-                RenderTransformOrigin="0.5,0.5" 
+                Grid.RowSpan="6"
+                RenderTransformOrigin="0.5,0.5"
                 Grid.ColumnSpan="2">
             <Image.RenderTransform>
                 <TransformGroup>

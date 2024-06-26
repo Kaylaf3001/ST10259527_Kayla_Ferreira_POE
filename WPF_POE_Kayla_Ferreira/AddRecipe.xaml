@@ -44,6 +44,7 @@
             </Setter>
         </Style>
 
+        <!-- Ingredient Template -->
         <DataTemplate x:Key="IngredientTemplate">
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -67,6 +68,7 @@
         </DataTemplate>
     </Window.Resources>
 
+    <!--Grid-->
     <Grid Margin="10,10,10,8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -80,12 +82,13 @@
             <ColumnDefinition Width="437*"/>
         </Grid.ColumnDefinitions>
         <Image Margin="243,48,10,0"
-               Source="/Theme1.png" 
+               Source="Images\AddRecipeTheme1.png" 
                Stretch="Fill" 
                Grid.Column="1"
                Grid.Row="3" 
                Panel.ZIndex="1000" 
                Grid.RowSpan="2"/>
+        
         <!-- Input Section -->
         <Border Grid.Row="0" 
                 Margin="0,0,0,10" 
@@ -160,7 +163,7 @@
                            HorizontalAlignment="Center"
                            Foreground="#FF7C343C"/>
                 <TextBox x:Name="RecipeStepTextBox"
-                         Width="304" 
+                         Width="312"
                          Margin="0,5"
                          Height="74" 
                          Background="#FFE9BECE"/>

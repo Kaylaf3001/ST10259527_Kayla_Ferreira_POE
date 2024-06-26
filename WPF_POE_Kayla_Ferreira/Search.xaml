@@ -139,8 +139,8 @@
                        VerticalAlignment="Top" 
                        Width="45" 
                        RenderTransformOrigin="1.008,0.552"/>
-                <Image Margin="0,330,134,-17" 
-                       Source="Images\SearchImage6.png" 
+                <Image Margin="0,330,134,-17"
+                       Source="Images\SearchWindowTheme4.png" 
                        Stretch="Fill"
                        RenderTransformOrigin="-8.062,2.061"/>
             </Grid>

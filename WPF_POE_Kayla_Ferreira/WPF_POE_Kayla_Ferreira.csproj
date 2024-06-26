@@ -123,43 +123,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Search_Icon.png" />
+    <Resource Include="Images\ViewImageTheme3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\FoodIcon2.png" />
+    <Resource Include="Images\IngredientInputTheme2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\FoodIcon1.0.png" />
+    <Resource Include="Images\SearchWindowTheme4.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ImageSearch.png" />
+    <Resource Include="Images\MainWindowSideImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ImageSearch2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ImageSearch3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\SearchImage4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\SearchImage7.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\SearchImage6.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ImageSearch5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="WallP1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Theme1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="SearchImage7.png" />
+    <Resource Include="Images\AddRecipeTheme1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prog6221_POE\Kayla_Ferreira_POE.csproj">
