@@ -18,7 +18,7 @@ namespace WPF_POE_Kayla_Ferreira
         {
             InitializeComponent();
             _allRecipes = allRecipes;
-
+            _allRecipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
             // Populate the ListBox with recipe names
             foreach (var recipe in _allRecipes)
             {
@@ -124,5 +124,6 @@ namespace WPF_POE_Kayla_Ferreira
                 DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
             }
         }
+        
     }
 }

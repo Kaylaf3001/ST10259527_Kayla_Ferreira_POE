@@ -8,8 +8,9 @@
         Title="View Recipe" 
         Height="617"
         Width="810"
-        ResizeMode="NoResize"
-        Background="#FF5ABED5">
+        Background="#FF5ABED5"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
     <!--  -->
     <Window.Resources>
@@ -133,7 +134,8 @@
                                  IsReadOnly="True" 
                                  Height="150" 
                                  VerticalAlignment="Top" 
-                                 Background="Transparent"/>
+                                 Background="Transparent"
+                                 />
                 </Border>
                 <Border CornerRadius="15" 
                         Background="Transparent" 

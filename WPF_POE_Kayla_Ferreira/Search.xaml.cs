@@ -23,6 +23,7 @@ namespace WPF_POE_Kayla_Ferreira
         private void Search_Loaded(object sender, RoutedEventArgs e)
         {
             _allRecipes = Window1.AllRecipes ?? new List<Recipes>();
+            _allRecipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
         }
 
         //=======================================================================================

@@ -55,8 +55,56 @@ namespace ST10259527_Kayla_Ferreira_POE
                             receipe = UserGetsReceipe();
                             break;
                         case 2:
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("________________________________________________________________________");
+                            Console.WriteLine($"******* Cook Book *******");
+                            Console.ResetColor();
                             // User chose to view all recipes
-                            alaphabeticalOrder();
+                            
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("________________________________________________________________________\n");
+                            Console.ResetColor();
+
+                            int viewResponse = (int)NumberInput("Would you like to view a recipe? (1 - Yes, 0 - No)\n");
+                            if (viewResponse == 1)
+                            {
+                                Console.WriteLine("Enter the name of the recipe you want to view:");
+                                string recipeName = Console.ReadLine();
+                                Recipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
+                                if (recipeToView != null)
+                                {
+
+                                    recipeToView.displayReceipe();
+
+                                    // Ask user if they want to scale the recipe
+                                    int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
+                                    if (response2 == 1)
+                                    {
+                                        double scaleNumber = NumberInput("What would you like to scale it to?\n");
+                                        receipe.scale(scaleNumber);
+                                    }
+
+                                    // Ask user if they want to reset the quantities
+                                    int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
+                                    if (response3 == 1)
+                                    {
+                                        receipe.resetQuantities();
+                                    }
+
+                                    // Ask user if they want to clear the data for a new recipe
+                                    int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
+                                    if (response4 == 1)
+                                    {
+                                        clearData();
+                                    }
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Recipe not found.");
+                                    Console.ResetColor();
+                                }
+                            }
                             break;
                         case 3:
                             // User chose to exit the application
@@ -310,68 +358,7 @@ namespace ST10259527_Kayla_Ferreira_POE
             }
             
         }
-        //============================================================================================================
-        // Method to display the recipes in alphabetical order
-        //=============================================================================================================
-        public void alaphabeticalOrder()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("________________________________________________________________________");
-            Console.WriteLine($"******* Cook Book *******");
-            Console.ResetColor();
-
-            // Sort the recipes in alphabetical order
-            allReceipes.Sort((x, y) => string.Compare(x.receipeName, y.receipeName));
-            foreach (var item in allReceipes)
-            {
-                Console.WriteLine(item.receipeName);
-            }
-
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("________________________________________________________________________\n");
-            Console.ResetColor();
-
-            int viewResponse = (int)NumberInput("Would you like to view a recipe? (1 - Yes, 0 - No)\n");
-            if (viewResponse == 1)
-            {
-                Console.WriteLine("Enter the name of the recipe you want to view:");
-                string recipeName = Console.ReadLine();
-                Recipes recipeToView = allReceipes.FirstOrDefault(r => r.receipeName == recipeName);
-                if (recipeToView != null)
-                {
-
-                    recipeToView.displayReceipe();
-
-                    // Ask user if they want to scale the recipe
-                    int response2 = (int)NumberInput("Would you like to change the scale of your recipe? (1 - Yes, 0 - No)\n");
-                    if (response2 == 1)
-                    {
-                        double scaleNumber = NumberInput("What would you like to scale it to?\n");
-                        receipe.scale(scaleNumber);
-                    }
-
-                    // Ask user if they want to reset the quantities
-                    int response3 = (int)NumberInput("Would you like to revert back to the original quantities? (1 - Yes, 0 - No)\n");
-                    if (response3 == 1)
-                    {
-                        receipe.resetQuantities();
-                    }
-
-                    // Ask user if they want to clear the data for a new recipe
-                    int response4 = (int)NumberInput("Would you like to clear the data for a new recipe?(1 - Yes, 0 - No)\n");
-                    if (response4 == 1)
-                    {
-                        clearData();
-                    }
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Recipe not found.");
-                    Console.ResetColor();
-                }
-            }
-        }
+        
 
         ////=============================================================================================================
         // Method to clear data for a new recipe

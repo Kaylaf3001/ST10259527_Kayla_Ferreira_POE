@@ -4,7 +4,9 @@
         Title="Recipe Input" 
         Height="625"
         Width="800" 
-        Background="#FFF0817F">
+        Background="#FFF0817F"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
     <Window.Resources>
 
@@ -177,7 +179,8 @@
                  Grid.RowSpan="5"
                  BorderBrush="#FF7C343C"
                  BorderThickness="2" 
-                 Background="#FFE9BECE"/>
+                 Background="#FFE9BECE"
+                 IsReadOnly="True"/>
 
         <!-- Done Button -->
         <Button Content="Done" Grid.Row="3" 
