@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using ST10259527_Kayla_Ferreira_POE.Class;
 
 namespace WPF_POE_Kayla_Ferreira
@@ -21,7 +25,10 @@ namespace WPF_POE_Kayla_Ferreira
             _allRecipes = Window1.AllRecipes ?? new List<Recipes>();
         }
 
-        //=======================================================================================================
+        //=======================================================================================
+        // Event Handlers
+        //=======================================================================================
+
         private void TextBox_Search(object sender, TextChangedEventArgs e)
         {
             UpdateRecipeList();
@@ -34,6 +41,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         private void CheckBox_Vegetables(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("Vegetables checkbox clicked."); // Debug statement
             UpdateRecipeList();
         }
 
@@ -61,9 +69,11 @@ namespace WPF_POE_Kayla_Ferreira
         {
             UpdateRecipeList();
         }
-        //=======================================================================================================
 
-        //=======================================================================================================
+        //=======================================================================================
+        // ListBox Selection Changed
+        //=======================================================================================
+
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (RecipeListBox != null && RecipeListBox.SelectedItem != null)
@@ -77,11 +87,12 @@ namespace WPF_POE_Kayla_Ferreira
                 }
             }
         }
-        //=======================================================================================================
 
-        //=======================================================================================================
+        //=======================================================================================
+        // Filtering Logic
+        //=======================================================================================
+
         // Get the filtered recipe names based on the search query, food groups, and max calories
-        //=======================================================================================================
         private List<string> GetFilteredRecipeNames()
         {
             var filteredRecipes = new List<string>();
@@ -114,11 +125,11 @@ namespace WPF_POE_Kayla_Ferreira
             return filteredRecipes;
         }
 
-        //=======================================================================================================
+        //=======================================================================================
+        // Updating Recipe List
+        //=======================================================================================
 
-        //=======================================================================================================
         // Update the recipe list based on the search query, food groups, and max calories
-        //=======================================================================================================
         private void UpdateRecipeList()
         {
             if (RecipeListBox == null) return;
@@ -130,48 +141,63 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeListBox.Items.Add(name);
             }
         }
-        //=======================================================================================================
 
-        //=======================================================================================================
+        //=======================================================================================
+        // Displaying Recipe Details
+        //=======================================================================================
+
         // Display the details of the selected recipe
-        //=======================================================================================================
         private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> steps, double totalCalories)
         {
             if (RecipeDetailsTextBox == null) return;
             else
             {
                 RecipeDetailsTextBox.Document.Blocks.Clear();
-                RecipeDetailsTextBox.AppendText($"Recipe Name: {recipeName}\n\n");
+                RecipeDetailsTextBox.FontFamily = new FontFamily("Century Gothic");
 
-                // Display Ingredients
-                RecipeDetailsTextBox.AppendText("Ingredients:\n");
+                // Recipe Name
+                AppendTextWithFormatting(RecipeDetailsTextBox, $"{recipeName}\n", FontWeights.Bold, 16, Brushes.DarkSalmon);
+
+                // Ingredients
+                AppendTextWithFormatting(RecipeDetailsTextBox, "Ingredients:", FontWeights.Bold, 14, Brushes.DarkSalmon);
                 foreach (var ingredient in ingredients)
                 {
-                    RecipeDetailsTextBox.AppendText($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n");
+                    AppendTextWithFormatting(RecipeDetailsTextBox, $"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}", FontWeights.Normal, 12, Brushes.Black);
                 }
-                RecipeDetailsTextBox.AppendText($"\nTotal Calories: {totalCalories}\n");
+                AppendTextWithFormatting(RecipeDetailsTextBox, $"\nTotal Calories: {totalCalories}\n", FontWeights.Bold, 14, Brushes.DarkSalmon);
 
-
-                // Display Steps
-                RecipeDetailsTextBox.AppendText("\nSteps:\n");
+                // Steps
+                AppendTextWithFormatting(RecipeDetailsTextBox, "\nSteps:", FontWeights.Bold, 14, Brushes.DarkSalmon);
                 foreach (var step in steps)
                 {
-                    RecipeDetailsTextBox.AppendText($"{step}\n");
+                    AppendTextWithFormatting(RecipeDetailsTextBox, $"{step}", FontWeights.Normal, 12, Brushes.Black);
                 }
             }
         }
-        //=======================================================================================================
 
-        //=======================================================================================================
+        // Helper method to append text with specific formatting
+        private void AppendTextWithFormatting(RichTextBox richTextBox, string text, FontWeight fontWeight, double fontSize, SolidColorBrush foregroundBrush)
+        {
+            var run = new Run(text)
+            {
+                FontWeight = fontWeight,
+                FontSize = fontSize,
+                Foreground = foregroundBrush
+            };
+            var paragraph = new Paragraph(run);
+            richTextBox.Document.Blocks.Add(paragraph);
+        }
+
+        //=======================================================================================
+        // Clearing Recipe Details
+        //=======================================================================================
+
         // Clear the recipe details
-        //=======================================================================================================
         private void ClearRecipeDetails()
         {
             if (RecipeDetailsTextBox == null) return;
 
             RecipeDetailsTextBox.Document.Blocks.Clear();
         }
-        //=======================================================================================================
     }
 }
-//===============================================End-of-page========================================================

@@ -200,7 +200,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             List<Recipes> dummyRecipes = new List<Recipes>();
             
             var random = new Random();
-            var foodgroup = new [] { "Grains", "Fats and oils", "Protein", "Dairy","Fruits", "Vegatables" };
+            var foodgroup = new [] { "Grains", "Fats and oils", "Protein", "Dairy","Fruits", "Vegetables" };
             var units = new[] { "cup", "tablespoon", "teaspoon", "gram", "ounce", "piece", "slice" };
             var ingredientsNames = new[] { "flour", "sugar", "butter", "milk", "eggs", "salt", "pepper", "chicken", 
                 "beef", "pork", "fish", "cheese", "tomato", "lettuce", "carrot", "apple", "banana", "orange", "strawberry", "blueberry" };

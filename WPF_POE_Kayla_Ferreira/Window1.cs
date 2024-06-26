@@ -86,18 +86,30 @@ namespace WPF_POE_Kayla_Ferreira
             }
         }
 
-        private void AddRecipeStep_Click(object sender, RoutedEventArgs e)
-        {
-            recipeSteps.Add(RecipeStepTextBox.Text);
-            RecipeStepTextBox.Clear();
-
-            // Display the complete recipe
-            DisplayRecipe();
-        }
-
-        // Create a new Recipe instance when the "Done" button is clicked
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            // Validate recipe name
+            if (string.IsNullOrWhiteSpace(RecipeNameTextBox.Text))
+            {
+                MessageBox.Show("Please enter a recipe name.");
+                return; // Stop further execution if validation fails
+            }
+
+            // Validate ingredients list
+            if (ingredients.Count == 0)
+            {
+                MessageBox.Show("Please add ingredients to the recipe.");
+                return; // Stop further execution if validation fails
+            }
+
+            // Validate recipe steps
+            if (recipeSteps.Count == 0)
+            {
+                MessageBox.Show("Please add recipe steps.");
+                return; // Stop further execution if validation fails
+            }
+
+            // Create a new Recipe instance
             Recipes newRecipe = new Recipes
             {
                 receipeName = RecipeNameTextBox.Text,
@@ -114,12 +126,12 @@ namespace WPF_POE_Kayla_Ferreira
             // Close the current window
             this.Close();
 
+            // Open a new MainWindow if one isn't already open
             MainWindow existingMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             if (existingMainWindow == null)
             {
-                // If not, open a new MainWindow
-                MainWindow newWindow1 = new MainWindow();
-                newWindow1.Show();
+                MainWindow newMainWindow = new MainWindow();
+                newMainWindow.Show();
             }
         }
 
@@ -127,6 +139,15 @@ namespace WPF_POE_Kayla_Ferreira
         {
             // Example implementation
             Console.WriteLine("Recipe name text changed.");
+        }
+
+        private void AddRecipeStep_Click(object sender, RoutedEventArgs e)
+        {
+            recipeSteps.Add(RecipeStepTextBox.Text);
+            RecipeStepTextBox.Clear();
+
+            // Display the complete recipe
+            DisplayRecipe();
         }
     }
 }

@@ -5,7 +5,8 @@
 
     <Grid Background="#FFA9DA92">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="77.04"/>
+            <RowDefinition Height="Auto" 
+                           MinHeight="77.04"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -15,10 +16,12 @@
                 CornerRadius="10" 
                 Margin="10,9,10,11" 
                 Grid.RowSpan="2">
+            
             <Grid HorizontalAlignment="Left" 
                   Height="443"
                   VerticalAlignment="Center" 
                   Width="244">
+                
                 <!-- Title -->
                 <TextBlock HorizontalAlignment="Left" 
                            Margin="10,0,0,0" 
@@ -143,17 +146,17 @@
         <ListBox x:Name="RecipeListBox" 
                  Grid.Row="1"
                  Margin="258,4,31,201" 
-                 SelectionChanged="ListBox_SelectionChanged"/>
+                 SelectionChanged="ListBox_SelectionChanged"
+                 />
 
         <!-- Recipe Details -->
         <RichTextBox x:Name="RecipeDetailsTextBox"
-                     Grid.Row="1" 
-                     HorizontalAlignment="Left" 
-                     Height="162" 
-                     VerticalAlignment="Top" 
-                     Width="423" 
-                     Margin="258,206,0,0"/>
+             Grid.Row="1"
+             HorizontalAlignment="Left"
+             Height="162"
+             VerticalAlignment="Top"
+             Width="423"
+             Margin="258,206,0,0"/>
 
-        <!-- Decorative Images -->
     </Grid>
 </Window>

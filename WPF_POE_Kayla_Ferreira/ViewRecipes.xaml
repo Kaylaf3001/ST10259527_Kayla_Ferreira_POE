@@ -5,18 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_POE_Kayla_Ferreira"
         mc:Ignorable="d"
-        Title="View Recipe" Height="617" Width="810"
+        Title="View Recipe" 
+        Height="617"
+        Width="810"
         ResizeMode="NoResize"
         Background="#FF5ABED5">
+
+    <!--  -->
     <Window.Resources>
-        <!-- Style for the button with rounded corners and cute colors -->
-        <Style x:Key="CuteButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF72B7E0"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Century Gothic"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="BorderThickness" Value="0"/>
+        <Style x:Key="CuteButtonStyle" 
+               TargetType="Button">
+            <Setter Property="Background" 
+                    Value="#FF72B7E0"/>
+            <Setter Property="Foreground" 
+                    Value="White"/>
+            <Setter Property="FontFamily" 
+                    Value="Century Gothic"/>
+            <Setter Property="FontSize" 
+                    Value="14"/>
+            <Setter Property="Padding" 
+                    Value="10,5"/>
+            <Setter Property="BorderThickness" 
+                    Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -34,7 +44,7 @@
         </Style>
     </Window.Resources>
 
-    <!-- EVERYTHING GRID-->
+    <!--  -->
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -43,84 +53,81 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width ="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Recipe List Box -->
+        <!--  -->
         <Border CornerRadius="15" 
-                Background="White" 
+                Background="White"
                 BorderBrush="#FF8DAEE1" 
-                BorderThickness="1" 
-                Grid.Row="1" 
+                BorderThickness="1"
+                Grid.Row="1"
                 Grid.Column="0" 
                 Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ListBox x:Name="RecipeListBox"
+                <ListBox x:Name="RecipeListBox" 
                          SelectionChanged="RecipeListBox_SelectionChanged"
                          Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"
+                            <TextBlock Text="{Binding}" 
                                        VerticalAlignment="Center"
-                                       Margin="5" />
+                                       Margin="5"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <!-- Buttons Panel -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5"
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            RenderTransformOrigin="0.5,0.5" 
                             Grid.Row="1">
-
                     <StackPanel.RenderTransform>
-
                         <TransformGroup>
-                            <ScaleTransform />
-                            <SkewTransform />
-                            <RotateTransform Angle="-0.223" />
-                            <TranslateTransform />
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.223"/>
+                            <TranslateTransform/>
                         </TransformGroup>
                     </StackPanel.RenderTransform>
+
+                    <!--  -->
                     <Button Content="Done"
-                            Style="{StaticResource CuteButtonStyle}"
-                            Click="BackButton_Click"
-                            Width="70"
-                            Height="40"
-                            Margin="10"
-                            Background="#FF6AC65E"
-                            Foreground="Black" />
-                    <Button Content="Clear"
-                            Style="{StaticResource CuteButtonStyle}"
+                            Style="{StaticResource CuteButtonStyle}" 
+                            Click="BackButton_Click" 
+                            Width="70" 
+                            Height="40" 
+                            Margin="10" 
+                            Background="#FF6AC65E" 
+                            Foreground="Black"/>
+                    <Button Content="Clear" 
+                            Style="{StaticResource CuteButtonStyle}" 
                             Click="DoneButton_Click"
-                            Width="70"
+                            Width="70" 
                             Height="40"
-                            Margin="10"
-                            Background="#FF6AC65E"
-                            Foreground="Black" />
+                            Margin="10" 
+                            Background="#FF6AC65E" 
+                            Foreground="Black"/>
                 </StackPanel>
             </Grid>
         </Border>
-            
-        <!-- Recipe Details Panel -->
+
+        <!--  -->
         <Border CornerRadius="15" 
-                Background="White" 
+                Background="White"
                 BorderBrush="#FF8DAEE1" 
                 BorderThickness="1" 
                 Grid.Column="1" 
                 Grid.Row="1" 
-                Grid.ColumnSpan="1"  
+                Grid.ColumnSpan="1" 
                 Margin="5">
-            <StackPanel Background="Transparent" >
-
-                <!-- Recipe Details Text Box -->
+            <StackPanel Background="Transparent">
                 <Border CornerRadius="15" 
                         Background="Transparent" 
-                        BorderBrush="#FF8DAEE1" 
-                        BorderThickness="1" >
+                        BorderBrush="#FF8DAEE1"
+                        BorderThickness="1">
                     <RichTextBox x:Name="RecipeDetailsTextBox" 
                                  VerticalScrollBarVisibility="Auto" 
                                  IsReadOnly="True" 
@@ -128,93 +135,90 @@
                                  VerticalAlignment="Top" 
                                  Background="Transparent"/>
                 </Border>
-
-                <!-- Recipe Steps List View -->
-                <Border CornerRadius="15"
-                        Background="Transparent"
-                        BorderBrush="#FF8DAEE1"
+                <Border CornerRadius="15" 
+                        Background="Transparent" 
+                        BorderBrush="#FF8DAEE1" 
                         BorderThickness="1"
                         Height="260">
-                    <ListView x:Name="RecipeStepsListView"
-                              Background="Transparent">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <ListView x:Name="RecipeStepsListView" 
+                              Background="Transparent"/>
                 </Border>
             </StackPanel>
         </Border>
 
+        <!--  -->
         <StackPanel Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Scale"
-                       FontSize="20"
+            <TextBlock Text="Scale" 
+                       FontSize="20" 
                        FontFamily="Century Gothic"
-                       FontWeight="Bold"
+                       FontWeight="Bold" 
                        Foreground="White"
-                       Margin="10" />
-            <Button Content="x2"
+                       Margin="10"/>
+            <Button Content="x2" 
                     Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
-                    Width="100"
+                    Click="ScaleButton_Click"
+                    Width="100" 
                     Height="40"
-                    Margin="10"
-                    Background="#FF6AC65E"
-                    Foreground="Black" />
-            <Button Content="x3"
-                    Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
+                    Margin="10" 
+                    Background="#FF6AC65E" 
+                    Foreground="Black" 
+                    Tag="2"/>
+            <Button Content="x3" 
+                    Style="{StaticResource CuteButtonStyle}" 
+                    Click="ScaleButton_Click"
                     Width="100"
-                    Height="40"
-                    Margin="10"
-                    Background="#FF6AC65E"
-                    Foreground="Black" />
-            <Button Content="x5"
-                    Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
+                    Height="40" 
+                    Margin="10" 
+                    Background="#FF6AC65E" 
+                    Foreground="Black" 
+                    Tag="3"/>
+            <Button Content="x5" 
+                    Style="{StaticResource CuteButtonStyle}" 
+                    Click="ScaleButton_Click"
                     Width="100"
-                    Height="40"
-                    Margin="10"
+                    Height="40" 
+                    Margin="10" 
                     Background="#FF6AC65E"
-                    Foreground="Black" />
-            <Button Content="1/2"
-                    Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
-                    Width="100"
-                    Height="40"
+                    Foreground="Black" 
+                    Tag="5"/>
+            <Button Content="1/2" 
+                    Style="{StaticResource CuteButtonStyle}" 
+                    Click="ScaleButton_Click" 
+                    Width="100" 
+                    Height="40" 
                     Margin="10"
-                    Background="#FF6AC65E"
-                    Foreground="Black" />
+                    Background="#FF6AC65E" 
+                    Foreground="Black" 
+                    Tag="0,5"/>
             <Button Content="1/3"
-                    Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
+                    Style="{StaticResource CuteButtonStyle}" 
+                    Click="ScaleButton_Click"
+                    Width="100" 
+                    Height="40"
+                    Margin="10" 
+                    Background="#FF6AC65E" 
+                    Foreground="Black" 
+                    Tag="0,333"/>
+            <Button Content="1/5" 
+                    Style="{StaticResource
+                CuteButtonStyle}" 
+                    Click="ScaleButton_Click" 
                     Width="100"
                     Height="40"
-                    Margin="10"
-                    Background="#FF6AC65E"
-                    Foreground="Black" />
-            <Button Content="1/5"
-                    Style="{StaticResource CuteButtonStyle}"
-                    Click="AddRecipeButton_Click"
-                    Width="100"
-                    Height="40"
-                    Margin="10"
-                    Background="#FF6AC65E"
-                    Foreground="Black" />
-
+                    Margin="10" 
+                    Background="#FF6AC65E" 
+                    Foreground="Black"
+                    Tag="0,2"/>
         </StackPanel>
 
-        <!-- Header Text Block -->
+        <!--  -->
         <TextBlock Text="Recipes" 
                    FontSize="100" 
                    FontFamily="Century Gothic" 
-                   FontWeight="Bold" 
-                   Foreground="White"  
+                   FontWeight="Bold"
+                   Foreground="White"
                    Grid.ColumnSpan="2"/>
-
-        <!-- Decorative Image -->
-        <Image Source="Images\FoodIcon1.0.png" 
+        <Image Source="Images\FoodIcon1.0.png"
                Width="124" 
                Grid.Column="3" 
                Height="133"/>

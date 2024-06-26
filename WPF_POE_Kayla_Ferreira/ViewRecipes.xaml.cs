@@ -5,18 +5,18 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using static WPF_POE_Kayla_Ferreira.Window1;
+using System.Windows.Media;
 
 namespace WPF_POE_Kayla_Ferreira
 {
     public partial class Window2 : Window
     {
         private List<Recipes> _allRecipes;
+        private Recipes selectedRecipe;
 
         public Window2(List<Recipes> allRecipes)
         {
             InitializeComponent();
-
             _allRecipes = allRecipes;
 
             // Populate the ListBox with recipe names
@@ -30,7 +30,7 @@ namespace WPF_POE_Kayla_Ferreira
         {
             if (RecipeListBox.SelectedItem != null)
             {
-                var selectedRecipe = _allRecipes.FirstOrDefault(r => r.receipeName == RecipeListBox.SelectedItem.ToString());
+                selectedRecipe = _allRecipes.FirstOrDefault(r => r.receipeName == RecipeListBox.SelectedItem.ToString());
                 if (selectedRecipe != null)
                 {
                     DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
@@ -51,8 +51,7 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeStepsListView.Items.Clear();
             RecipeStepsListView.Visibility = Visibility.Collapsed;
         }
-        //=======================================================================================================
-        // Display the selected recipe details in the RecipeDetailsTextBox and RecipeStepsListView
+
         private void DisplayRecipe(string recipeName, List<Ingredients> ingredients, List<string> recipeSteps, double totalCalories)
         {
             RecipeDetailsTextBox.Document.Blocks.Clear(); // Clear previous content
@@ -60,19 +59,48 @@ namespace WPF_POE_Kayla_Ferreira
             RecipeStepsListView.Visibility = Visibility.Visible;
 
             // Recipe name
-            var recipeNameParagraph = new Paragraph(new Run($"Recipe Name: {recipeName}"));
+            var recipeNameRun = new Run($"Recipe Name: {recipeName}")
+            {
+                FontSize = 16,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.DarkBlue,
+                FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
+            };
+            var recipeNameParagraph = new Paragraph(recipeNameRun);
             RecipeDetailsTextBox.Document.Blocks.Add(recipeNameParagraph);
 
             // Ingredients
-            var ingredientsParagraph = new Paragraph(new Run("Ingredients:\n"));
+            var ingredientsParagraph = new Paragraph();
+            var ingredientsTitleRun = new Run("Ingredients:\n")
+            {
+                FontSize = 14,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.DarkGreen,
+                FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
+            };
+            ingredientsParagraph.Inlines.Add(ingredientsTitleRun);
+
             foreach (var ingredient in ingredients)
             {
-                ingredientsParagraph.Inlines.Add(new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n"));
+                var ingredientRun = new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n")
+                {
+                    FontSize = 12,
+                    Foreground = Brushes.Black,
+                    FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
+                };
+                ingredientsParagraph.Inlines.Add(ingredientRun);
             }
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Display total calories
-            var totalCaloriesParagraph = new Paragraph(new Run($"\nTotal Calories: {totalCalories}\n"));
+            var totalCaloriesRun = new Run($"Total Calories: {totalCalories}\n")
+            {
+                FontSize = 14,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.Red,
+                FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
+            };
+            var totalCaloriesParagraph = new Paragraph(totalCaloriesRun);
             RecipeDetailsTextBox.Document.Blocks.Add(totalCaloriesParagraph);
 
             // Recipe steps
@@ -81,19 +109,20 @@ namespace WPF_POE_Kayla_Ferreira
                 RecipeStepsListView.Items.Add(new CheckBox { Content = step, Margin = new Thickness(0, 2, 0, 2) });
             }
         }
-        //=======================================================================================================
 
-        //=======================================================================================================
-        // The following methods are not used in this class, but are kept here for future reference if needed.
-        //=======================================================================================================
-        private void RecipeDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void ScaleButton_Click(object sender, RoutedEventArgs e)
         {
-            // Handle text changed event if needed
-        }
+            if (selectedRecipe != null)
+            {
+                Button button = sender as Button;
+                double scaleFactor = Convert.ToDouble(button.Tag);
 
-        private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
-        {
+                // Call the scale method with the appropriate factor
+                selectedRecipe.scale(scaleFactor);
 
+                // Refresh the displayed recipe details after scaling
+                DisplayRecipe(selectedRecipe.receipeName, selectedRecipe.Ingredients, selectedRecipe.stepDescriptions, selectedRecipe.totalCalories());
+            }
         }
     }
 }

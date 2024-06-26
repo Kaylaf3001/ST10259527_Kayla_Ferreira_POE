@@ -11,7 +11,8 @@
         Background="#FFF5E1C9">
 
     <Window.Resources>
-        <Style x:Key="MenuButtons" TargetType="Button">
+        <Style x:Key="MenuButtons" 
+               TargetType="Button">
             <Setter Property="Width" 
                     Value="137" />
             <Setter Property="Height" 
