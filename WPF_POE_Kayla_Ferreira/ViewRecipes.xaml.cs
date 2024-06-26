@@ -71,7 +71,7 @@ namespace WPF_POE_Kayla_Ferreira
 
             // Ingredients
             var ingredientsParagraph = new Paragraph();
-            var ingredientsTitleRun = new Run("Ingredients:\n")
+            var ingredientsTitleRun = new Run("Ingredients:")
             {
                 FontSize = 14,
                 FontWeight = FontWeights.Bold,
@@ -79,17 +79,21 @@ namespace WPF_POE_Kayla_Ferreira
                 FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
             };
             ingredientsParagraph.Inlines.Add(ingredientsTitleRun);
+            
 
             foreach (var ingredient in ingredients)
             {
-                var ingredientRun = new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n")
+                // Updated to include the unit of measurement next to the quantity
+                var ingredientRun = new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n"
+)
                 {
                     FontSize = 12,
                     Foreground = Brushes.Black,
                     FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
                 };
                 ingredientsParagraph.Inlines.Add(ingredientRun);
-            }
+            
+        }
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
             // Display total calories

@@ -12,6 +12,7 @@ namespace WPF_POE_Kayla_Ferreira
         private List<Ingredients> ingredients = new List<Ingredients>();
         private List<string> recipeSteps = new List<string>();
         public static List<Recipes> AllRecipes { get; private set; } = new List<Recipes>();
+        private bool hasShownCalorieWarning = false; // Flag to track if the warning has been shown
 
         public Window1()
         {
@@ -80,6 +81,13 @@ namespace WPF_POE_Kayla_Ferreira
             double totalCalories = currentRecipe.totalCalories();
             RecipeDetailsTextBox.AppendText($"\nTotal Calories: {totalCalories}\n");
 
+            // Check if total calories exceed 300 and show a warning if not already shown
+            if (totalCalories > 300 && !hasShownCalorieWarning)
+            {
+                MessageBox.Show("Warning: The recipe has exceeded 300 calories!");
+                hasShownCalorieWarning = true; // Set the flag to true to indicate the warning has been shown
+            }
+
             // Recipe steps
             RecipeDetailsTextBox.AppendText("\nSteps:\n");
             int stepNumber = 1;
@@ -91,53 +99,53 @@ namespace WPF_POE_Kayla_Ferreira
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-{
-    // Validate recipe name
-    if (string.IsNullOrWhiteSpace(RecipeNameTextBox.Text))
-    {
-        MessageBox.Show("Please enter a recipe name.");
-        return; // Stop further execution if validation fails
-    }
+        {
+            // Validate recipe name
+            if (string.IsNullOrWhiteSpace(RecipeNameTextBox.Text))
+            {
+                MessageBox.Show("Please enter a recipe name.");
+                return; // Stop further execution if validation fails
+            }
 
-    // Validate ingredients list
-    if (ingredients.Count == 0)
-    {
-        MessageBox.Show("Please add ingredients to the recipe.");
-        return; // Stop further execution if validation fails
-    }
+            // Validate ingredients list
+            if (ingredients.Count == 0)
+            {
+                MessageBox.Show("Please add ingredients to the recipe.");
+                return; // Stop further execution if validation fails
+            }
 
-    // Validate recipe steps
-    if (recipeSteps.Count == 0)
-    {
-        MessageBox.Show("Please add recipe steps.");
-        return; // Stop further execution if validation fails
-    }
+            // Validate recipe steps
+            if (recipeSteps.Count == 0)
+            {
+                MessageBox.Show("Please add recipe steps.");
+                return; // Stop further execution if validation fails
+            }
 
-    // Create a new Recipe instance
-    Recipes newRecipe = new Recipes
-    {
-        receipeName = RecipeNameTextBox.Text,
-        Ingredients = ingredients,
-        stepDescriptions = recipeSteps
-    };
+            // Create a new Recipe instance
+            Recipes newRecipe = new Recipes
+            {
+                receipeName = RecipeNameTextBox.Text,
+                Ingredients = ingredients,
+                stepDescriptions = recipeSteps
+            };
 
-    // Add the new recipe to AllRecipes
-    AllRecipes.Add(newRecipe);
+            // Add the new recipe to AllRecipes
+            AllRecipes.Add(newRecipe);
 
-    // Show a message box indicating that the recipe has been saved
-    MessageBox.Show("Recipe has been saved!");
+            // Show a message box indicating that the recipe has been saved
+            MessageBox.Show("Recipe has been saved!");
 
-    // Close the current window
-    this.Close();
+            // Close the current window
+            this.Close();
 
-    // Open a new MainWindow if one isn't already open
-    MainWindow existingMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-    if (existingMainWindow == null)
-    {
-        MainWindow newMainWindow = new MainWindow();
-        newMainWindow.Show();
-    }
-}
+            // Open a new MainWindow if one isn't already open
+            MainWindow existingMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (existingMainWindow == null)
+            {
+                MainWindow newMainWindow = new MainWindow();
+                newMainWindow.Show();
+            }
+        }
 
         private void RecipeNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
