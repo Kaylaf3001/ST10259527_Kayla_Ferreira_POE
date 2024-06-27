@@ -29,15 +29,8 @@ namespace WPF_POE_Kayla_Ferreira
         //-----------------------------------------------------------------------------------------------
         public Window1()
         {
-            //call dummy data from Recipe class
-            List<Recipes> dummyRecipes = Recipes.getDummyRecipes();
-            foreach (var recipe in dummyRecipes)
-            {
-                AllRecipes.Add(recipe);
-            }
             InitializeComponent();
-
-            
+  
         }
         //-----------------------------------------------------------------------------------------------
 
