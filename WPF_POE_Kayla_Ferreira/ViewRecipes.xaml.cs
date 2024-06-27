@@ -9,6 +9,14 @@ using System.Windows.Media;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+    /// <summary>
+    /// Kayla Ferreira - ST10259527
+    /// References: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-8.0
+    /// https://www.youtube.com/watch?v=gSfMNjWNoX0
+    /// https://www.tutorialspoint.com/wpf/index.htm
+    /// https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/button?view=netframeworkdesktop-4.8
+    /// PROG6221 - Assignment 3
+    /// </summary>
     //-----------------------------------------------------------------------------------------------
     public partial class Window2 : Window
     {
@@ -100,27 +108,27 @@ namespace WPF_POE_Kayla_Ferreira
                 FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
             };
             ingredientsParagraph.Inlines.Add(ingredientsTitleRun);
-            
 
             foreach (var ingredient in ingredients)
             {
                 // Updated to include the unit of measurement next to the quantity
-                var ingredientRun = new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n"
-)
+                var ingredientRun = new Run($"{ingredient.ingredientName}: {ingredient.ingredientQuantity} {ingredient.unitOfMeasurement}, {ingredient.calories} Calories, {ingredient.foodGroup}\n")
                 {
                     FontSize = 12,
                     Foreground = Brushes.Black,
                     FontFamily = new FontFamily("Century Gothic") // Set font to Century Gothic
                 };
                 ingredientsParagraph.Inlines.Add(ingredientRun);
-            
-        }
+            }
 
             // Add the ingredients paragraph to the RecipeDetailsTextBox
             RecipeDetailsTextBox.Document.Blocks.Add(ingredientsParagraph);
 
-            // Display total calories
-            var totalCaloriesRun = new Run($"Total Calories: {totalCalories}\n")
+            // Get the total calorie meaning
+            string calorieMeaning = selectedRecipe.totalCalorieMeaning();
+
+            // Display total calories and their meaning
+            var totalCaloriesRun = new Run($"Total Calories: {totalCalories} - {calorieMeaning}\n")
             {
                 FontSize = 14,
                 FontWeight = FontWeights.Bold,
@@ -140,7 +148,7 @@ namespace WPF_POE_Kayla_Ferreira
 
         //-----------------------------------------------------------------------------------------------
         // Scale the recipe
-
+        //-----------------------------------------------------------------------------------------------
         private void ScaleButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedRecipe != null)

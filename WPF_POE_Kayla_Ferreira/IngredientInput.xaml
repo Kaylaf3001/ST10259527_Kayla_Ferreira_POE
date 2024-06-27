@@ -56,7 +56,7 @@
                  Margin="10,10,0,10" 
                  Width="300" 
                  Background="#FFD3D3FF" 
-                 BorderBrush="#FF5972A4"/>
+                 BorderBrush="#FF5972A4" />
 
         <!-- Calories -->
         <TextBlock Text="Calories:"

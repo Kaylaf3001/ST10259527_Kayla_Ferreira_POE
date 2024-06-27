@@ -4,6 +4,14 @@ using System.Windows.Controls;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+    /// <summary>
+    /// Kayla Ferreira - ST10259527
+    /// References: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-8.0
+    /// https://www.youtube.com/watch?v=gSfMNjWNoX0
+    /// https://www.tutorialspoint.com/wpf/index.htm
+    /// https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/combobox?view=netframeworkdesktop-4.8
+    /// PROG6221 - Assignment 3
+    /// </summary>
     //-----------------------------------------------------------------------------------------------
     public partial class IngredientWindow : Window
     {
@@ -21,7 +29,7 @@ namespace WPF_POE_Kayla_Ferreira
         //-----------------------------------------------------------------------------------------------
 
         //-----------------------------------------------------------------------------------------------
-        // Event handlers
+        // Enter the ingredient details
         //-----------------------------------------------------------------------------------------------
         private void AddIngredient_Click(object sender, RoutedEventArgs e)
         {
@@ -34,7 +42,9 @@ namespace WPF_POE_Kayla_Ferreira
                     ingredientQuantity = quantity,
                     originalQuantity = quantity,
                     unitOfMeasurement = ((ComboBoxItem)UnitComboBox.SelectedItem)?.Content.ToString(),
+                    orignalUnitOfMeasurement = ((ComboBoxItem)UnitComboBox.SelectedItem)?.Content.ToString(),
                     calories = calories,
+                    orignalCalories = calories,
                     foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem)?.Content.ToString()
                 };
                 DialogResult = true;

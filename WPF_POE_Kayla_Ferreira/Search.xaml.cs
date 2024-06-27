@@ -10,6 +10,15 @@ using ST10259527_Kayla_Ferreira_POE.Class;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+    /// <summary>
+    /// Kayla Ferreira - ST10259527
+    /// References: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-8.0
+    /// https://www.youtube.com/watch?v=gSfMNjWNoX0
+    /// https://www.tutorialspoint.com/wpf/index.htm
+    /// https://wpf-tutorial.com/listview-control/listview-filtering/
+    /// https://www.youtube.com/watch?v=Es8pn5UvqK0
+    /// PROG6221 - Assignment 3
+    /// </summary>
     public partial class Search : Window
     {
         private List<Recipes> _allRecipes;
@@ -147,11 +156,22 @@ namespace WPF_POE_Kayla_Ferreira
 
             foreach (var recipe in _allRecipes)
             {
+                // Check if the recipe name matches the search query
                 var matchesSearchQuery = string.IsNullOrWhiteSpace(searchQuery) || recipe.receipeName.ToLower().Contains(searchQuery);
+
+                // Check if any ingredient matches the search query
+                var matchesIngredients = recipe.Ingredients.Any(ing =>
+                    ing.ingredientName.ToLower().Contains(searchQuery) ||
+                    ing.foodGroup.ToLower().Contains(searchQuery));
+
+                // Check if the recipe matches selected food groups
                 var matchesFoodGroups = selectedFoodGroups.Count == 0 || recipe.Ingredients.Any(ing => selectedFoodGroups.Contains(ing.foodGroup));
+
+                // Check if the recipe is within max calories limit
                 var withinCalories = maxCalories == 0 || recipe.Ingredients.Sum(ing => ing.calories) <= maxCalories;
 
-                if (matchesSearchQuery && matchesFoodGroups && withinCalories)
+                // Add recipe to filtered list if it meets all criteria
+                if ((matchesSearchQuery || matchesIngredients) && matchesFoodGroups && withinCalories)
                 {
                     filteredRecipes.Add(recipe.receipeName);
                 }
@@ -160,7 +180,7 @@ namespace WPF_POE_Kayla_Ferreira
             return filteredRecipes;
         }
         //-----------------------------------------------------------------------------------------------
-       
+
         //-----------------------------------------------------------------------------------------------
         // Update the recipe list based on the search query, food groups, and max calories
         //-----------------------------------------------------------------------------------------------

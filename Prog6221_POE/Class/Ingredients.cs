@@ -16,6 +16,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public double ingredientQuantity { get; set; } // Quantity of the ingredient
         public double originalQuantity { get; set; } // Original quantity of the ingredient
         public string unitOfMeasurement { get; set; } // Unit of measurement for the ingredient
+        public string orignalUnitOfMeasurement { get; set; }
         public double orignalCalories { get; set; } // Calories in the ingredient
         public double calories { get; set; } // Calories in the ingredient
         public string foodGroup { get; set; } // Food group of the ingredient
@@ -30,6 +31,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             this.ingredientQuantity = ingredientQuantity;
             this.originalQuantity = ingredientQuantity;
             this.unitOfMeasurement = unitOfMeasurement;
+            this.orignalUnitOfMeasurement = unitOfMeasurement;
             this.calories = calories;
             this.orignalCalories = calories;
             this.foodGroup = foodGroup;
@@ -49,6 +51,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             this.ingredientQuantity = ingredientQuantity;
             this.originalQuantity = ingredientQuantity;
             this.unitOfMeasurement = ""; // No unit of measurement
+            this.orignalUnitOfMeasurement = unitOfMeasurement;
             this.calories = calories;
             this.orignalCalories = calories;
             this.foodGroup = foodGroup;

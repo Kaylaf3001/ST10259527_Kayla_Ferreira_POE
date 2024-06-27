@@ -7,6 +7,13 @@ using System.Windows.Controls;
 
 namespace WPF_POE_Kayla_Ferreira
 {
+    /// <summary>
+    /// Kayla Ferreira - ST10259527
+    /// References: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-8.0
+    /// https://www.youtube.com/watch?v=gSfMNjWNoX0
+    /// https://www.tutorialspoint.com/wpf/index.htm
+    /// PROG6221 - Assignment 3
+    /// </summary>
    //-----------------------------------------------------------------------------------------------
     public partial class Window1 : Window
     {
@@ -22,12 +29,15 @@ namespace WPF_POE_Kayla_Ferreira
         //-----------------------------------------------------------------------------------------------
         public Window1()
         {
+            //call dummy data from Recipe class
             List<Recipes> dummyRecipes = Recipes.getDummyRecipes();
             foreach (var recipe in dummyRecipes)
             {
                 AllRecipes.Add(recipe);
             }
             InitializeComponent();
+
+            
         }
         //-----------------------------------------------------------------------------------------------
 

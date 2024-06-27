@@ -116,6 +116,7 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
             {
                 Ingredients[i].ingredientQuantity = Ingredients[i].originalQuantity;
                 Ingredients[i].calories = Ingredients[i].orignalCalories;
+                Ingredients[i].unitOfMeasurement = Ingredients[i].orignalUnitOfMeasurement;
             }
         }
 
@@ -134,28 +135,20 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         //--------------------------------------------------------------------------------------------------------
         // Method to check the total calories and determine if the recipe is healthy
         //--------------------------------------------------------------------------------------------------------
-        public bool totalCalorieMeaning()
+        public string totalCalorieMeaning()
         {
             if (totalCalories() > 500)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This recipe has a high calorie count, which is not suitable for those on a low-calorie diet.");
-                Console.ResetColor();
-                return false;
+               
+                return "This recipe has a high calorie count, which is not suitable for those on a low-calorie diet.";
             }
             else if (totalCalories() >= 300 && totalCalories() <= 500)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("This meal has a moderate calorie content and is healthy.");
-                Console.ResetColor();
-                return true;
+                return "This meal has a moderate calorie content and is healthy.";
             }
             else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("You might want to consider adding some more calories to this meal.");
-                Console.ResetColor();
-                return true;
+            {         
+                return "You might want to consider adding some more calories to this meal.";
             }
         }
         //--------------------------------------------------------------------------------------------------------
@@ -194,38 +187,169 @@ namespace ST10259527_Kayla_Ferreira_POE.Class
         public static List<Recipes> getDummyRecipes() {
 
             List<Recipes> dummyRecipes = new List<Recipes>();
+           
+            //Beef slider recipe
+            Recipes BeefSlider = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            BeefSlider.receipeName = "Beef Slider";
+            BeefSlider.ingreNo = 1;
+
+            string ingredientName = "Ground Beef";
+            int ingredientQuantity = 100;
+            int originalQuantity = ingredientQuantity;
+            string unitOfMeasurement = "g";
+            int calories = 200;
+            string foodGroup = "Protein";
             
-            var random = new Random();
-            var foodgroup = new [] { "Grains", "Fats and oils", "Protein", "Dairy","Fruits", "Vegetables" };
-            var units = new[] { "cup", "tablespoon", "teaspoon", "gram", "ounce", "piece", "slice" };
-            var ingredientsNames = new[] { "flour", "sugar", "butter", "milk", "eggs", "salt", "pepper", "chicken", 
-                "beef", "pork", "fish", "cheese", "tomato", "lettuce", "carrot", "apple", "banana", "orange", "strawberry", "blueberry" };
-            for (int i = 0; i <= 5; i++)
-            {
-                Recipes recipe = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
-                recipe.receipeName = "Recipe " + (i + 1);
-                recipe.ingreNo = random.Next(3, 6);
-                for (int j = 0; j < recipe.ingreNo; j++)
-                {
-                   
-                    string ingredientName = ingredientsNames[random.Next(0, ingredientsNames.Length)];
-                    int ingredientQuantity = random.Next(1, 10);
-                    int originalQuantity = ingredientQuantity;
-                    string unitOfMeasurement = units[random.Next(0, units.Length)];
-                    int calories = random.Next(50, 200);
-                    string foodGroup = foodgroup[random.Next(0, foodgroup.Length)];
-                    Ingredients ingredient = new Ingredients(ingredientName, ingredientQuantity, calories, foodGroup);
-                    recipe.Ingredients.Add(ingredient);
+            Ingredients ingredient = new Ingredients(ingredientName, ingredientQuantity, unitOfMeasurement, calories, foodGroup);
+            BeefSlider.Ingredients.Add(ingredient);
+            BeefSlider.stepDescriptions.Add("1. Cook the beef");
+                
+            dummyRecipes.Add(BeefSlider);
 
-                }
-                recipe.repSteps = random.Next(3, 6);
-                for (int k = 0; k < recipe.repSteps; k++)
-                {
-                    recipe.stepDescriptions.Add("Step " + (k + 1) + ": Do something.");
-                }
-                dummyRecipes.Add(recipe);
-            }
+            //Tomato Pasta recipe
+            Recipes tomatoPasta = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            tomatoPasta.receipeName = "Tomato Pasta";
+            tomatoPasta.ingreNo = 1;
 
+            string ingredientName1 = "Tomato";
+            int ingredientQuantity1 = 100;
+            int originalQuantity1 = ingredientQuantity;
+            string unitOfMeasurement1 = "g";
+            int calories1 = 500;
+            string foodGroup1 = "Vegetables";
+
+            Ingredients ingredient1 = new Ingredients(ingredientName1, ingredientQuantity1, unitOfMeasurement1, calories1, foodGroup1);
+            tomatoPasta.Ingredients.Add(ingredient1);
+            tomatoPasta.stepDescriptions.Add("1. Cook pasta");
+
+            dummyRecipes.Add(tomatoPasta);
+
+            //Simple Green Salad recipe
+            Recipes SimpleGreenSalad = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            SimpleGreenSalad.receipeName = "Simple Green Salad";
+            SimpleGreenSalad.ingreNo = 1;
+
+            string ingredientName2 = "Mixed greens";
+            int ingredientQuantity2 = 240;
+            int originalQuantity2 = ingredientQuantity;
+            string unitOfMeasurement2 = "g";
+            int calories2 = 200;
+            string foodGroup2 = "Vegetables";
+
+            Ingredients ingredient2 = new Ingredients(ingredientName2, ingredientQuantity2, unitOfMeasurement2, calories2, foodGroup2);
+            SimpleGreenSalad.Ingredients.Add(ingredient2);
+            SimpleGreenSalad.stepDescriptions.Add("1. In a large bowl, combine the mixed greens, cucumber, cherry tomatoes, and red onion.");
+
+            dummyRecipes.Add(SimpleGreenSalad);
+
+            //Pancakes
+            Recipes Pancakes = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            Pancakes.receipeName = "Pancakes";
+            Pancakes.ingreNo = 1;
+
+            string ingredientName3 = "Butter";
+            int ingredientQuantity3 = 240;
+            int originalQuantity3 = ingredientQuantity;
+            string unitOfMeasurement3 = "ml";
+            int calories3 = 400;
+            string foodGroup3 = "Dairy";
+
+            Ingredients ingredient3 = new Ingredients(ingredientName3, ingredientQuantity3, unitOfMeasurement3, calories3, foodGroup3);
+            Pancakes.Ingredients.Add(ingredient3);
+            Pancakes.stepDescriptions.Add("1. In a large bowl, whisk together the flour, sugar, baking powder, baking soda, and salt.");
+
+            dummyRecipes.Add(Pancakes);
+
+            //Grilled Cheese Sandwich recipe
+            Recipes GrilledCheeseSandwich = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            GrilledCheeseSandwich.receipeName = "Grilled Cheese Sandwich";
+            GrilledCheeseSandwich.ingreNo = 1;
+
+            string ingredientName4 = "Cheese";
+            int ingredientQuantity4 = 60;
+            int originalQuantity4 = ingredientQuantity;
+            string unitOfMeasurement4 = "g";
+            int calories4 = 250;
+            string foodGroup4 = "Dairy";
+
+            Ingredients ingredient4 = new Ingredients(ingredientName4, ingredientQuantity4, unitOfMeasurement4, calories4, foodGroup4);
+            GrilledCheeseSandwich.Ingredients.Add(ingredient4);
+            GrilledCheeseSandwich.stepDescriptions.Add("1. Heat a skillet over medium heat.");
+
+            dummyRecipes.Add(GrilledCheeseSandwich);
+
+            //Chicken Stir Fry recipe
+            Recipes ChickenStirFry = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            ChickenStirFry.receipeName = "Chicken Stir Fry";
+            ChickenStirFry.ingreNo = 1;
+
+            string ingredientName5 = "Chicken";
+            int ingredientQuantity5 = 100;
+            int originalQuantity5 = ingredientQuantity;
+            string unitOfMeasurement5 = "g";
+            int calories5 = 500;
+            string foodGroup5 = "Protein";
+
+            Ingredients ingredient5 = new Ingredients(ingredientName5, ingredientQuantity5, unitOfMeasurement5, calories5, foodGroup5);
+            ChickenStirFry.Ingredients.Add(ingredient5);
+            ChickenStirFry.stepDescriptions.Add("1. Cook the Chicken");
+
+            dummyRecipes.Add(ChickenStirFry);
+
+            //Caprese Salad recipe
+            Recipes CapreseSalad = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            CapreseSalad.receipeName = "Caprese Salad";
+            CapreseSalad.ingreNo = 1;
+
+            string ingredientName6 = "Tomato";
+            int ingredientQuantity6 = 100;
+            int originalQuantity6 = ingredientQuantity;
+            string unitOfMeasurement6 = "g";
+            int calories6 = 500;
+            string foodGroup6 = "Vegetables";
+
+            Ingredients ingredient6 = new Ingredients(ingredientName6, ingredientQuantity6, unitOfMeasurement6, calories6, foodGroup6);
+            CapreseSalad.Ingredients.Add(ingredient6);
+            CapreseSalad.stepDescriptions.Add("1. Make Salad");
+
+            dummyRecipes.Add(CapreseSalad);
+
+            //Beef Tacos recipes
+            Recipes BeefTacos = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            BeefTacos.receipeName = "Beef Tacos";
+            BeefTacos.ingreNo = 1;
+
+            string ingredientName7 = "Beef";
+            int ingredientQuantity7 = 240;
+            int originalQuantity7 = ingredientQuantity;
+            string unitOfMeasurement7 = "g";
+            int calories7 = 200;
+            string foodGroup7 = "Protein";
+
+            Ingredients ingredient7 = new Ingredients(ingredientName7, ingredientQuantity7, unitOfMeasurement7, calories7, foodGroup7);
+            BeefTacos.Ingredients.Add(ingredient7);
+            BeefTacos.stepDescriptions.Add("1.Cook ground beef in a skillet over medium heat until browned and cooked through.");
+
+            dummyRecipes.Add(BeefTacos);
+
+            //Fruit Smoothie recipe
+            Recipes FruitSmoothie = new Recipes { Ingredients = new List<Ingredients>(), stepDescriptions = new List<string>() };
+            FruitSmoothie.receipeName = "Fruit Smoothie";
+            FruitSmoothie.ingreNo = 1;
+
+            string ingredientName8 = "Butter";
+            int ingredientQuantity8 = 240;
+            int originalQuantity8 = ingredientQuantity;
+            string unitOfMeasurement8 = "ml";
+            int calories8 = 400;
+            string foodGroup8 = "Dairy";
+
+            Ingredients ingredient8 = new Ingredients(ingredientName8, ingredientQuantity8, unitOfMeasurement8, calories8, foodGroup8);
+            FruitSmoothie.Ingredients.Add(ingredient8);
+            FruitSmoothie.stepDescriptions.Add("1. Place banana slices, strawberries, blueberries, plain yogurt, honey (if using), and orange juice in a blender.");
+
+            dummyRecipes.Add(FruitSmoothie);
+ 
             return dummyRecipes;
         }
     }
